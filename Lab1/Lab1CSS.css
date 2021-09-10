@@ -1,0 +1,56 @@
+.task-item {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    padding: 2px;
+    background: lightblue;
+    height: 10%;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+body {
+    font-family: Futura;
+    background: whitesmoke;
+    text-align: center;
+    font-size: x-large;
+}
+
+button {
+    font-family: Futura;
+    font-size: x-large;
+    color: black;
+    background: #e3e7ff;
+    border-color: cornflowerblue;
+    border-radius: 4px;
+    border-style: solid;
+}
+
+button:hover {
+    background-color: #3a237c;
+}
+
+#task-container {
+}
+
+.checkmark {
+    float: left;
+    size: 20px;
+}
+
+.edit  {
+    font-size: medium;
+    float: right;
+    margin-top: 4px;
+    margin-right: 4px;
+    background: midnightblue;
+    color: papayawhip;
+    border-style: none;
+
+}
