@@ -4,8 +4,8 @@
     border-radius: 4px;
     padding: 2px;
     background: lightblue;
-    height: 10%;
-    width: 50%;
+    height: auto;
+    width: 450px;
     display: block;
     margin: 0 auto;
     text-align: left;
@@ -45,9 +45,6 @@ button:hover {
     transition: background-color .2s;
 }
 
-#task-container {
-}
-
 .checkmark {
     float: left;
     size: 20px;
@@ -61,6 +58,7 @@ button:hover {
     background: midnightblue;
     color: papayawhip;
     border-style: none;
+    position: relative;
 
 }
 
@@ -114,4 +112,13 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+form input{
+    font-size: 150%;
+    border-style: none;
+}
+
+#done-button {
+    margin-top: 10px;
 }
