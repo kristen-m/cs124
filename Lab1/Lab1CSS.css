@@ -19,12 +19,20 @@ body {
     font-family: Futura;
     background: whitesmoke;
     text-align: center;
-    font-size: x-large;
+}
+
+h2 {
+    font-size: 300%;
+    margin-bottom: 0px;
+}
+
+label {
+    font-size: 150%;
 }
 
 button {
     font-family: Futura;
-    font-size: x-large;
+    font-size: 130%;
     color: black;
     background: #e3e7ff;
     border-color: cornflowerblue;
@@ -46,7 +54,7 @@ button:hover {
 }
 
 .edit  {
-    font-size: medium;
+    font-size: 75%;
     float: right;
     margin-top: 4px;
     margin-right: 4px;
@@ -60,8 +68,6 @@ button:hover {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    outline-color: blue;
-    outline-style: solid;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -100,6 +106,12 @@ button:hover {
     transition: background-color .2s;
 }
 
-#small-triangle {
-    font-size: small;
+.small-triangle {
+    font-size: 50%;
+}
+
+#app-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
