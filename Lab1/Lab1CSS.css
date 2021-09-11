@@ -59,7 +59,10 @@ button:hover {
     color: papayawhip;
     border-style: none;
     position: relative;
+}
 
+.edit:hover {
+    background-color: midnightblue;
 }
 
 #button-container {
