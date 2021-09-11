@@ -7,9 +7,28 @@
 </head>
 <body>
 <h2>Tasks</h2>
+<div id="button-container">
 <span><a href="Lab1-2.2.html"><button type="button">New Item</button></a>
-<button type="button">Show Uncompleted</button>
-<button type="button">Delete Completed</button></span>
+
+<div class="dropdown">
+  <button class="dropbtn">View <span id="small-triangle"> ▼ </span> </button>
+  <div class="dropdown-content">
+    <a href="#">All tasks</a>
+    <a href="#">Completed Tasks</a>
+    <a href="#">Uncompleted Tasks</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn">🗑<span id="small-triangle"> ▼ </span> </button>
+  <div class="dropdown-content">
+    <a href="#">All tasks</a>
+    <a href="#">Completed Tasks</a>
+    <a href="#">Uncompleted Tasks</a>
+  </div>
+</div>
+
+</div>
 <div></div>
 <label class="task-item">
     <input type="checkbox">
