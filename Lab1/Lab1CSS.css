@@ -17,7 +17,6 @@ div {
 }
 
 body {
-    display: grid;
     grid-template-columns: 10pt auto auto auto 10pt;
     grid-template-rows: 10pt 100px auto auto 10pt;
     font-family: Futura;
