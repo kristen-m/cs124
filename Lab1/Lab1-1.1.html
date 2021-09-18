@@ -8,40 +8,43 @@
 <body>
     <div id="app-title"><h2>Tasks</h2>
     </div>
-    <div id="menu-buttons">
-            <span><a href="Lab1-2.2.html"><button type="button">New Item</button></a>
-            </span>
-        <div class="dropdown">
-            <button>View <span class="small-triangle"> ▼ </span> </button>
-            <div class="dropdown-content">
-                <a href="#">All tasks</a>
-                <a href="#">Completed Tasks</a>
-                <a href="#">Uncompleted Tasks</a>
+    <div class = "buttons-and-tasks">
+        <div id="menu-buttons">
+            <div class = "dropdown" id = "new-item-button">
+                <span><a href="Lab1-2.2.html"><button type="button" class = "menu-buttons">New Item</button></a>
+                </span>
+            </div>
+            <div class="dropdown" id =  "view-button">
+                <button class = "menu-buttons">View <span class="small-triangle"> ▼ </span> </button>
+                <div class="dropdown-content">
+                    <a href="#">All tasks</a>
+                    <a href="#">Completed Tasks</a>
+                    <a href="#">Uncompleted Tasks</a>
+                </div>
+            </div>
+            <div class="dropdown" id = "trash-button">
+                <button class = "menu-buttons">🗑<span class="small-triangle"> ▼ </span> </button>
+                <div class="dropdown-content">
+                    <a href="#">All tasks</a>
+                    <a href="#">Completed Tasks</a>
+                    <a href="#">Uncompleted Tasks</a>
+                </div>
             </div>
         </div>
-
-        <div class="dropdown">
-            <button>🗑<span class="small-triangle"> ▼ </span> </button>
-            <div class="dropdown-content">
-                <a href="#">All tasks</a>
-                <a href="#">Completed Tasks</a>
-                <a href="#">Uncompleted Tasks</a>
-            </div>
-        </div>
-    </div>
     <div id="task-container">
         <label class="task-item">
-            <input type="checkbox">
+            <input type="checkbox" class="check">
             <span class="checkmark"></span>
             Call Mom
             <button class="edit" type="button">edit</button>
         </label>
         <label class="task-item">
-            <input type="checkbox">
+            <input type="checkbox" class="check">
             <span class="checkmark"></span>
             Text John
             <button class="edit" type="button">edit</button>
         </label>
+    </div>
     </div>
 </body>
 </html>
