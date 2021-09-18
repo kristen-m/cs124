@@ -169,3 +169,11 @@ form input{
 #done-button {
     margin-top: 10px;
 }
+
+#new-item {
+    width: 50%;
+}
+
+#new-item-label {
+    font-size: 45px;
+}
