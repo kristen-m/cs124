@@ -79,6 +79,7 @@ button:hover {
     color: papayawhip;
     border-style: none;
     position: relative;
+    padding: 21px;
 }
 
 .edit:hover {
@@ -92,7 +93,12 @@ button:hover {
 
 }
 
-#menu-buttons {
+.menu-buttons-container {
+    display: flex;
+    flex-direction: row;
+    /*align-items: center;*/
+    justify-content: center;
+    gap: 20pt;
     grid-column: 2 /span 3;
 }
 
