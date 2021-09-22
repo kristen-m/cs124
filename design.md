@@ -30,10 +30,41 @@ However, we realized that utilizing the checkbox could lead to some confusion wh
 
 We chose to use the trash can to represent the delete button instead of using the text “delete” because using the trash can for deleting objects is a widely used iconography within web development, which makes it easily recognizable in terms of what the button means and what action is associated with it.
 
+#### Design Tasks and Walkthrough
+
+This is the flow for task 1: creating an item named "Buy new John Grisham book" in an empty list
+
+![Task 1 Flow](Task_1_Flow.png)
+
+
+This is the flow for task 2: creating an item named "Eat Lunch" in a non-empty list
+
+![Task 2 Flow](Task_2_Flow.png)
+
+
+This is the flow for task 3: Marking the item named "Call Mom" completed
+
+![Task 3 Flow](Task_3_Flow.png)
+
+
+This is the flow for task 4: Renaming the item "Text John" to "Text John about bank statements"
+
+![Task 4 Flow](Task_4_Flow.png)
+
+
+This is the flow for task 5: Show only uncompleted items
+
+![Task 5 Flow](Task_5_Flow.png)
+
+
+This is the flow for task 6: Delete all completed items.
+
+![Task 6 Flow](Task_6_Flow.png)
+
 #### Challenges Faced
 We faced a lot of challenges with the layout of the buttons and actual tasks (see Figure 5). One thing that we realized during this process was when it’s best to make a new html class vs to use an existing one. For example, we originally gave each task its own class, but in the final product it was better to have one class for all the tasks and then put the tasks all into a container. In general, I think we faced a lot of challenges related to not doing quite enough planning for the actual html, even though we did do enough planning for the design. Even though this was frustrating at some points of our lab, it showed us what we need to change about our design process for lab 2.
 
-![Figure 5](Figure_5.jpeg)
+![Figure 5](Figure_5.png)
 (Figure 5)
 
 #### Parts of Design We're Most Proud Of
