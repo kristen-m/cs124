@@ -32,6 +32,8 @@ We chose to use the trash can to represent the delete button instead of using th
 
 #### Design Tasks and Walkthrough
 
+The following diagrams represent the user's path and the design flow through each of the assigned tasks for this project. In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.)
+
 This is the flow for task 1: creating an item named "Buy new John Grisham book" in an empty list
 
 ![Task 1 Flow](Task_1_Flow.png)
