@@ -30,6 +30,14 @@ However, we realized that utilizing the checkbox could lead to some confusion wh
 
 We chose to use the trash can to represent the delete button instead of using the text “delete” because using the trash can for deleting objects is a widely used iconography within web development, which makes it easily recognizable in terms of what the button means and what action is associated with it.
 
+### User Testing
+
+For our user testing, we made sure to diversify our user testing pool by getting a variety of users, including students who had never used HTML and CSS before, as well as other students who are in CS124 class. The students who are in CS124 class were complimentary of our design. They thought that the color scheme that we utilized was very minimalist and sleek, and that the dropdown menu buttons were an innovative design choice. They did point out, however, that since we were designing a mobile web app, the dropdown styling we added on hover would not show up as intended, since there is no hovering on a touch screen device. This didn't turn out to be an issue, because the drop down menus still appear on mobile, just on tap instead of on hover.
+
+The next user who we tested our mobile web app with pointed out some inconsistancies in our use of iconography vs. text, in that some places we were using images (trash can) whereas in other places we were using text (edit). The user was wondering why we did not use an image for the edit button too. Our rationale is that, while the trash can is pretty universally accepted as a delete action, the iconography surrounding edit buttons is less standardized, and we worried that choosing an icon might cause confusion. For this reason, we thought leaving the plain text there would be clearer for the user.
+
+The last user we tested on had no complaints or concerns about the design, and was able to correctly identify how all tasks would be performed. This user was also the user who was least familiar with HTML and CSS so we took weighted their feedback higher than the feedback given by those with more design expereince, since we figured the app would be geared more towards users with little to no design experience.
+
 #### Design Tasks and Walkthrough
 
 The following diagrams represent the user's path and the design flow through each of the assigned tasks for this project. In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.)
