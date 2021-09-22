@@ -7,7 +7,7 @@ The goal of this project was to design a mobile webapp using HTML and CSS that w
 #### Design Decisions & Alternative Designs Considered
 Coming into this project, we wanted to design a webapp that was channeling the intersection of Kanban boards and the typical, pen and paper TODO list. We knew that we needed functionality to add new items, check off items as completed, rename items, and organize the list, so we sketched out a rough draft of what we wanted our components to look like (see Figure 1).
 
-![Figure 1](Lab1/Figure_1.jpeg)
+![Figure 1](Figure_1.jpeg)
 
 We drew inspiration from the organization site Notion.so (see Figure 2) for our app's minimalist design and straightforward concept.
 
