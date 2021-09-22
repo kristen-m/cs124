@@ -1,5 +1,7 @@
 # Design Document
 Kristen Mason & Hilary Nelson
+
+
 Link to index.html: https://kristen-m.github.io/cs124/index.html
 
 ####  Overview
