@@ -2,13 +2,27 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 4px;
-    padding: 2px;
     background: lightblue;
-    height: 10%;
-    width: 50%;
-    display: block;
-    margin: 0 auto;
+    /*justify-content: left;*/
+    width: 100%;
     text-align: left;
+    /*grid-column: 2;*/
+}
+
+#task-container {
+    display: grid;
+    /*border-style: solid;*/
+    width: 100%;
+    grid-column: 2/ span 3;
+    gap: 20px;
+}
+
+.buttons-and-tasks {
+    /*border: solid;*/
+    /*border-color: blue;*/
+    display: grid;
+    grid-template-columns: 50px auto auto auto 50px;
+    grid-template-rows: auto auto;
 }
 
 div {
@@ -19,12 +33,26 @@ body {
     font-family: Futura;
     background: whitesmoke;
     text-align: center;
-    font-size: x-large;
+}
+
+h2 {
+    font-size: 800%;
+    margin-bottom: 0px;
+}
+
+
+input.check {
+    width: 35px;
+    height: 35px;
+}
+
+label {
+    font-size: 400%;
 }
 
 button {
     font-family: Futura;
-    font-size: x-large;
+    font-size: 173%;
     color: black;
     background: #e3e7ff;
     border-color: cornflowerblue;
@@ -37,37 +65,59 @@ button:hover {
     transition: background-color .2s;
 }
 
-#task-container {
-}
-
 .checkmark {
     float: left;
-    size: 20px;
+    size: 26px;
 }
 
 .edit  {
-    font-size: medium;
+    font-size: 40%;
     float: right;
     margin-top: 4px;
     margin-right: 4px;
     background: midnightblue;
     color: papayawhip;
     border-style: none;
+    position: relative;
+    padding: 21px;
+}
+
+.edit:hover {
+    background-color: midnightblue;
+}
+
+.menu-buttons {
+    width: 200px;
+    height: 100px;
+    font-size: 38px;
 
 }
 
-#button-container {
+.menu-buttons-container {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    outline-color: blue;
-    outline-style: solid;
+    flex-direction: row;
+    /*align-items: center;*/
+    justify-content: center;
+    gap: 20pt;
+    grid-column: 2 /span 3;
+}
+
+#new-item-button {
+    grid-column: 2;
+}
+
+#view-button {
+    grid-column: 3;
+}
+
+#trash-button {
+    grid-column: 4;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position: relative;
     display: inline-block;
+    width: 200px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -75,9 +125,10 @@ button:hover {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    font-size:30px;
 }
 
 /* Links inside the dropdown */
@@ -100,6 +151,29 @@ button:hover {
     transition: background-color .2s;
 }
 
-#small-triangle {
-    font-size: small;
+.small-triangle {
+    font-size: 66%;
+}
+
+#app-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+form input{
+    font-size: 200%;
+    border-style: none;
+}
+
+#done-button {
+    margin-top: 10px;
+}
+
+#new-item {
+    width: 50%;
+}
+
+#new-item-label {
+    font-size: 45px;
 }
