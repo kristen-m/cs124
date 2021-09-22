@@ -5,7 +5,13 @@ Kristen Mason & Hilary Nelson
 The goal of this project was to design a mobile webapp using HTML and CSS that will act as scaffolding for future lab projects. The purpose of the webapp was to manage a list of items to complete. The app support the functionality to add new tasks, mark tasks completed, rename tasks, and update the task view so that users can view all of their completed or incomplete tasks. It also provides functionality for users to delete all of their completed or incomplete tasks. As this lab was primarily design focused, these HTML & CSS files function as snapshots of the state of the screen at the beginning of the task, the state of the screen at the end of the task, and the state of the screen during intermediate portions of the task as necessary. 
 
 #### Design Decisions & Alternative Designs Considered
-Coming into this project, we wanted to design a webapp that was channeling the intersection of Kanban boards and the typical, pen and paper TODO list. We knew that we needed functionality to add new items, check off items as completed, rename items, and organize the list, so we sketched out a rough draft of what we wanted our components to look like (see Figure 1). We drew inspiration from the organization site Notion.so (see Figure 2) for our app's minimalist design and straightforward concept.
+Coming into this project, we wanted to design a webapp that was channeling the intersection of Kanban boards and the typical, pen and paper TODO list. We knew that we needed functionality to add new items, check off items as completed, rename items, and organize the list, so we sketched out a rough draft of what we wanted our components to look like (see Figure 1).
+
+![Figure 1](https://github.com/kristen-m/cs124/blob/Lab1/Figure_1.jpeg?raw=true)
+
+ We drew inspiration from the organization site Notion.so (see Figure 2) for our app's minimalist design and straightforward concept.
+
+ ![Figure 2](https://github.com/kristen-m/cs124/blob/Lab1/Figure_2.jpeg?raw=true)
 
 Originally, we considered having a unique button for each menu option. After playing around with that layout for a few days, we decided that it was too crowded and would cause confusion from users (not to mention, it opened up the possibility of disasterous mis-clicks, where the user might click on the 'delete all' option instead of the 'view complete items' option.) (See Figure 3).
 
