@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <link rel="stylesheet" href="Lab1CSS.css">
+</head>
+<body>
+<div id="app-title"><h2>Tasks</h2>
+</div>
+<div class = "buttons-and-tasks">
+    <div class="menu-buttons-container">
+        <div class = "dropdown" id = "new-item-button">
+                <span><a href="1.1-Add-Eat-Lunch-Item.html"><button type="button" class = "menu-buttons">New Item</button></a>
+                </span>
+        </div>
+        <div class="dropdown" id =  "view-button">
+            <button class = "menu-buttons">View <span class="small-triangle"> ▼ </span> </button>
+            <div class="dropdown-content">
+                <a href="4.1-delete-view-problems.html">All tasks</a>
+                <a href="#">Completed Tasks</a>
+                <a href="#">Uncompleted Tasks</a>
+            </div>
+        </div>
+        <div class="dropdown" id = "trash-button">
+            <button class = "menu-buttons">🗑<span class="small-triangle"> ▼ </span> </button>
+            <div class="dropdown-content">
+                <a href="#">All tasks</a>
+                <a href="#">Completed Tasks</a>
+                <a href="#">Uncompleted Tasks</a>
+            </div>
+        </div>
+    </div>
+    <div id="task-container">
+        <label class="task-item">
+            <input type="checkbox" class="check">
+            <span class="checkmark"></span>
+            Text John about bank statements
+            <button class="edit" type="button">edit</button>
+        </label>
+        <label class="task-item">
+            <input type="checkbox" class="check">
+            <span class="checkmark"></span>
+            Buy new John Grisham book
+            <button class="edit" type="button">edit</button>
+        </label>
+    </div>
+</div>
+</body>
+</html>
