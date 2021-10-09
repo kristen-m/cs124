@@ -4,7 +4,9 @@ import {useState} from "react";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 import ButtonsAndTasks from './ButtonsAndTasks';
 import TaskItem from "./TaskItem";
+import Alert from "./Alert";
 
+let currentDeleteOption = "";
 
 
 let data = [
@@ -42,7 +44,21 @@ const menuItems = [
 
 function App() {
   const [tasks, setTasks] = useState(data);
-  const [checked, setChecked] = useState(tasks.filter(element => element.check === true));
+  const [showAlert, setShowAlert] = useState(false);
+
+  function toggleModal() {
+    setShowAlert(!showAlert);
+  }
+
+  function setCurrentDeleteOption(currDelete) {
+    console.log("i am the loop")
+    currentDeleteOption = currDelete;
+    console.log("after set")
+  }
+
+  function handleAlertOK() {
+    console.log('ok');
+  }
 
   function handleTaskNameChange(e, id) {
     console.log("handling task name change!")
@@ -109,7 +125,12 @@ function App() {
       <div className="App">
         <div id="app-title"><h2>Tasks</h2>
         </div>
-        <ButtonsAndTasks handleTaskNameChange={handleTaskNameChange} toggleCheckbox={toggleCheckbox} deleteOrView={deleteOrView} tasksData={tasks} buttonData={menuItems} dropdownOptions={dropdownOptions} makeNewItem={MakeNewItem}/>
+        {showAlert && <Alert onClose={toggleModal} onOK={deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>
+          <div>
+            Are you sure you want to delete these tasks?
+          </div>
+        </Alert>}
+        <ButtonsAndTasks setCurrentDeleteOption={setCurrentDeleteOption} toggleModal={toggleModal} handleAlertOK={handleAlertOK} handleTaskNameChange={handleTaskNameChange} toggleCheckbox={toggleCheckbox} deleteOrView={deleteOrView} tasksData={tasks} buttonData={menuItems} dropdownOptions={dropdownOptions} makeNewItem={MakeNewItem}/>
       </div>
   );
 }
