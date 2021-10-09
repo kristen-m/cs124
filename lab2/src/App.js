@@ -44,6 +44,14 @@ function App() {
   const [tasks, setTasks] = useState(data);
   const [checked, setChecked] = useState(tasks.filter(element => element.check === true));
 
+  function handleTaskNameChange(e, id) {
+    console.log("handling task name change!")
+    let taskIndex = tasks.findIndex(e => e.id === id);
+    tasks[taskIndex].name = e.target.value
+    console.log(tasks)
+    setTasks(tasks);
+  }
+
   function hideTask(task, check) {
     if (task.check === check) {
       task.hidden = true;
@@ -53,7 +61,7 @@ function App() {
   function toggleCheckbox(id) {
     tasks.find(e => e.id === id).check = !tasks.find(e => e.id === id).check
   }
-  
+
   function deleteOrView(id, option) {
     if (id === "trash") {
       if (option === "All Tasks") {
@@ -90,7 +98,7 @@ function App() {
   function MakeNewItem() {
     setTasks([      {
       id: generateUniqueID,
-      name: "",
+      name: "Enter Task",
       checked: false,
       hidden: false
     },
@@ -101,7 +109,7 @@ function App() {
       <div className="App">
         <div id="app-title"><h2>Tasks</h2>
         </div>
-        <ButtonsAndTasks toggleCheckbox={toggleCheckbox} deleteOrView={deleteOrView} tasksData={tasks} buttonData={menuItems} dropdownOptions={dropdownOptions} makeNewItem={MakeNewItem}/>
+        <ButtonsAndTasks handleTaskNameChange={handleTaskNameChange} toggleCheckbox={toggleCheckbox} deleteOrView={deleteOrView} tasksData={tasks} buttonData={menuItems} dropdownOptions={dropdownOptions} makeNewItem={MakeNewItem}/>
       </div>
   );
 }

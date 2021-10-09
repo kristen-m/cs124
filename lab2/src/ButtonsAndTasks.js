@@ -10,7 +10,7 @@ function ButtonsAndTasks(props) {
             </div>
             {props.buttonData.map(e => <DropdownButton taskData={props.tasksData} id = {e.id} name={e.name} options={props.dropdownOptions} deleteOrView={props.deleteOrView}/>)}
         </div>
-        <TaskContainer tasksData={props.tasksData} toggleCheckbox={props.toggleCheckbox}/>
+        <TaskContainer handleTaskNameChange={props.handleTaskNameChange} tasksData={props.tasksData} toggleCheckbox={props.toggleCheckbox}/>
     </div>
 }
 

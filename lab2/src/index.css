@@ -177,3 +177,14 @@ form input{
 #new-item-label {
   font-size: 45px;
 }
+
+input {
+  width: 96%;
+  box-sizing: border-box;
+  background-color: lightblue;
+  box-shadow: none;
+  height: 100%;
+  font-size: 42pt;
+  font-family: Futura;
+  border: none;
+}
