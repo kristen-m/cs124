@@ -91,6 +91,32 @@ function App() {
     }
   }
 
+  // function deleteOptions(id, option){
+  //   if (id === "trash") {
+  //     if (option === "All Tasks") {
+  //       setTasks([])
+  //     } else if (option === "Completed Tasks") {
+  //       let newTasks = tasks.filter(element => element.checked === false)
+  //       setTasks(newTasks)
+  //     } else if (option === "Uncompleted Tasks") {
+  //       let newTasks = tasks.filter(element => element.checked === true)
+  //       setTasks(newTasks)
+  //     }
+  //   }
+  // }
+  //
+  // function viewOptions(id, option) {
+  //   if (id === "view") {
+  //     if (option === "All Tasks") {
+  //       setCurrView("All Tasks")
+  //     } else if (option === "Completed Tasks") {
+  //       setCurrView("Completed Tasks")
+  //     } else if (option === "Uncompleted Tasks") {
+  //       setCurrView("Uncompleted Tasks")
+  //     }
+  //   }
+  // }
+
   function showTask(task) {
     return ((currView === "All Tasks") || (currView === "Completed Tasks" && task.checked) || (currView === "Uncompleted Tasks" && !task.checked))
   }
@@ -101,19 +127,18 @@ function App() {
       name: "Enter Task",
       checked: false,
     },
-      ...tasks])
-    console.log(tasks);
+      ...tasks]);
   }
 
   return (
       <div className="App">
         <div id="app-title"><h2>Tasks</h2>
         </div>
-        {/*{showAlert && <Alert onClose={toggleModal} onOK={deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>*/}
-        {/*  <div>*/}
-        {/*    Are you sure you want to delete these tasks?*/}
-        {/*  </div>*/}
-        {/*</Alert>}*/}
+        {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>
+          <div>
+            Are you sure you want to delete these tasks?
+          </div>
+        </Alert>}
         <div className="buttons-and-tasks">
           <div className="menu-buttons-container">
             <div className="dropdown" id="new-item-button">
