@@ -2,28 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
-import ButtonsAndTasks from './ButtonsAndTasks';
 import TaskItem from "./TaskItem";
 import Alert from "./Alert";
+import DropdownButton from "./DropdownButton";
+import TaskContainer from "./TaskContainer";
 
 let currentDeleteOption = "";
-
 
 let data = [
   {
     id: 1,
     name: "test",
-    check: false,
-    hidden: false
+    checked: false
   },
   {
     id: 2,
     name: "test2",
-    check: false,
-    hidden: false
+    checked: false
   }
 ]
-
 
 const dropdownOptions = {
   option1: "All Tasks",
@@ -45,15 +42,14 @@ const menuItems = [
 function App() {
   const [tasks, setTasks] = useState(data);
   const [showAlert, setShowAlert] = useState(false);
+  const [currView, setCurrView] = useState("All Tasks");
 
   function toggleModal() {
     setShowAlert(!showAlert);
   }
 
   function setCurrentDeleteOption(currDelete) {
-    console.log("i am the loop")
     currentDeleteOption = currDelete;
-    console.log("after set")
   }
 
   function handleAlertOK() {
@@ -68,69 +64,65 @@ function App() {
     setTasks(tasks);
   }
 
-  function hideTask(task, check) {
-    if (task.check === check) {
-      task.hidden = true;
-    }
-  }
-
   function toggleCheckbox(id) {
-    tasks.find(e => e.id === id).check = !tasks.find(e => e.id === id).check
+    tasks.find(e => e.id === id).checked = !tasks.find(e => e.id === id).checked
   }
 
   function deleteOrView(id, option) {
     if (id === "trash") {
       if (option === "All Tasks") {
-        setTasks([])
+          setTasks([])
       } else if (option === "Completed Tasks") {
-        let newTasks = tasks.filter(element => element.check === false)
-        setTasks(newTasks)
+          let newTasks = tasks.filter(element => element.checked === false)
+          setTasks(newTasks)
       } else if (option === "Uncompleted Tasks") {
-        let newTasks = tasks.filter(element => element.check === true)
-        setTasks(newTasks)
+          let newTasks = tasks.filter(element => element.checked === true)
+          setTasks(newTasks)
       }
     }
     if (id === "view") {
-      console.log("tasks before", tasks)
-      console.log(option)
       if (option === "All Tasks") {
-        tasks.forEach(e => e.hidden = false)
-        setTasks(tasks);
+        setCurrView("All Tasks")
       } else if (option === "Completed Tasks") {
-        tasks.forEach(e => hideTask(e, false))
-        setTasks(tasks);
-        console.log("tasks ", tasks)
-        console.log("in completed")
-       } else if (option === "Uncompleted Tasks") {
-        tasks.forEach(e => hideTask(e, true))
-        setTasks(tasks);
-        console.log("tasks ", tasks)
-        console.log("in uncompleted")
-
+        setCurrView("Completed Tasks")
+      } else if (option === "Uncompleted Tasks") {
+        setCurrView("Uncompleted Tasks")
       }
     }
   }
 
+  function showTask(task) {
+    return ((currView === "All Tasks") || (currView === "Completed Tasks" && task.checked) || (currView === "Uncompleted Tasks" && !task.checked))
+  }
+
   function MakeNewItem() {
     setTasks([      {
-      id: generateUniqueID,
+      id: generateUniqueID(),
       name: "Enter Task",
       checked: false,
-      hidden: false
     },
       ...tasks])
+    console.log(tasks);
   }
 
   return (
       <div className="App">
         <div id="app-title"><h2>Tasks</h2>
         </div>
-        {showAlert && <Alert onClose={toggleModal} onOK={deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>
-          <div>
-            Are you sure you want to delete these tasks?
+        {/*{showAlert && <Alert onClose={toggleModal} onOK={deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>*/}
+        {/*  <div>*/}
+        {/*    Are you sure you want to delete these tasks?*/}
+        {/*  </div>*/}
+        {/*</Alert>}*/}
+        <div className="buttons-and-tasks">
+          <div className="menu-buttons-container">
+            <div className="dropdown" id="new-item-button">
+              <button type="button" className="menu-buttons" onClick={MakeNewItem}>New Item</button>
+            </div>
+            {menuItems.map(e => <DropdownButton key={e.id} setCurrentDeleteOption={setCurrentDeleteOption}  toggleModal={toggleModal} tasksData={tasks} {...e} options={dropdownOptions} deleteOrView={deleteOrView}/>)}
           </div>
-        </Alert>}
-        <ButtonsAndTasks setCurrentDeleteOption={setCurrentDeleteOption} toggleModal={toggleModal} handleAlertOK={handleAlertOK} handleTaskNameChange={handleTaskNameChange} toggleCheckbox={toggleCheckbox} deleteOrView={deleteOrView} tasksData={tasks} buttonData={menuItems} dropdownOptions={dropdownOptions} makeNewItem={MakeNewItem}/>
+          <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={tasks.filter(e => showTask(e))} toggleCheckbox={toggleCheckbox}/>
+        </div>
       </div>
   );
 }

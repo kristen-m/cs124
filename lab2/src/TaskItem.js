@@ -1,9 +1,9 @@
 function TaskItem(props) {
-    return <label className="task-item" hidden = {props.taskData.hidden} >
+    return <label className="task-item" >
         <div>
-            <input type="checkbox" className="check" defaultChecked={props.taskData.check} onClick={() => props.toggleCheckbox(props.taskData.id)}/>
+            <input type="checkbox" className="check" defaultChecked={props.checked} onClick={() => props.toggleCheckbox(props.id)}/>
             <span className="checkmark"></span>
-            <input defaultValue={props.taskData.name} onChange={e => props.handleTaskNameChange(e, props.taskData.id)}></input>
+            <input defaultValue={props.name} onChange={e => props.handleTaskNameChange(e, props.id)}></input>
         </div>
     </label>;
 }
