@@ -1,6 +1,3 @@
-import Alert from "./Alert";
-
-
 function DropdownButton(props) {
     return <div className="dropdown" id="view-button">
         <button className="menu-buttons">{props.name}<span className="small-triangle"> ▼ </span></button>

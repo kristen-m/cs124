@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
-import TaskItem from "./TaskItem";
 import Alert from "./Alert";
 import DropdownButton from "./DropdownButton";
 import TaskContainer from "./TaskContainer";
@@ -50,10 +48,6 @@ function App() {
 
   function setCurrentDeleteOption(currDelete) {
     currentDeleteOption = currDelete;
-  }
-
-  function handleAlertOK() {
-    console.log('ok');
   }
 
   function handleTaskNameChange(e, id) {
@@ -132,8 +126,7 @@ function App() {
 
   return (
       <div className="App">
-        <div id="app-title"><h2>Tasks</h2>
-        </div>
+        <h2>Tasks</h2>
         {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)} dropdownOptions={dropdownOptions}>
           <div>
             Are you sure you want to delete these tasks?

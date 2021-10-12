@@ -11,22 +11,20 @@
 
 #task-container {
   display: grid;
-  /*border-style: solid;*/
-  width: 100%;
+  border-style: solid;
+  border-color: lightgray;
+  width: 90%;
   grid-column: 2/ span 3;
   gap: 20px;
 }
 
 .buttons-and-tasks {
-  /*border: solid;*/
-  /*border-color: blue;*/
+  border: solid;
+  border-color: blue;
   display: grid;
   grid-template-columns: 50px auto auto auto 50px;
   grid-template-rows: auto auto;
-}
-
-div {
-  margin-bottom: 10px;
+  width: 120%;
 }
 
 body {
@@ -36,10 +34,13 @@ body {
 }
 
 h2 {
-  font-size: 800%;
+  background-color: red;
+  font-size: 500%;
   margin-bottom: 0px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
-
 
 input.check {
   width: 35px;
@@ -70,22 +71,6 @@ button:hover {
   size: 26px;
 }
 
-.edit  {
-  font-size: 40%;
-  float: right;
-  margin-top: 4px;
-  margin-right: 4px;
-  background: midnightblue;
-  color: papayawhip;
-  border-style: none;
-  position: relative;
-  padding: 21px;
-}
-
-.edit:hover {
-  background-color: midnightblue;
-}
-
 .menu-buttons {
   width: 200px;
   height: 100px;
@@ -96,7 +81,7 @@ button:hover {
 .menu-buttons-container {
   display: flex;
   flex-direction: row;
-  /*align-items: center;*/
+  align-items: center;
   justify-content: center;
   gap: 20pt;
   grid-column: 2 /span 3;
@@ -199,7 +184,7 @@ form input{
 }
 
 input {
-  width: 96%;
+  width: 88%;
   box-sizing: border-box;
   background-color: lightblue;
   box-shadow: none;
