@@ -2,10 +2,11 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  border-style: solid;
-  border-color: #61dafb;
-  width: 140%;
   height: 100%;
+}
+
+#root {
+  width: 150vh;
 }
 
 .App-logo {

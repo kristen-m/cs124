@@ -11,20 +11,19 @@
 
 #task-container {
   display: grid;
-  border-style: solid;
-  border-color: lightgray;
-  width: 90%;
+  /*border-style: solid;*/
+  /*border-color: lightgray;*/
+  width: 100%;
   grid-column: 2/ span 3;
   gap: 20px;
 }
 
 .buttons-and-tasks {
-  border: solid;
-  border-color: blue;
   display: grid;
   grid-template-columns: 50px auto auto auto 50px;
   grid-template-rows: auto auto;
-  width: 120%;
+  width: 100%;
+  gap: 15px;
 }
 
 body {
@@ -34,8 +33,8 @@ body {
 }
 
 h2 {
-  background-color: red;
-  font-size: 500%;
+  /*background-color: red;*/
+  font-size: 700%;
   margin-bottom: 0px;
   text-align: center;
   align-items: center;
@@ -85,6 +84,7 @@ button:hover {
   justify-content: center;
   gap: 20pt;
   grid-column: 2 /span 3;
+  width: 100%;
 }
 
 #new-item-button {
