@@ -36,7 +36,31 @@ After speaking with our user testers, we returned to our project and made change
 
 #### Design Tasks and Walkthrough
 
-PUT FLOW HERE
+The following diagrams represent the user's path and the design flow through each of the assigned tasks for this project. In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.) Images are to scale for the width of the Moto G4 screen but not to scale for height to save space while creating the composite image flows.
+
+This is the flow for task 1: creating an item named "Buy new John Grisham book" in an empty list
+
+![Flow_1](Flow_1.png)
+
+This is the flow for task 2: creating an item named "Eat Lunch" in a non-empty list
+
+![Flow_2](Flow_2.png)
+
+This is the flow for task 3: Marking the item named "Call Mom" completed
+
+![Flow_3](Flow_3.png)
+
+This is the flow for task 4: Renaming the item "Text John" to "Text John about bank statements"
+
+![Flow_4](Flow_4.png)
+
+This is the flow for task 5: Show only uncompleted items
+
+![Flow_5](Flow_5.png)
+
+This is the flow for task 6: Delete all completed items.
+
+![Flow_6](Flow_6.png)
 
 #### Challenges Faced
 The biggest challenge we faced was the formatting after we switched the display mode to Moto G4. Previously, the header had been centered and all the menu items were visible, but once we switched to Moto G4 everything was a little off. We had to make a lot of changes to our css during this phase (see the borders and backgrounds put in above) in order to finally figure out the problem. 
