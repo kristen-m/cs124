@@ -1,9 +1,9 @@
 function Alert(props) {
-    return <div className={"backdrop"}>
-        <div className="modal">
-            {props.children}
-            <div className="alert-buttons">
-
+    return (
+    <div className="alert-buttons">
+        <div className={"backdrop"}>
+            <div className="modal">
+                {props.children}
                 <button className={"alert-button alert-cancel"} type={"button"}
                         onClick={props.onClose}>
                     Cancel
@@ -17,7 +17,7 @@ function Alert(props) {
                 </button>
             </div>
         </div>
-    </div>;
+    </div>);
 }
 
 export default Alert;

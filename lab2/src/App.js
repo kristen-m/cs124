@@ -118,7 +118,7 @@ function App() {
   function MakeNewItem() {
     setTasks([      {
       id: generateUniqueID(),
-      name: "Enter Task",
+      name: "Click to Enter Task",
       checked: false,
     },
       ...tasks]);
