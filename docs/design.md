@@ -60,7 +60,9 @@ This is the flow for task 5: Show only uncompleted items
 
 This is the flow for task 6: Delete all completed items.
 
-![Flow_6](Flow_6.png)
+![Flow_6.1](Flow_6.1.png)
+
+![Flow_6.2](Flow_6.2.png)
 
 #### Challenges Faced
 The biggest challenge we faced was the formatting after we switched the display mode to Moto G4. Previously, the header had been centered and all the menu items were visible, but once we switched to Moto G4 everything was a little off. We had to make a lot of changes to our css during this phase (see the borders and backgrounds put in above) in order to finally figure out the problem. 
