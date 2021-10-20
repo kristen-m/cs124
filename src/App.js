@@ -59,9 +59,9 @@ function App() {
   let query = db.collection('hilnels-hmc-tasks');
   const collection = db.collection('hilnels-hmc-tasks');
 
-  if(currView == "All Tasks"){
+  if(currView === "All Tasks"){
     query = db.collection('hilnels-hmc-tasks');
-  } else if (currView == "Completed Tasks") {
+  } else if (currView === "Completed Tasks") {
     query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
   } else {
     query = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
@@ -98,21 +98,21 @@ function App() {
     collection.doc(id).update({checked: !oldChecked})
   }
 
-  function handleDeleteTasks() {
-  console.log("tried to delete here");
-  data = [];
+  function handleDeleteTasks(ids) {
+    ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
   }
 
   function deleteOrView(id, option) {
     if (id === "trash") {
       if (option === "All Tasks") {
-        handleDeleteTasks();
+        let ids = data.map(e => e.id);
+        handleDeleteTasks(ids);
       } else if (option === "Completed Tasks") {
-          // let newTasks = tasks.filter(element => element.checked === false)
-          // setTasks(newTasks)
+        let ids = data.map(e => {if (e.checked) return e.id});
+        handleDeleteTasks(ids);
       } else if (option === "Uncompleted Tasks") {
-          // let newTasks = tasks.filter(element => element.checked === true)
-          // setTasks(newTasks)
+        let ids = data.map(e => {if (!e.checked) return e.id});
+        handleDeleteTasks(ids);
       }
     }
     if (id === "view") {
