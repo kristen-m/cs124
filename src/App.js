@@ -56,8 +56,16 @@ function App() {
   const [showAlert, setShowAlert] = useState(false);
   const [currView, setCurrView] = useState("All Tasks");
 
-  const collection = db.collection('hilnels-hmc-tasks');
-  const [value, loading, error] = useCollection(collection);
+  let query = db.collection('hilnels-hmc-tasks');
+
+  if(currView == "All Tasks"){
+    query = db.collection('hilnels-hmc-tasks');
+  } else if (currView == "Completed Tasks") {
+    query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
+  } else {
+    query = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
+  }
+  const [value, loading, error] = useCollection(query);
   let data = []
 
   if (value) {
@@ -78,7 +86,7 @@ function App() {
     // console.log(tasks)
     // setTasks(tasks);
 
-    collection.doc(id).update({name: e.target.value});
+    query.doc(id).update({name: e.target.value});
 
   }
 
@@ -86,13 +94,18 @@ function App() {
     console.log("in toggle checkbox")
     const oldChecked = data.find(e => e.id === id).checked;
     console.log(oldChecked);
-    collection.doc(id).update({checked: !oldChecked})
+    query.doc(id).update({checked: !oldChecked})
+  }
+
+  function handleDeleteTasks() {
+  console.log("tried to delete here");
+  data = [];
   }
 
   function deleteOrView(id, option) {
     if (id === "trash") {
       if (option === "All Tasks") {
-          // setTasks([])
+        handleDeleteTasks();
       } else if (option === "Completed Tasks") {
           // let newTasks = tasks.filter(element => element.checked === false)
           // setTasks(newTasks)
@@ -118,7 +131,7 @@ function App() {
 
   function makeNewItem() {
     const newId = generateUniqueID();
-    collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
+    query.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
   }
 
   return <div>
