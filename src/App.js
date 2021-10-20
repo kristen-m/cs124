@@ -57,6 +57,7 @@ function App() {
   const [currView, setCurrView] = useState("All Tasks");
 
   let query = db.collection('hilnels-hmc-tasks');
+  const collection = db.collection('hilnels-hmc-tasks');
 
   if(currView == "All Tasks"){
     query = db.collection('hilnels-hmc-tasks');
@@ -86,7 +87,7 @@ function App() {
     // console.log(tasks)
     // setTasks(tasks);
 
-    query.doc(id).update({name: e.target.value});
+    collection.doc(id).update({name: e.target.value});
 
   }
 
@@ -94,7 +95,7 @@ function App() {
     console.log("in toggle checkbox")
     const oldChecked = data.find(e => e.id === id).checked;
     console.log(oldChecked);
-    query.doc(id).update({checked: !oldChecked})
+    collection.doc(id).update({checked: !oldChecked})
   }
 
   function handleDeleteTasks() {
@@ -131,7 +132,7 @@ function App() {
 
   function makeNewItem() {
     const newId = generateUniqueID();
-    query.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
+    collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
   }
 
   return <div>
