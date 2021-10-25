@@ -85,32 +85,6 @@ function App() {
     }
   }
 
-  // function deleteOptions(id, option){
-  //   if (id === "trash") {
-  //     if (option === "All Tasks") {
-  //       setTasks([])
-  //     } else if (option === "Completed Tasks") {
-  //       let newTasks = tasks.filter(element => element.checked === false)
-  //       setTasks(newTasks)
-  //     } else if (option === "Uncompleted Tasks") {
-  //       let newTasks = tasks.filter(element => element.checked === true)
-  //       setTasks(newTasks)
-  //     }
-  //   }
-  // }
-  //
-  // function viewOptions(id, option) {
-  //   if (id === "view") {
-  //     if (option === "All Tasks") {
-  //       setCurrView("All Tasks")
-  //     } else if (option === "Completed Tasks") {
-  //       setCurrView("Completed Tasks")
-  //     } else if (option === "Uncompleted Tasks") {
-  //       setCurrView("Uncompleted Tasks")
-  //     }
-  //   }
-  // }
-
   function showTask(task) {
     return ((currView === "All Tasks") || (currView === "Completed Tasks" && task.checked) || (currView === "Uncompleted Tasks" && !task.checked))
   }
