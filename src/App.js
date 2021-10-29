@@ -21,19 +21,6 @@ const db = firebase.firestore();
 
 let currentDeleteOption = "";
 
-// let data = [
-//   {
-//     id: 1,
-//     name: "test",
-//     checked: false
-//   },
-//   {
-//     id: 2,
-//     name: "test2",
-//     checked: false
-//   }
-// ]
-
 const dropdownOptions = {
   option1: "All Tasks",
   option2: "Completed Tasks",
@@ -52,7 +39,7 @@ const menuItems = [
 ]
 
 function App() {
-  // const [tasks, setTasks] = useState(data);
+  const [sort, setSort] = useState("A to Z");
   const [showAlert, setShowAlert] = useState(false);
   const [currView, setCurrView] = useState("All Tasks");
 
@@ -130,6 +117,10 @@ function App() {
     return ((currView === "All Tasks") || (currView === "Completed Tasks" && task.checked) || (currView === "Uncompleted Tasks" && !task.checked))
   }
 
+  function updatePriority(id, priority) {
+    collection.doc(id).update( {priority: priority})
+  }
+
   function makeNewItem() {
     const newId = generateUniqueID();
     collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
@@ -153,13 +144,31 @@ function App() {
             {menuItems.map(e => <DropdownButton key={e.id} setCurrentDeleteOption={setCurrentDeleteOption}  toggleModal={toggleModal} tasksData={data} {...e} options={dropdownOptions} deleteOrView={deleteOrView}/>)}
           </div>
           <div id="sorting-area">
-            <span><select value="Sort Priority" name="Priority" id="priority">
-                <option value="High">High</option>
-                <option value="Medium">Med</option>
-                <option value="Low">Low</option>
-            </select></span>
+          <span>
+              <select name="sorting" id="task-sorting">
+                <option selected hidden>Sort By:</option>
+                <option value="Name: A to Z" onClick={() => {
+                  setSort("Name: A to Z");
+                  console.log(sort);
+                }}>Name: A to Z</option>
+                <option value="Name: Z to A" onClick={() => {
+                  setSort("Name: Z to A");
+                  console.log(sort);
+                }}>Name: Z to A</option>
+                <option value="Priority: High to Low" onClick={() => {
+                  setSort("Priority: High to Low");
+                  console.log(sort);
+                }}>Priority: High to Low</option>
+                <option value="Priority: Low to High" onClick={() => {
+                  setSort("Priority: Low to High");
+                  console.log(sort);
+                }}>Priority: Low to High</option>
+                <option value="Date Created" onClick={() =>{setSort("Date Created");
+                console.log(sort);}}>Date Created</option>
+            </select>
+        </span>
           </div>
-          <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data} toggleCheckbox={toggleCheckbox}/>
+          <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data} toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
         </div>
       </div>
   }
