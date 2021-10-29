@@ -123,7 +123,7 @@ function App() {
 
   function makeNewItem() {
     const newId = generateUniqueID();
-    collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false})
+    collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false, priority: "High"})
   }
 
   return <div>
