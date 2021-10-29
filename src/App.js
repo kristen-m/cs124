@@ -152,6 +152,13 @@ function App() {
             </div>
             {menuItems.map(e => <DropdownButton key={e.id} setCurrentDeleteOption={setCurrentDeleteOption}  toggleModal={toggleModal} tasksData={data} {...e} options={dropdownOptions} deleteOrView={deleteOrView}/>)}
           </div>
+          <div id="sorting-area">
+            <span><select value="Sort Priority" name="Priority" id="priority">
+                <option value="High">High</option>
+                <option value="Medium">Med</option>
+                <option value="Low">Low</option>
+            </select></span>
+          </div>
           <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data} toggleCheckbox={toggleCheckbox}/>
         </div>
       </div>
