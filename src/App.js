@@ -39,7 +39,7 @@ const menuItems = [
 ]
 
 function App() {
-  const [sort, setSort] = useState("A to Z");
+  const [sort, setSort] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [currView, setCurrView] = useState("All Tasks");
 
@@ -131,6 +131,11 @@ function App() {
                           created: firebase.database.ServerValue.TIMESTAMP})
   }
 
+  function getNewSort() {
+    console.log("In get new sort: "+document.getElementById("task-sorting").value);
+    setSort(document.getElementById("task-sorting").value);
+  }
+
   return <div>
       {
         loading ? <div>Loading...</div> :
@@ -150,26 +155,15 @@ function App() {
           </div>
           <div id="sorting-area">
           <span>
-              <select name="sorting" id="task-sorting">
+              <select name="sorting" id="task-sorting" onChange={() =>{
+                document.getElementById("task-sorting").addEventListener("click", getNewSort);
+                console.log("Val of Sort: "+sort);}}>
                 <option selected hidden>Sort By:</option>
-                <option value="Date Created" onClick={() =>{setSort("Date Created");
-                  console.log(sort);}}>Date Created</option>
-                <option value="Name: A to Z" onClick={() => {
-                  setSort("Name: A to Z");
-                  console.log(sort);
-                }}>Name: A to Z</option>
-                <option value="Name: Z to A" onClick={() => {
-                  setSort("Name: Z to A");
-                  console.log(sort);
-                }}>Name: Z to A</option>
-                <option value="Priority: High to Low" onClick={() => {
-                  setSort("Priority: High to Low");
-                  console.log(sort);
-                }}>Priority: High to Low</option>
-                <option value="Priority: Low to High" onClick={() => {
-                  setSort("Priority: Low to High");
-                  console.log(sort);
-                }}>Priority: Low to High</option>
+                <option value="Date Created">Date Created</option>
+                <option value="Name: A to Z">Name: A to Z</option>
+                <option value="Name: Z to A">Name: Z to A</option>
+                <option value="Priority: High to Low">Priority: High to Low</option>
+                <option value="Priority: Low to High">Priority: Low to High</option>
             </select>
         </span>
           </div>
