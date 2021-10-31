@@ -47,7 +47,7 @@ function App() {
   const collection = db.collection('hilnels-hmc-tasks');
 
   if(currView === "All Tasks"){
-    query = db.collection('hilnels-hmc-tasks');
+    query = db.collection('hilnels-hmc-tasks').orderBy("created", "asc");
   } else if (currView === "Completed Tasks") {
     query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
   } else {
@@ -123,7 +123,11 @@ function App() {
 
   function makeNewItem() {
     const newId = generateUniqueID();
-    collection.doc(newId).set({id: newId, name: "Click to Enter Task", checked: false, priority: "High"})
+    collection.doc(newId).set({id: newId,
+                             name: "Click to Enter Task",
+                          checked: false,
+                         priority: "High",
+                          created: firebase.database.ServerValue.TIMESTAMP})
   }
 
   return <div>
