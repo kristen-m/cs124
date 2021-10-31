@@ -134,6 +134,7 @@ function App() {
   function getNewSort() {
     console.log("In get new sort: "+document.getElementById("task-sorting").value);
     setSort(document.getElementById("task-sorting").value);
+    console.log("Sort in get new sort: "+sort);
   }
 
   return <div>
@@ -157,6 +158,7 @@ function App() {
           <span>
               <select name="sorting" id="task-sorting" onChange={() =>{
                 document.getElementById("task-sorting").addEventListener("click", getNewSort);
+                getNewSort();
                 console.log("Val of Sort: "+sort);}}>
                 <option selected hidden>Sort By:</option>
                 <option value="Date Created">Date Created</option>

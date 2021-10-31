@@ -44,6 +44,7 @@ h2 {
 input.check {
   width: 35px;
   height: 35px;
+  margin-right: 10px;
 }
 
 label {
@@ -194,6 +195,7 @@ input {
   font-family: Futura;
   border: none;
   user-select: all;
+  margin-top: 15px;
 }
 
 .app {
@@ -232,6 +234,8 @@ input {
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
+  width:100px;
+  border-radius: 10px;
 }
 
 #task-sorting {
