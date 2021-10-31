@@ -58,6 +58,7 @@ function App() {
 
   if (value) {
     data = value.docs.map(e => {return { ...e.data(), id: e.id }});
+    data = data.reverse();
   }
 
   function toggleModal() {
@@ -151,6 +152,8 @@ function App() {
           <span>
               <select name="sorting" id="task-sorting">
                 <option selected hidden>Sort By:</option>
+                <option value="Date Created" onClick={() =>{setSort("Date Created");
+                  console.log(sort);}}>Date Created</option>
                 <option value="Name: A to Z" onClick={() => {
                   setSort("Name: A to Z");
                   console.log(sort);
@@ -167,8 +170,6 @@ function App() {
                   setSort("Priority: Low to High");
                   console.log(sort);
                 }}>Priority: Low to High</option>
-                <option value="Date Created" onClick={() =>{setSort("Date Created");
-                console.log(sort);}}>Date Created</option>
             </select>
         </span>
           </div>
