@@ -2,7 +2,7 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
-  background: lightblue;
+  /*background: lightblue;*/
   /*justify-content: left;*/
   width: 100%;
   text-align: left;
@@ -188,7 +188,7 @@ form input{
 input {
   width: 75%;
   box-sizing: border-box;
-  background-color: lightblue;
+  background-color: transparent;
   box-shadow: none;
   height: 100%;
   font-size: 42pt;
@@ -228,7 +228,7 @@ input {
 #priority {
   font-size: 30px;
   font-family: Futura;
-  background: lightblue;
+  background: lightgrey;
   margin-bottom: 25px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -241,7 +241,9 @@ input {
 #task-sorting {
   font-size: 20px;
   font-family: Futura;
-  background: lightblue;
+  background: #e3e7ff;
+  border-color: cornflowerblue;
+  border-radius: 5px;
   margin-bottom: 25px;
 }
 
@@ -250,4 +252,27 @@ input {
   display: grid;
   grid-column: 3/ span 2;
   text-align: center;
+}
+
+#sort {
+  display: flex;
+  flex-direction: row;
+  font-size: 25px;
+  font-family: Futura;
+}
+
+#sort-label {
+  margin-right: 10px;
+}
+
+#task-color-a {
+  background: #ff8e8e;
+}
+
+#task-color-b {
+  background: #fff3a6;
+}
+
+#task-color-c {
+  background: #c5e8b0;
 }
