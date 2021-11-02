@@ -153,17 +153,10 @@ function App() {
         })
     }
 
-    function getNewSort() {
-        console.log("In get new sort: " + document.getElementById("task-sorting").value);
-        setSort(document.getElementById("task-sorting").value);
-        console.log("Sort in get new sort: " + sort);
-    }
-
     return <div>
         {
             loading ? <div>Loading...</div> :
                 <div className="App">
-                    <h2>Tasks</h2>
                     {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
                                          dropdownOptions={dropdownOptions}>
                         <div>
@@ -171,7 +164,9 @@ function App() {
                         </div>
                     </Alert>}
                     <div className="buttons-and-tasks">
-                        <div className="menu-buttons-container">
+                        <div id="fixed-buttons">
+                            <h2 className="start">Tasks</h2>
+                            <div className="menu-buttons-container">
                             <div className="dropdown" id="new-item-button">
                                 <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item</button>
                             </div>
@@ -197,6 +192,7 @@ function App() {
 </div>
 </span>
                         </div>}
+                        </div>
                         <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data}
                                        toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
                     </div>

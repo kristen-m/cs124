@@ -10,6 +10,7 @@
 }
 
 #task-container {
+  margin-top: 400px;
   display: grid;
   /*border-style: solid;*/
   /*border-color: lightgray;*/
@@ -252,6 +253,9 @@ input {
   display: grid;
   grid-column: 3/ span 2;
   text-align: center;
+  float: right;
+  margin-right: 85px;
+  margin-top: 15px;
 }
 
 #sort {
@@ -275,4 +279,17 @@ input {
 
 #task-color-c {
   background: #c5e8b0;
+}
+
+#fixed-buttons {
+  position: sticky;
+  top: 0px;
+  background: whitesmoke;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+.start {
+  margin-bottom: 5px;
 }
