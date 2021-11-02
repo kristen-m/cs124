@@ -76,6 +76,18 @@ function App() {
         data = data.reverse();
     }
 
+    if (sort === "Name: A to Z") {
+        data = data.sort((a, b) => (a.name > b.name) ? 1 : -1)
+    } else if (sort === "Name: Z to A") {
+        data = data.sort((a, b) => (a.name < b.name) ? 1 : -1)
+    } else if (sort === "Date Created") {
+        data = data.sort((a, b) => (a.created < b.created) ? 1 : -1)
+    } else if (sort === "Priority: High to Low") {
+        data = data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+    } else if (sort === "Priority: Low to High") {
+        data = data.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+    }
+
     function toggleModal() {
         setShowAlert(!showAlert);
     }
@@ -159,11 +171,21 @@ function App() {
                 <div className="App">
                     <div className="buttons-and-tasks">
                         <div id="fixed-buttons">
-                            {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
-                                                 dropdownOptions={dropdownOptions}>
-                                <div>
-                                    Are you sure you want to delete these tasks?
-                                </div>
+                            {showAlert &&
+                            <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
+                                   dropdownOptions={dropdownOptions}>
+                                {(currentDeleteOption === "All Tasks") ? <div>
+                                        Are you sure you want to delete all {data.length} task(s)?
+                                    </div> :
+                                    (currentDeleteOption === "Uncompleted Tasks") ?
+                                        <div>
+                                            Are you sure you want to
+                                            delete {data.filter(e => !e.checked).length} uncompleted task(s)?
+                                        </div> :
+                                        <div>
+                                            Are you sure you want to
+                                            delete {data.filter(e => e.checked).length} completed task(s)?
+                                        </div>}
                             </Alert>}
                             <h2 className="start">Tasks</h2>
                             <div className="menu-buttons-container">
