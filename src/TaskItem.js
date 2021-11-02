@@ -3,7 +3,7 @@ function TaskItem(props) {
         <div id={"task-color-" + props.priority}>
             <input type="checkbox" className="check" defaultChecked={props.checked} onClick={() => props.toggleCheckbox(props.id)}/>
             <span className="checkmark"></span>
-            <input defaultValue={props.name} onChange={e => props.handleTaskNameChange(e, props.id)}></input>
+            <input value={props.name} placeholder="Click to Enter Task" onChange={e => props.handleTaskNameChange(e, props.id)}></input>
             <select name="Priority" id="priority" onChange={e => props.updatePriority(props.id, e.target.value)}>
                 <option value="a" selected= {"a"===props.priority}>High</option>
                 <option value="b" selected= {"b"===props.priority}>Med</option>

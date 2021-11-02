@@ -146,7 +146,7 @@ function App() {
         const newId = generateUniqueID();
         collection.doc(newId).set({
             id: newId,
-            name: "Click to Enter Task",
+            name: "",
             checked: false,
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
