@@ -157,14 +157,14 @@ function App() {
         {
             loading ? <div>Loading...</div> :
                 <div className="App">
-                    {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
-                                         dropdownOptions={dropdownOptions}>
-                        <div>
-                            Are you sure you want to delete these tasks?
-                        </div>
-                    </Alert>}
                     <div className="buttons-and-tasks">
                         <div id="fixed-buttons">
+                            {showAlert && <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
+                                                 dropdownOptions={dropdownOptions}>
+                                <div>
+                                    Are you sure you want to delete these tasks?
+                                </div>
+                            </Alert>}
                             <h2 className="start">Tasks</h2>
                             <div className="menu-buttons-container">
                             <div className="dropdown" id="new-item-button">
