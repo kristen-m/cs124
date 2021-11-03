@@ -121,33 +121,25 @@ Our first user successfully used all the features of the app when prompted, with
 
 #### Design Tasks and Walkthrough
 
-The following diagrams represent the user's path and the design flow through each of the assigned tasks for this project. In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.) Images are to scale for the width of the Moto G4 screen but not to scale for height to save space while creating the composite image flows.
+The following diagrams represent the user's path and the design flow through the new functionality added to Lab 3 (building on Lab 2). In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.) 
 
-This is the flow for task 1: creating an item named "Buy new John Grisham book" in an empty list
 
-![Flow_1](Flow_1.png)
+1) Marking Tasks Completed: This flow shows the new end state when marking a task complete.
 
-This is the flow for task 2: creating an item named "Eat Lunch" in a non-empty list
 
-![Flow_2](Flow_2.png)
 
-This is the flow for task 3: Marking the item named "Call Mom" completed
+![Mark_Completed_Flow](Mark_Completed_Flow.png)
 
-![Flow_3](Flow_3.png)
 
-This is the flow for task 4: Renaming the item "Text John" to "Text John about bank statements"
+2) Changing Task Priority: This flow shows the process of changing a task's priority. The change demonstrated is going from a low to a high priority task, but the flow is the same regardless of priority (the user just clicks on a different option in step 2).
 
-![Flow_4](Flow_4.png)
+![Change_Priority_Flow](Change_Priority_Flow.png)
 
-This is the flow for task 5: Show only uncompleted items
 
-![Flow_5](Flow_5.png)
+2) Filtering by Property Flow: This flow shows the process of filtering the tasks by a certain property (date created, alphabetical order, task priority, etc). The change demonstrated is going from sorting a list by date created to sorting by task priority (high to low), but the flow is the same regardless of what sorting option is checked (the user just clicks on a different option in step 2).
 
-This is the flow for task 6: Delete all completed items.
+![Filter_Flow](Filter_Flow.png)
 
-![Flow_6.1](Flow_6.1.png)
-
-![Flow_6.2](Flow_6.2.png)
 
 #### Challenges Faced
 Our biggest challenge revolved around sorting. Firebase does not let you filter data by one field and sort it by another, and so we were very confused about how we were supposed to sort our data efficiently. We pretty much wrote off the idea of sorting the data after we retrieved it because that did not seem practical, but in the end that was our only option.
