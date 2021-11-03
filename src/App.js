@@ -73,7 +73,6 @@ function App() {
         data = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
-        data = data.reverse();
     }
 
     if (sort === "Name: A to Z") {
@@ -81,7 +80,7 @@ function App() {
     } else if (sort === "Name: Z to A") {
         data = data.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
     } else if (sort === "Date Created") {
-        data = data.sort((a, b) => (a.created < b.created) ? 1 : -1)
+        data = data.sort((a, b) => (a.created > b.created) ? 1 : -1)
     } else if (sort === "Priority: High to Low") {
         data = data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
     } else if (sort === "Priority: Low to High") {
