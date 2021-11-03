@@ -9,11 +9,16 @@ function TaskItem(props) {
             {/*<input value={props.name} disabled={props.checked} placeholder="Click to Enter Task" onChange={e => props.handleTaskNameChange(e, props.id)}></input>*/}
             <TextField
                 id="task-text-entry"
+                variant="standard"
                 placeholder="Click to Enter Task"
                 value={props.name}
                 onChange={e => props.handleTaskNameChange(e, props.id)}
                 disabled={props.checked}
-                InputProps={{ style: { fontSize: 40} }}
+                InputProps={{ disableUnderline: true,
+                                         style: { fontSize: 40,
+                                                background: "transparent",
+                                                marginTop:"10px",
+                                                fontFamily: "Futura",} }}
                 multiline
             />
             <select name="Priority" id="priority" onChange={e => props.updatePriority(props.id, e.target.value)}>

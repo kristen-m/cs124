@@ -195,6 +195,10 @@ form input{
   margin-top: 15px;
 }
 
+TextField {
+  outline: none;
+}
+
 .app {
   width: 640px;
 }
@@ -300,8 +304,8 @@ form input{
   margin-bottom: 5px;
 }
 
-#disabled-task-item {
-  width: 100%;
-  border: solid;
-  background: blueviolet;
-}
+/*#disabled-task-item {*/
+/*  width: 100%;*/
+/*  border: solid;*/
+/*  background: blueviolet;*/
+/*}*/
