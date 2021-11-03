@@ -269,16 +269,26 @@ input {
   margin-right: 10px;
 }
 
-#task-color-a {
+#task-color-a-false {
   background: #ff8e8e;
 }
 
-#task-color-b {
+#task-color-b-false {
   background: #fff3a6;
 }
 
-#task-color-c {
+#task-color-c-false {
   background: #c5e8b0;
+}
+
+#task-color-a-true {
+  background: grey;
+}
+#task-color-b-true {
+  background: grey;
+}
+#task-color-c-true {
+  background: grey;
 }
 
 #fixed-buttons {
@@ -292,4 +302,10 @@ input {
 
 .start {
   margin-bottom: 5px;
+}
+
+#disabled-task-item {
+  width: 100%;
+  border: solid;
+  background: blueviolet;
 }

@@ -77,9 +77,9 @@ function App() {
     }
 
     if (sort === "Name: A to Z") {
-        data = data.sort((a, b) => (a.name > b.name) ? 1 : -1)
+        data = data.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
     } else if (sort === "Name: Z to A") {
-        data = data.sort((a, b) => (a.name < b.name) ? 1 : -1)
+        data = data.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
     } else if (sort === "Date Created") {
         data = data.sort((a, b) => (a.created < b.created) ? 1 : -1)
     } else if (sort === "Priority: High to Low") {
