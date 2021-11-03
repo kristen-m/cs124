@@ -3,37 +3,131 @@ Kristen Mason & Hilary Nelson
 
 #### Design Decisions & Alternative Designs Considered
 
-Based on user feedback from Lab 1, we came into this lab knowing that we wanted to make a few changes to our initial HTML design when implementing it with React and JSX. We wanted to cut down on the number of clicks a user would need to make in order to enter a new item (or edit an existing one), so we decided to remove the intermediate step from Lab 1 where the user was prompted to enter the new task on a page separate from the task list. To simplify the action flow, users can now add new tasks and edit existing tasks directly from the home page by either clicking on the new task button or clicking on an existing task to edit its contents. 
-Due to that design choice, we decided to remove the edit buttons that we had in the original task items design, as they were now redundant, and also took up valuable page space that could be used by our task items. An alternative design we considered involved leaving the edit buttons and preserving their functionality so that the user would click the edit button and have the respective task item’s contents be selected, but we realized that this only added to the total number of clicks and the flow could be simplified if we removed the edit button.
+Our current design is largely the same as the past two iterations of this project, aside from a couple additions. We added a priority level feature that allows users to select a priority for each task. We decided to implement this feature right on the task itself, so that users could easily edit any aspect of the tasks in as few clicks as possible. To make the priority more clear, we also set the background color of the tasks based on priority level– red being the highest priority, yellow being medium priority, and green being the lowest priority. 
+ Before:
 
-Another change we made from our original design based on good React practices that we learned in class was the addition of a delete confirmation alert. In our old design, when the user clicked on the option to delete options, the page automatically updated with the appropriate elements deleted. However, due to the nature of the drop down menus, we worried that there could be instances in which the user misclicked and deleted items when they meant to change the view or deleted items on accident. To remedy this, we introduced a popup alert that confirms that the user really wants to complete the delete action they selected, and provides them the opportunity to backtrack before making any irreversible changes to their task list. Originally, our alert appeared at the top of the page in rather small font
-But after user testing we realized that this initial approach was not the best, as everyone we workshopped our design with did not notice the alert. After some reflection, we decided to update the design so that the alert greyed out the background (so that the user knows an alert is present somewhere on the screen), which made the whole alert process much more straightforward.
+![Priority_2](Priority_2.png)
 
-PUT DESIGN DECISIONS IMAGES HERE
+After:
+![Priority_1](Priority_1.png)
+
+
+Another feature we added in this round of iterations was sorting tasks. We added a “Sort By:” menu to our navigation panel, which takes inspiration from many online shopping sites. This feature allows users to rearrange and order their data based on what criteria the user deems important– they can sort by the date that tasks were added, display tasks in alphabetical order, and in ascending/descending priority (based off of the priority feature mentioned above.)
+
+Inspiration for our sorting dropdown menu:
+![Sort_Inspo_1](Sort_Inspo_1.png)
+
+
+![Sort_Inspo_2](Sort_Inspo_2.png)
+
+
+How we implemented our sorting dropdown:
+![Sort_Drop_1](Sort_Drop_1.png)
+
+
+![Sort_Drop_2](Sort_Drop_2.png)
+
+
+We also added quality of life updates to the overall user experience in order to make the app more streamlined. We removed the default text from the task items and replaced it with placeholder text that vanishes automatically when the user types– we found that this was a much better approach than having the user delete the entire string “Click to Enter Task” each time they wanted to add a new task. We also updated the task item so that if an item is checked off, the text field becomes read only, so that the user wouldn’t accidentally change the name of a task once it was done. We also added visual cues to completed tasks, greying out the entire task item to indicate that it has been marked as “done.” Additionally, we modified our task item’s input area so that it would work for multi-line tasks. Previously, any text that didn’t fit into the input area was truncated by our app, but now longer tasks will have appropriately sized task items! 
+
+Quality of Life Updates (Before & After):
+
+Placeholder Text:
+![Placeholder_Text_Before](Placeholder_Text_Before.png)
+
+
+![Placeholder_Text_After](Placeholder_Text_After.png)
+
+
+Behavior and Design when Checked:
+![Checked_Behavior_Before](Checked_Behavior_Before.png)
+
+
+![Checked_Behavior_After](Checked_Behavior_After.png)
+
+
+Long Task Design:
+![Long_Task_Before](Long_Task_Before.png)
+
+
+![Long_Task_After](Long_Task_After.png)
+
+
+We also upgraded our delete alert, displaying the number of tasks that are to be deleted within the confirmation.
+
+
+Before:
+![Delete_Before](Delete_Before.png)
+
+
+After:
+![Delete_After](Delete_After.png)
+
+
+Lastly, we added a favicon of a green checkmark and title (Task List) to our React app to give it a bit of additional personality and flair.
+
+#### Alternative Designs Considered
+
+We discussed many possible alternative designs when it came to sorting before settling on our final design. Some ideas that were tossed around included sorting as you would in a spreadsheet style display (clicking the column header to sort by that column), or having our dropdown sort menu start unsorted. When dealing with some issues when it came to filtering data by our sorting dropdown in addition to filtering the data by its checked/unchecked status, we briefly considered removing the dropdown sorting menu when the view selected was anything other than “All Tasks”
+
+Alternative Design Considered:
+![Alt_Design_1_Before](Alt_Design_1_Before.png)
+
+Actual Design Implemented:
+![Alt_Design_1_After](Alt_Design_1_After.png)
+
+
+Another alternative design choice we considered was making it possible to order tasks through Drag and Drop. We thought that this would be a cool way to give users additional freedom when it came to sorting their tasks, as it allowed for more possibilities than the ones that could fit into our sorting dropdown menu, and added a certain aspect of customization. However, the timeline of adding this feature to our app was not the best– we thought of it less than 24 hours before the lab was due, and although there was initial promise in making the Task Items draggable (see images below), we did not have enough time to work with the React-Beautiful-DnD library to work around the issues we ran into of tasks no longer being editable after they were dragged, and the tasks would not remain in-line when dragged, so ultimately we scrapped this design and went in another direction.
+
+Drag & Drop Fails:
+![Drag_Fail_1](Drag_Fail_1.png)
+![Drag_Fail_2](Drag_Fail_2.png)
+
 
 ### User Testing
 
 User 1)
-This user was uncertain if they would be able to view previously deleted tasks. It seemed like the manual editing was a bit tedious (they tried to double click/ expected the cursor to appear at the end of the task instead of where they clicked). The “confirm deletion” alert was noticed the first time she attempted to delete items but it took a second to remember it the 2nd time, could be fixed by making the alert more of a popup/appear over the whole contents of the page as opposed to a small div at the top. The click to edit functionality was intuitive for the user
-
-User 2)
-User 2 experienced the same issue that user 1 had where they struggled with knowing where to click to best rename an item. It was straightforward that clicking on the task was how they were supposed to rename it, but they weren’t sure about how to edit the name from the end. She also faced some confusion with the dropdown menu when it didn’t retract when she clicked on it a second time. The alert was straightforward for the user. Alert text was very small and she had to squint to read it. 
-
-Based on this feedback I think it would be good to iterate on our current design and make it so that a new task/top level task is automatically selected when the “New Task” button is clicked to make it more obvious that it is an editable field. This would also solve the cursor issue initially, because defaulting the items as selected would reduce the number of clicks the user would need to make in order to figure out the best place to type to rename the item. It could also be nice if in addition to focusing on the text box if all of the default text within the item was selected when the user clicked on a task so that the user didn’t need to go back and delete the entirety of the default text before adding their own.
-
-Regarding the alert, I think that we could redesign it such that the alert was more in the user's face so they didn’t have to wonder why their delete action wasn’t working immediately. Making it an intrusive overlay over the task items would make it impossible to miss. Making the text of the alert bigger would also make it easier to understand the alert’s purpose. 
-
-After speaking with our user testers, we returned to our project and made changes to our code so that the alert was more visible when delete options were selected, and we also edited the task items so that if a user clicked one to edit its contents that all of the initial text would be selected for increased ease of deletion.
-
+Our first user successfully used all the features of the app when prompted, without any assistance. She liked the colors for the priority and said that everything was clear and easy to find. Her one recommendation was to allow task text to go onto multiple lines in case someone had a long task. We were able to implement this suggestion.
 
 #### Design Tasks and Walkthrough
 
-PUT FLOW HERE
+The following diagrams represent the user's path and the design flow through each of the assigned tasks for this project. In these diagrams, "taps" are represented by ovals around the element that the tap action is being performed on, and the arrow graphics indicate a transition between states (e.g. between the start state and intermediate steps, between the intermediate steps and the final state, etc.) Images are to scale for the width of the Moto G4 screen but not to scale for height to save space while creating the composite image flows.
+
+This is the flow for task 1: creating an item named "Buy new John Grisham book" in an empty list
+
+![Flow_1](Flow_1.png)
+
+This is the flow for task 2: creating an item named "Eat Lunch" in a non-empty list
+
+![Flow_2](Flow_2.png)
+
+This is the flow for task 3: Marking the item named "Call Mom" completed
+
+![Flow_3](Flow_3.png)
+
+This is the flow for task 4: Renaming the item "Text John" to "Text John about bank statements"
+
+![Flow_4](Flow_4.png)
+
+This is the flow for task 5: Show only uncompleted items
+
+![Flow_5](Flow_5.png)
+
+This is the flow for task 6: Delete all completed items.
+
+![Flow_6.1](Flow_6.1.png)
+
+![Flow_6.2](Flow_6.2.png)
 
 #### Challenges Faced
-The biggest challenge we faced was the formatting after we switched the display mode to Moto G4. Previously, the header had been centered and all the menu items were visible, but once we switched to Moto G4 everything was a little off. We had to make a lot of changes to our css during this phase (see the borders and backgrounds put in above) in order to finally figure out the problem. 
+Our biggest challenge revolved around sorting. Firebase does not let you filter data by one field and sort it by another, and so we were very confused about how we were supposed to sort our data efficiently. We pretty much wrote off the idea of sorting the data after we retrieved it because that did not seem practical, but in the end that was our only option.
 
-PUT IMAGE HERE
+When adding multiline text editing, we ran into problems relating to the font size. Our font size was set quite large in the css, and it resulted in the text being larger than the text entry box. We couldn’t figure out the problem, because the text box size was not constrained elsewhere. We eventually figured out that the font size needed to be specified in TaskItem.js as well on the TextField element so that the box could be properly sized. 
+
+
+![challenges](challenges.png)
 
 #### Parts of Design We're Most Proud Of
-We are most proud of the new item/click to edit functionality and delete alert. Our original design adding/editing items was quite clunky and, although it was clear, it took more clicks than necessary. Our new design provides the same functionality, and shows the user how to edit a task right when they enter one (clicking to edit). We are also very happy with how the delete alert turned out. After some user feedback we decided that the alert was not clear enough, and greyed out the background and moved the alert to the center of the screen. The delete menu also stays open while this alert shows in order for the user to see what they’ve selected and ensure that it’s the correct choice.
+The part of the design that we are most proud of is the priority color system. We think that it very effectively shows the tasks priorities, and it looks really nice when the tasks get sorted by priority. 
+
+We’re also quite proud of the sorting dropdown and its functionality– we spent a lot of time struggling to find an efficient way to implement the sorting, which was frustrating, but figuring out the solution was very rewarding and it looks great in our webapp.
