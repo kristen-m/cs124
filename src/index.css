@@ -2,8 +2,6 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
-  /*background: lightblue;*/
-  /*justify-content: left;*/
   width: 100%;
   text-align: left;
   /*grid-column: 2;*/
@@ -186,14 +184,12 @@ form input{
   font-size: 45px;
 }
 
-input {
-  width: 75%;
+#task-text-entry {
+  width: 650px;
   box-sizing: border-box;
   background-color: transparent;
   box-shadow: none;
-  height: 100%;
-  font-size: 42pt;
-  font-family: Futura;
+  font-size: 40pt;
   border: none;
   user-select: all;
   margin-top: 15px;
