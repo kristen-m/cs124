@@ -87,8 +87,9 @@ After:
 
 ![Delete_After](Delete_After.png)
 
+The final change we made regarding the functionality and usability of our app was to make our task header & buttons "sticky", so that if a user added lots of tasks and had to scroll down their task list, the buttons to add a new task, view, delete, sort, etc. would remain visible at the top of the screen instead of scrolling out of view as the user scrolled down the page.
 
-Lastly, we added a favicon of a green checkmark and title (Task List) to our React app to give it a bit of additional personality and flair.
+As a superficial polish, we added a favicon of a green checkmark and title (Task List) to our React app to give it a bit of additional personality and flair.
 
 #### Alternative Designs Considered
 
