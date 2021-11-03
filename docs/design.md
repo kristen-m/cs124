@@ -4,17 +4,27 @@ Kristen Mason & Hilary Nelson
 #### Design Decisions & Alternative Designs Considered
 
 Our current design is largely the same as the past two iterations of this project, aside from a couple additions. We added a priority level feature that allows users to select a priority for each task. We decided to implement this feature right on the task itself, so that users could easily edit any aspect of the tasks in as few clicks as possible. To make the priority more clear, we also set the background color of the tasks based on priority level– red being the highest priority, yellow being medium priority, and green being the lowest priority. 
+
+
  Before:
 
 ![Priority_2](Priority_2.png)
 
+
+
 After:
+
+
 ![Priority_1](Priority_1.png)
 
 
 Another feature we added in this round of iterations was sorting tasks. We added a “Sort By:” menu to our navigation panel, which takes inspiration from many online shopping sites. This feature allows users to rearrange and order their data based on what criteria the user deems important– they can sort by the date that tasks were added, display tasks in alphabetical order, and in ascending/descending priority (based off of the priority feature mentioned above.)
 
+
+
 Inspiration for our sorting dropdown menu:
+
+
 ![Sort_Inspo_1](Sort_Inspo_1.png)
 
 
@@ -22,6 +32,8 @@ Inspiration for our sorting dropdown menu:
 
 
 How we implemented our sorting dropdown:
+
+
 ![Sort_Drop_1](Sort_Drop_1.png)
 
 
@@ -32,7 +44,11 @@ We also added quality of life updates to the overall user experience in order to
 
 Quality of Life Updates (Before & After):
 
+
+
 Placeholder Text:
+
+
 ![Placeholder_Text_Before](Placeholder_Text_Before.png)
 
 
@@ -40,6 +56,8 @@ Placeholder Text:
 
 
 Behavior and Design when Checked:
+
+
 ![Checked_Behavior_Before](Checked_Behavior_Before.png)
 
 
@@ -47,6 +65,8 @@ Behavior and Design when Checked:
 
 
 Long Task Design:
+
+
 ![Long_Task_Before](Long_Task_Before.png)
 
 
@@ -57,10 +77,14 @@ We also upgraded our delete alert, displaying the number of tasks that are to be
 
 
 Before:
+
+
 ![Delete_Before](Delete_Before.png)
 
 
 After:
+
+
 ![Delete_After](Delete_After.png)
 
 
@@ -71,15 +95,21 @@ Lastly, we added a favicon of a green checkmark and title (Task List) to our Rea
 We discussed many possible alternative designs when it came to sorting before settling on our final design. Some ideas that were tossed around included sorting as you would in a spreadsheet style display (clicking the column header to sort by that column), or having our dropdown sort menu start unsorted. When dealing with some issues when it came to filtering data by our sorting dropdown in addition to filtering the data by its checked/unchecked status, we briefly considered removing the dropdown sorting menu when the view selected was anything other than “All Tasks”
 
 Alternative Design Considered:
+
+
 ![Alt_Design_1_Before](Alt_Design_1_Before.png)
 
 Actual Design Implemented:
+
+
 ![Alt_Design_1_After](Alt_Design_1_After.png)
 
 
 Another alternative design choice we considered was making it possible to order tasks through Drag and Drop. We thought that this would be a cool way to give users additional freedom when it came to sorting their tasks, as it allowed for more possibilities than the ones that could fit into our sorting dropdown menu, and added a certain aspect of customization. However, the timeline of adding this feature to our app was not the best– we thought of it less than 24 hours before the lab was due, and although there was initial promise in making the Task Items draggable (see images below), we did not have enough time to work with the React-Beautiful-DnD library to work around the issues we ran into of tasks no longer being editable after they were dragged, and the tasks would not remain in-line when dragged, so ultimately we scrapped this design and went in another direction.
 
 Drag & Drop Fails:
+
+
 ![Drag_Fail_1](Drag_Fail_1.png)
 ![Drag_Fail_2](Drag_Fail_2.png)
 
