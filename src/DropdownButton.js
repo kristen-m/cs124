@@ -1,7 +1,10 @@
 function DropdownButton(props) {
+    //this is definitely not the right way to do this...but i could not think of the right way so here ya go :))
+    let displayBlock = false;
     return <div className="dropdown" id="view-button">
-        <button className="menu-buttons">{props.name}<span className="small-triangle"> ▼ </span></button>
-        <div className="dropdown-content">
+        {/*add an onclick to this button that toggles the dropdown menu on/off when clicked to add tabbing*/}
+        <button className="menu-buttons" onClick={displayBlock = !displayBlock} >{props.name}<span className="small-triangle"> ▼ </span></button>
+        <div className="dropdown-content" style={{display: displayBlock ? "none" : "block"}}>
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "trash") {
                     props.toggleModal();

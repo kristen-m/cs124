@@ -30,11 +30,13 @@ const dropdownOptions = {
 const menuItems = [
     {
         id: "view",
-        name: "View"
+        name: "View",
+        arialabel: "view tasks"
     },
     {
         id: "trash",
         name: "🗑",
+        arialabel: "delete tasks"
     }
 ]
 
@@ -96,13 +98,7 @@ function App() {
     }
 
     function handleTaskNameChange(e, id) {
-        // let taskIndex = tasks.findIndex(e => e.id === id);
-        // tasks[taskIndex].name = e.target.value
-        // console.log(tasks)
-        // setTasks(tasks);
-
         collection.doc(id).update({name: e.target.value});
-
     }
 
     function toggleCheckbox(id) {
@@ -186,33 +182,41 @@ function App() {
                                             delete {data.filter(e => e.checked).length} completed task(s)?
                                         </div>}
                             </Alert>}
-                            <h2 className="start">Tasks</h2>
+                            <h2 className="start" tabIndex="0" aria-label="Tasks">Tasks</h2>
                             <div className="menu-buttons-container">
-                            <div className="dropdown" id="new-item-button">
-                                <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item</button>
+                                <div className="dropdown" id="new-item-button" aria-label="create a new task">
+                                    <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item
+                                    </button>
+                                </div>
+                                {menuItems.map(e => <DropdownButton key={e.id}
+                                                                    aria-label="test5"
+                                                                    setCurrentDeleteOption={setCurrentDeleteOption}
+                                                                    toggleModal={toggleModal} tasksData={data} {...e}
+                                                                    options={dropdownOptions}
+                                                                    deleteOrView={deleteOrView}/>)}
                             </div>
-                            {menuItems.map(e => <DropdownButton key={e.id}
-                                                                setCurrentDeleteOption={setCurrentDeleteOption}
-                                                                toggleModal={toggleModal} tasksData={data} {...e}
-                                                                options={dropdownOptions}
-                                                                deleteOrView={deleteOrView}/>)}
-                        </div>
-                        {(currView === "All Tasks") && <div id="sorting-area">
-<span>
-
-<div id="sort">
-<div id="sort-label">Sort By:</div>
-<select name="sorting" id="task-sorting" onChange={e => setSort(e.target.value)}>
-<option selected hidden>Sort By:</option>
-<option value="Date Created" selected={"Date Created" === sort}>Date Created</option>
-<option value="Name: A to Z" selected={"Name: A to Z" === sort}>Name: A to Z</option>
-<option value="Name: Z to A" selected={"Name: Z to A" === sort}>Name: Z to A</option>
-<option value="Priority: High to Low" selected={"Priority: High to Low" === sort}>Priority: High to Low</option>
-<option value="Priority: Low to High" selected={"Priority: Low to High" === sort}>Priority: Low to High</option>
-</select>
-</div>
-</span>
-                        </div>}
+                            {(currView === "All Tasks") &&
+                            <div id="sorting-area">
+                                <span>
+                                    <div id="sort">
+                                        <div id="sort-label">Sort By:</div>
+                                        <select name="sorting" id="task-sorting" aria-label="Sort tasks by"
+                                                onChange={e => setSort(e.target.value)}>
+                                            <option selected hidden>Sort By:</option>
+                                            <option value="Date Created"
+                                                    selected={"Date Created" === sort}>Date Created</option>
+                                            <option value="Name: A to Z"
+                                                    selected={"Name: A to Z" === sort}>Name: A to Z</option>
+                                            <option value="Name: Z to A"
+                                                    selected={"Name: Z to A" === sort}>Name: Z to A</option>
+                                            <option value="Priority: High to Low"
+                                                    selected={"Priority: High to Low" === sort}>Priority: High to Low</option>
+                                            <option value="Priority: Low to High"
+                                                    selected={"Priority: Low to High" === sort}>Priority: Low to High</option>
+                                        </select>
+                                    </div>
+                                </span>
+                            </div>}
                         </div>
                         <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data}
                                        toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
