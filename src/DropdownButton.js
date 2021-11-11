@@ -28,7 +28,14 @@ function DropdownButton(props) {
                 } else {
                     props.deleteOrView(props.id, props.options.option3);
                 }
-            }}>{props.options.option3}</button>
+            }} onKeyDown={(e) => {
+                if(e.key === "Tab"){
+                    if(drop){
+                        setDrop(!drop);
+                    }
+                }
+            }
+            }>{props.options.option3}</button>
         </div>
     </div>;
 }
