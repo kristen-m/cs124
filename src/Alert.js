@@ -2,28 +2,21 @@ import {useEffect, useRef} from "react";
 
 
 function Alert(props) {
-    // const alertFocus = useRef(null);
     const cancelButton = useRef(null);
     const okButton = useRef(null);
     useEffect(() => {
         cancelButton.current.focus();
         cancelButton.current.addEventListener("keydown", (e) => {
-            console.log("typed:"+ e.key +" while focused on cancel button");
             //Treat tab & shift+tab the same way bc only two options
             if(e.key ===  "Tab") {
                 e.preventDefault();
-                console.log("Pressed: "+e.key+" ... refocusing...");
-                console.log(okButton.current);
                 okButton.current.focus()
             }
         });
         okButton.current.addEventListener("keydown", (e) => {
-            console.log("typed:"+ e.key +" while focused on ok button");
             //Treat tab & shift+tab the same way bc only two options
             if(e.key === "Tab") {
                 e.preventDefault();
-                console.log("Pressed: "+e.key+" ... refocusing...");
-                console.log(cancelButton.current);
                 cancelButton.current.focus();
             }
         });
