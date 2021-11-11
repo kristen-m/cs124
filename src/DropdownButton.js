@@ -1,10 +1,10 @@
+import {useState} from "react";
+
 function DropdownButton(props) {
-    //this is definitely not the right way to do this...but i could not think of the right way so here ya go :))
-    let displayBlock = false;
+    const [drop, setDrop] = useState(false);
     return <div className="dropdown" id="view-button">
-        {/*add an onclick to this button that toggles the dropdown menu on/off when clicked to add tabbing*/}
-        <button className="menu-buttons" onClick={displayBlock = !displayBlock} >{props.name}<span className="small-triangle"> ▼ </span></button>
-        <div className="dropdown-content" style={{display: displayBlock ? "none" : "block"}}>
+        <button className="menu-buttons" onClick={() => {setDrop(!drop)}}>{props.name}<span className="small-triangle"> ▼ </span></button>
+        <div className="dropdown-content" style={{display: drop ? "block" : "none"}}>
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "trash") {
                     props.toggleModal();

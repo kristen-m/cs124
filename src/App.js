@@ -140,10 +140,6 @@ function App() {
         }
     }
 
-    function showTask(task) {
-        return ((currView === "All Tasks") || (currView === "Completed Tasks" && task.checked) || (currView === "Uncompleted Tasks" && !task.checked))
-    }
-
     function updatePriority(id, priority) {
         collection.doc(id).update({priority: priority})
     }
@@ -169,15 +165,15 @@ function App() {
                             {showAlert &&
                             <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
                                    dropdownOptions={dropdownOptions}>
-                                {(currentDeleteOption === "All Tasks") ? <div>
+                                {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
                                         Are you sure you want to delete all {data.length} task(s)?
                                     </div> :
                                     (currentDeleteOption === "Uncompleted Tasks") ?
-                                        <div>
+                                        <div tabIndex="1">
                                             Are you sure you want to
                                             delete {data.filter(e => !e.checked).length} uncompleted task(s)?
                                         </div> :
-                                        <div>
+                                        <div tabIndex="1">
                                             Are you sure you want to
                                             delete {data.filter(e => e.checked).length} completed task(s)?
                                         </div>}
