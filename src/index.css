@@ -7,11 +7,33 @@
   /*grid-column: 2;*/
 }
 
+@media screen and (min-width: 400px) {
+  .task-item {
+    width: 100%;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 11.25%;
+    /*grid-column: 2;*/
+  }
+
+  .task-color{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 11.25%;
+  }
+}
+
 #task-container {
+  alignment: center;
   margin-top: 400px;
   display: grid;
-  /*border-style: solid;*/
-  /*border-color: lightgray;*/
   width: 100%;
   grid-column: 2/ span 3;
   gap: 20px;
@@ -19,7 +41,7 @@
 
 .buttons-and-tasks {
   display: grid;
-  grid-template-columns: 50px auto auto auto 50px;
+  grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto 25px auto;
   width: 100%;
   gap: 15px;
@@ -52,7 +74,6 @@ label {
 
 button {
   font-family: Futura;
-  font-size: 173%;
   color: black;
   background: #e3e7ff;
   border-color: cornflowerblue;
@@ -168,7 +189,7 @@ button:hover {
 }
 
 form input{
-  font-size: 200%;
+  font-size: 10%;
   border-style: none;
 }
 
@@ -303,9 +324,3 @@ TextField {
 .start {
   margin-bottom: 5px;
 }
-
-/*#disabled-task-item {*/
-/*  width: 100%;*/
-/*  border: solid;*/
-/*  background: blueviolet;*/
-/*}*/

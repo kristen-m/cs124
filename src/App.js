@@ -7,6 +7,7 @@ import TaskContainer from "./TaskContainer";
 import {useCollection} from "react-firebase-hooks/firestore";
 import firebase from "firebase/compat";
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyCd9qqxvMpEKpBzwfWcc2tlRFa6ICaLH_s",
     authDomain: "hmc-cs124-fa21-labs.firebaseapp.com",
@@ -155,7 +156,6 @@ function App() {
             created: firebase.database.ServerValue.TIMESTAMP
         })
     }
-
     return <div>
         {
             loading ? <div>Loading...</div> :

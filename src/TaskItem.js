@@ -1,9 +1,11 @@
 import TextField from '@mui/material/TextField';
+import { useMediaQuery } from 'react-responsive';
 
 function TaskItem(props) {
+    const isResized = useMediaQuery({minWidth: 400})
+
     return <label className="task-item" >
-        <div id={"task-color-" + props.priority + "-" + props.checked}
-        >
+        <div className={"task-color"} id={"task-color-" + props.priority + "-" + props.checked}>
             <input type="checkbox" className="check" defaultChecked={props.checked} onClick={() => props.toggleCheckbox(props.id)}/>
             <span className="checkmark"></span>
             <TextField
