@@ -62,7 +62,7 @@ function App() {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
-        console.log(listData);
+        // console.log(listData);
     }
 
     if (currTaskList !== "") {
@@ -109,7 +109,7 @@ function App() {
             taskData = value.docs.map(e => {
                 return {...e.data(), id: e.id}
             });
-            console.log(taskData);
+            // console.log(taskData);
         }
     }
 
@@ -193,6 +193,7 @@ function App() {
         //     priority: "c",
         //     created: firebase.database.ServerValue.TIMESTAMP
         // })
+        console.log("Tried making a new item");
         const newId = generateUniqueID();
         collection.doc(currTaskList).collection("tasks").doc(newId).set({
             id: newId,
@@ -200,7 +201,9 @@ function App() {
             checked: false,
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
-        })
+        });
+        console.log("Current Task List is: "+currTaskList);
+        console.log(collection.doc(currTaskList).collection("tasks"));
     }
 
     function makeNewTaskList() {
