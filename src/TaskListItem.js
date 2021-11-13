@@ -8,7 +8,7 @@ function TaskListItem(props) {
                 variant="standard"
                 placeholder="Click to Enter List Name"
                 value={props.name}
-                onChange={e => props.handleTaskNameChange(e, props.id)}
+                onChange={e => props.handleTaskListNameChange(e, props.id)}
                 disabled={props.checked}
                 InputProps={{ disableUnderline: true,
                     style: { fontSize: 40,
@@ -18,7 +18,7 @@ function TaskListItem(props) {
                         fontFamily: "Futura",} }}
                 multiline
             />
-            <button type="button" className="open-task-list">Open></button>
+            <button type="button" className="open-task-list" onClick={() => (props.togglePageView(), props.updateCurrTaskList(props.id))}>⮑</button>
         </div>
     </label>;
 }

@@ -23,6 +23,7 @@ const db = firebase.firestore();
 
 
 let currentDeleteOption = "";
+let currTaskList = "v1-1636781833788-3753798932278";
 
 const dropdownOptions = {
     option1: "All Tasks",
@@ -47,55 +48,72 @@ function App() {
     const [sort, setSort] = useState("Date Created");
     const [showAlert, setShowAlert] = useState(false);
     const [currView, setCurrView] = useState("All Tasks");
-    const [currTaskList, setCurrTaskList] = useState("")
+    const [currPage, setCurrPage] = useState("home")
 
-    let query = db.collection('hilnels-hmc-tasks');
+    let query = db.collection('hilnels-hmc-task-lists');
     const collection = db.collection('hilnels-hmc-task-lists');
 
-    if (currView === "All Tasks") {
-        if (sort === "Name: A to Z") {
-            query = db.collection('hilnels-hmc-tasks').orderBy("name", "desc");
-        } else if (sort === "Name: Z to A") {
-            query = db.collection('hilnels-hmc-tasks').orderBy("name", "asc");
-        } else if (sort === "Priority: High to Low") {
-            query = db.collection('hilnels-hmc-tasks').orderBy("priority", "desc");
-        } else if (sort === "Priority: Low to High") {
-            query = db.collection('hilnels-hmc-tasks').orderBy("priority", "asc");
-        } else {
-            query = db.collection('hilnels-hmc-tasks').orderBy("created", "asc");
-        }
-
-        query.orderBy("created", "asc");
-    } else if (currView === "Completed Tasks") {
-        query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
-    } else {
-        query = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
-    }
+    // if (currView === "All Tasks") {
+    //     if (sort === "Name: A to Z") {
+    //         query = db.collection('hilnels-hmc-tasks').orderBy("name", "desc");
+    //     } else if (sort === "Name: Z to A") {
+    //         query = db.collection('hilnels-hmc-tasks').orderBy("name", "asc");
+    //     } else if (sort === "Priority: High to Low") {
+    //         query = db.collection('hilnels-hmc-tasks').orderBy("priority", "desc");
+    //     } else if (sort === "Priority: Low to High") {
+    //         query = db.collection('hilnels-hmc-tasks').orderBy("priority", "asc");
+    //     } else {
+    //         query = db.collection('hilnels-hmc-tasks').orderBy("created", "asc");
+    //     }
+    //
+    //     query.orderBy("created", "asc");
+    // } else if (currView === "Completed Tasks") {
+    //     query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
+    // } else {
+    //     query = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
+    // }
 
     const [value, loading, error] = useCollection(query);
-    let data = []
+    let listData = []
+    let taskData = []
 
     if (value) {
-        console.log(data);
-        data = value.docs.map(e => {
+        listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
+        console.log(listData);
+        //need to properly get the taskData!
+        taskData = value.docs.map(e => {
+            return {...e.data(), id: e.id}
+        })
     }
 
     if (sort === "Name: A to Z") {
-        data = data.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
     } else if (sort === "Name: Z to A") {
-        data = data.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
     } else if (sort === "Date Created") {
-        data = data.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
     } else if (sort === "Priority: High to Low") {
-        data = data.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
     } else if (sort === "Priority: Low to High") {
-        data = data.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
     }
 
     function toggleModal() {
         setShowAlert(!showAlert);
+    }
+
+    function togglePageView() {
+        if (currPage === "home") {
+            setCurrPage("list");
+        } else {
+            setCurrPage("home")
+        }
+    }
+
+    function updateCurrTaskList(id) {
+        currTaskList = id;
     }
 
     function setCurrentDeleteOption(currDelete) {
@@ -104,7 +122,7 @@ function App() {
 
     function handleTaskNameChange(e, id) {
         // collection.doc(id).update({name: e.target.value});
-        collection.doc(currTaskList).collection.doc(id).update({name: e.target.value});
+        collection.doc(currTaskList).collection("tasks").doc(id).update({name: e.target.value});
     }
 
     function handleTaskListNameChange(e, id) {
@@ -112,9 +130,7 @@ function App() {
     }
 
     function toggleCheckbox(id) {
-        console.log("in toggle checkbox")
-        const oldChecked = data.find(e => e.id === id).checked;
-        console.log(oldChecked);
+        const oldChecked = taskData.find(e => e.id === id).checked;
         collection.doc(id).update({checked: !oldChecked})
     }
 
@@ -125,15 +141,15 @@ function App() {
     function deleteOrView(id, option) {
         if (id === "trash") {
             if (option === "All Tasks") {
-                let ids = data.map(e => e.id);
+                let ids = taskData.map(e => e.id);
                 handleDeleteTasks(ids);
             } else if (option === "Completed Tasks") {
-                let ids = data.map(e => {
+                let ids = taskData.map(e => {
                     if (e.checked) return e.id
                 });
                 handleDeleteTasks(ids);
             } else if (option === "Uncompleted Tasks") {
-                let ids = data.map(e => {
+                let ids = taskData.map(e => {
                     if (!e.checked) return e.id
                 });
                 handleDeleteTasks(ids);
@@ -156,8 +172,16 @@ function App() {
 
     // a is highest priority
     function makeNewItem() {
+        // const newId = generateUniqueID();
+        // collection.doc(newId).set({
+        //     id: newId,
+        //     name: "",
+        //     checked: false,
+        //     priority: "c",
+        //     created: firebase.database.ServerValue.TIMESTAMP
+        // })
         const newId = generateUniqueID();
-        collection.doc(newId).set({
+        collection.doc(currTaskList).collection("tasks").doc(newId).set({
             id: newId,
             name: "",
             checked: false,
@@ -179,76 +203,76 @@ function App() {
     return <div>
         {
             loading ? <div>Loading ... </div> :
+                (currPage === "home") ?
                 <div className="homepage">
                     <h2 className="start" tabIndex="0" aria-label="Tasks">Task Lists</h2>
                     <div className="dropdown" id="new-item-button" aria-label="create a new task">
-                        <button type="button" className="menu-buttons" onClick={makeNewTaskList}>New Item
+                        <button type="button" className="new-list-button" onClick={makeNewTaskList}>New Task List
                         </button>
                     </div>
-                    <TaskListContainer handleTaskListNameChange={handleTaskListNameChange} tasksData={data}
-                                                       toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
-                </div>
-        //
-        //         loading ? <div>Loading...</div> :
-        //             <div className="App">
-        //                 <div className="buttons-and-tasks">
-        //                     <div id="fixed-buttons">
-        // {showAlert &&
-        //                         <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
-        //                                dropdownOptions={dropdownOptions}>
-        //                             {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
-        //                                     Are you sure you want to delete all {data.length} task(s)?
-        //                                 </div> :
-        //                                 (currentDeleteOption === "Uncompleted Tasks") ?
-        //                                     <div tabIndex="1">
-        //                                         Are you sure you want to
-        //                                         delete {data.filter(e => !e.checked).length} uncompleted task(s)?
-        //                                     </div> :
-        //                                     <div tabIndex="1">
-        //                                         Are you sure you want to
-        //                                         delete {data.filter(e => e.checked).length} completed task(s)?
-        //                                     </div>}
-        //                         </Alert>}
-        //                         <h2 className="start" tabIndex="0" aria-label="Tasks">Tasks</h2>
-        //                         <div className="menu-buttons-container">
-        //                             <div className="dropdown" id="new-item-button" aria-label="create a new task">
-        //                                 <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item
-        //                                 </button>
-        //                             </div>
-        //                             {menuItems.map(e => <DropdownButton key={e.id}
-        //                                                                 aria-label="test5"
-        //                                                                 setCurrentDeleteOption={setCurrentDeleteOption}
-        //                                                                 toggleModal={toggleModal} tasksData={data} {...e}
-        //                                                                 options={dropdownOptions}
-        //                                                                 deleteOrView={deleteOrView}/>)}
-        //                         </div>
-        //                         {(currView === "All Tasks") &&
-        //                         <div id="sorting-area">
-        //                             <span>
-        //                                 <div id="sort">
-        //                                     <div id="sort-label">Sort By:</div>
-        //                                     <select name="sorting" id="task-sorting" aria-label="Sort tasks by"
-        //                                             onChange={e => setSort(e.target.value)}>
-        //                                         <option selected hidden>Sort By:</option>
-        //                                         <option value="Date Created"
-        //                                                 selected={"Date Created" === sort}>Date Created</option>
-        //                                         <option value="Name: A to Z"
-        //                                                 selected={"Name: A to Z" === sort}>Name: A to Z</option>
-        //                                         <option value="Name: Z to A"
-        //                                                 selected={"Name: Z to A" === sort}>Name: Z to A</option>
-        //                                         <option value="Priority: High to Low"
-        //                                                 selected={"Priority: High to Low" === sort}>Priority: High to Low</option>
-        //                                         <option value="Priority: Low to High"
-        //                                                 selected={"Priority: Low to High" === sort}>Priority: Low to High</option>
-        //                                     </select>
-        //                                 </div>
-        //                             </span>
-        //                         </div>}
-        //                     </div>
-        //                     <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={data}
-        //                                    toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
-        //                 </div>
-        //             </div>
+                    <TaskListContainer handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
+                </div> :
+            <div className="App">
+                        <div className="buttons-and-tasks">
+                            <div id="fixed-buttons">
+                            {showAlert &&
+                                <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
+                                       dropdownOptions={dropdownOptions}>
+                                    {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
+                                            Are you sure you want to delete all {taskData.length} task(s)?
+                                        </div> :
+                                        (currentDeleteOption === "Uncompleted Tasks") ?
+                                            <div tabIndex="1">
+                                                Are you sure you want to
+                                                delete {taskData.filter(e => !e.checked).length} uncompleted task(s)?
+                                            </div> :
+                                            <div tabIndex="1">
+                                                Are you sure you want to
+                                                delete {taskData.filter(e => e.checked).length} completed task(s)?
+                                            </div>}
+                                </Alert>}
+                                <h2 className="start" tabIndex="0" aria-label="Tasks">{listData.find(e => e.id === currTaskList).name}</h2>
+                                <div className="menu-buttons-container">
+                                    <button type="button" id="back-button" className="menu-buttons" onClick={togglePageView}>⮐
+                                    </button>
+                                    <div className="dropdown" id="new-item-button" aria-label="create a new task">
+                                        <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item
+                                        </button>
+                                    </div>
+                                    {menuItems.map(e => <DropdownButton key={e.id}
+                                                                        aria-label="test5"
+                                                                        setCurrentDeleteOption={setCurrentDeleteOption}
+                                                                        toggleModal={toggleModal} tasksData={taskData} {...e}
+                                                                        options={dropdownOptions}
+                                                                        deleteOrView={deleteOrView}/>)}
+                                </div>
+                                {(currView === "All Tasks") &&
+                                <div id="sorting-area">
+                                    <span>
+                                        <div id="sort">
+                                            <div id="sort-label">Sort By:</div>
+                                            <select name="sorting" id="task-sorting" aria-label="Sort tasks by"
+                                                    onChange={e => setSort(e.target.value)}>
+                                                <option selected hidden>Sort By:</option>
+                                                <option value="Date Created"
+                                                        selected={"Date Created" === sort}>Date Created</option>
+                                                <option value="Name: A to Z"
+                                                        selected={"Name: A to Z" === sort}>Name: A to Z</option>
+                                                <option value="Name: Z to A"
+                                                        selected={"Name: Z to A" === sort}>Name: Z to A</option>
+                                                <option value="Priority: High to Low"
+                                                        selected={"Priority: High to Low" === sort}>Priority: High to Low</option>
+                                                <option value="Priority: Low to High"
+                                                        selected={"Priority: Low to High" === sort}>Priority: Low to High</option>
+                                            </select>
+                                        </div>
+                                    </span>
+                                </div>}
+                            </div>
+                            <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
+                                           toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
+                        </div>
+                    </div>
             }
     </div>;
 }

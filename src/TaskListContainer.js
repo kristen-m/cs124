@@ -2,7 +2,7 @@ import TaskListItem from './TaskListItem';
 
 function TaskListContainer(props) {
     return <div id="task-list-container">
-        {props.tasksData.map(e => <TaskListItem key={e.id} handleTaskNameChange={props.handleTaskNameChange} {...e}/>)}
+        {props.taskListData.map(e => <TaskListItem key={e.id} handleTaskListNameChange={props.handleTaskListNameChange} {...e} togglePageView={props.togglePageView} updateCurrTaskList={props.updateCurrTaskList}/>)}
     </div>;
 }
 

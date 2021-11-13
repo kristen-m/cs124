@@ -95,7 +95,11 @@ button:hover {
   width: 200px;
   height: 100px;
   font-size: 38px;
-
+}
+.new-list-button {
+  width: 300px;
+  height: 100px;
+  font-size: 38px;
 }
 
 .menu-buttons-container {
@@ -106,6 +110,10 @@ button:hover {
   gap: 20pt;
   grid-column: 2 /span 3;
   width: 100%;
+}
+
+#back-button {
+  grid-column: 1;
 }
 
 #new-item-button {
