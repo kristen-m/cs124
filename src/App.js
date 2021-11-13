@@ -53,51 +53,64 @@ function App() {
     let query = db.collection('hilnels-hmc-task-lists');
     const collection = db.collection('hilnels-hmc-task-lists');
 
-    // if (currView === "All Tasks") {
-    //     if (sort === "Name: A to Z") {
-    //         query = db.collection('hilnels-hmc-tasks').orderBy("name", "desc");
-    //     } else if (sort === "Name: Z to A") {
-    //         query = db.collection('hilnels-hmc-tasks').orderBy("name", "asc");
-    //     } else if (sort === "Priority: High to Low") {
-    //         query = db.collection('hilnels-hmc-tasks').orderBy("priority", "desc");
-    //     } else if (sort === "Priority: Low to High") {
-    //         query = db.collection('hilnels-hmc-tasks').orderBy("priority", "asc");
-    //     } else {
-    //         query = db.collection('hilnels-hmc-tasks').orderBy("created", "asc");
-    //     }
-    //
-    //     query.orderBy("created", "asc");
-    // } else if (currView === "Completed Tasks") {
-    //     query = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
-    // } else {
-    //     query = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
-    // }
-
     const [value, loading, error] = useCollection(query);
     let listData = []
     let taskData = []
+
 
     if (value) {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
         console.log(listData);
-        //need to properly get the taskData!
-        taskData = value.docs.map(e => {
-            return {...e.data(), id: e.id}
-        })
     }
 
-    if (sort === "Name: A to Z") {
-        taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-    } else if (sort === "Name: Z to A") {
-        taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-    } else if (sort === "Date Created") {
-        taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-    } else if (sort === "Priority: High to Low") {
-        taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-    } else if (sort === "Priority: Low to High") {
-        taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+    if (currTaskList !== "") {
+        // do we need two different queries? one for the task lists and one for the current tasks?
+        // Helppppp i think this is way more messy than it should be??
+        let queryTasks = db.collectionGroup(currTaskList);
+        const collectionTasks = db.collectionGroup(currTaskList);
+
+
+        let taskData = []
+
+        if (currView === "All Tasks") {
+            if (sort === "Name: A to Z") {
+                queryTasks = db.collection(currTaskList).orderBy("name", "desc");
+            } else if (sort === "Name: Z to A") {
+                queryTasks = db.collection(currTaskList).orderBy("name", "asc");
+            } else if (sort === "Priority: High to Low") {
+                queryTasks = db.collection(currTaskList).orderBy("priority", "desc");
+            } else if (sort === "Priority: Low to High") {
+                queryTasks = db.collection(currTaskList).orderBy("priority", "asc");
+            } else {
+                queryTasks = db.collection(currTaskList).orderBy("created", "asc");
+            }
+            queryTasks.orderBy("created", "asc");
+        } else if (currView === "Completed Tasks") {
+            queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
+        } else {
+            queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
+        }
+
+        if (sort === "Name: A to Z") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Name: Z to A") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Date Created") {
+            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        } else if (sort === "Priority: High to Low") {
+            taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        } else if (sort === "Priority: Low to High") {
+            taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        }
+
+        if (value) {
+            taskData = value.docs.map(e => {
+                return {...e.data(), id: e.id}
+            });
+            console.log(taskData);
+        }
     }
 
     function toggleModal() {
