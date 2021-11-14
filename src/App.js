@@ -23,7 +23,7 @@ const db = firebase.firestore();
 
 
 let currentDeleteOption = "";
-let currTaskList = "v1-1636781833788-3753798932278";
+let currTaskList = "";
 
 const dropdownOptions = {
     option1: "All Tasks",
@@ -64,53 +64,51 @@ function App() {
         });
         // console.log(listData);
     }
+    console.log("list data ", listData)
 
-    if (currTaskList !== "") {
+    if (currTaskList !== "" && listData !== []) {
         // do we need two different queries? one for the task lists and one for the current tasks?
         // Helppppp i think this is way more messy than it should be??
-        let queryTasks = db.collectionGroup(currTaskList);
-        const collectionTasks = db.collectionGroup(currTaskList);
+
+        console.log("in if, list data is ", listData)
+        let currList = listData.find(e => e.id === currTaskList);
+        console.log("currListId is ", currTaskList)
+        console.log("currList is", currList)
+        taskData = currList.tasks;
+        console.log(taskData)
 
 
-        let taskData = []
+        // if (currView === "All Tasks") {
+        //     if (sort === "Name: A to Z") {
+        //         queryTasks = db.collection(currTaskList).orderBy("name", "desc");
+        //     } else if (sort === "Name: Z to A") {
+        //         queryTasks = db.collection(currTaskList).orderBy("name", "asc");
+        //     } else if (sort === "Priority: High to Low") {
+        //         queryTasks = db.collection(currTaskList).orderBy("priority", "desc");
+        //     } else if (sort === "Priority: Low to High") {
+        //         queryTasks = db.collection(currTaskList).orderBy("priority", "asc");
+        //     } else {
+        //         queryTasks = db.collection(currTaskList).orderBy("created", "asc");
+        //     }
+        //     queryTasks.orderBy("created", "asc");
+        // } else if (currView === "Completed Tasks") {
+        //     queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
+        // } else {
+        //     queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
+        // }
 
-        if (currView === "All Tasks") {
-            if (sort === "Name: A to Z") {
-                queryTasks = db.collection(currTaskList).orderBy("name", "desc");
-            } else if (sort === "Name: Z to A") {
-                queryTasks = db.collection(currTaskList).orderBy("name", "asc");
-            } else if (sort === "Priority: High to Low") {
-                queryTasks = db.collection(currTaskList).orderBy("priority", "desc");
-            } else if (sort === "Priority: Low to High") {
-                queryTasks = db.collection(currTaskList).orderBy("priority", "asc");
-            } else {
-                queryTasks = db.collection(currTaskList).orderBy("created", "asc");
-            }
-            queryTasks.orderBy("created", "asc");
-        } else if (currView === "Completed Tasks") {
-            queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
-        } else {
-            queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
-        }
+        // if (sort === "Name: A to Z") {
+        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        // } else if (sort === "Name: Z to A") {
+        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        // } else if (sort === "Date Created") {
+        //     taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        // } else if (sort === "Priority: High to Low") {
+        //     taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        // } else if (sort === "Priority: Low to High") {
+        //     taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        // }
 
-        if (sort === "Name: A to Z") {
-            taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-        } else if (sort === "Name: Z to A") {
-            taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-        } else if (sort === "Date Created") {
-            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-        } else if (sort === "Priority: High to Low") {
-            taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-        } else if (sort === "Priority: Low to High") {
-            taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
-        }
-
-        if (value) {
-            taskData = value.docs.map(e => {
-                return {...e.data(), id: e.id}
-            });
-            // console.log(taskData);
-        }
     }
 
     function toggleModal() {
@@ -193,17 +191,21 @@ function App() {
         //     priority: "c",
         //     created: firebase.database.ServerValue.TIMESTAMP
         // })
-        console.log("Tried making a new item");
-        const newId = generateUniqueID();
-        collection.doc(currTaskList).collection("tasks").doc(newId).set({
+        let currTaskListObject = db.collection('hilnels-hmc-task-lists').doc(currTaskList).get();
+        const newId = generateUniqueID()
+        let newTask = {
             id: newId,
             name: "",
             checked: false,
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
+        }
+        console.log("new TASK", newTask)
+        let newTasks = taskData + newTask;
+        console.log("newTasks ", newTasks)
+        collection.doc(currTaskList).update({
+            tasks: newTasks
         });
-        console.log("Current Task List is: "+currTaskList);
-        console.log(collection.doc(currTaskList).collection("tasks"));
     }
 
     function makeNewTaskList() {
@@ -212,6 +214,7 @@ function App() {
             id: newId,
             name: "",
             taskCount: 0,
+            tasks: [],
             created: firebase.database.ServerValue.TIMESTAMP
         })
     }
