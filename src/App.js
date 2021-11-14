@@ -44,6 +44,26 @@ const menuItems = [
     }
 ]
 
+function sortAlpha(asc, a, b) {
+    if (asc) {
+        if (a.name < b.name) {
+            return -1;
+        } else if (b.name < a.name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        if (a.name > b.name) {
+            return -1;
+        } else if (b.name > a.name) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
 function App() {
     const [sort, setSort] = useState("Date Created");
     const [showAlert, setShowAlert] = useState(false);
@@ -76,36 +96,36 @@ function App() {
         console.log(taskData)
 
 
-        // if (currView === "All Tasks") {
-        //     if (sort === "Name: A to Z") {
-        //         queryTasks = db.collection(currTaskList).orderBy("name", "desc");
-        //     } else if (sort === "Name: Z to A") {
-        //         queryTasks = db.collection(currTaskList).orderBy("name", "asc");
-        //     } else if (sort === "Priority: High to Low") {
-        //         queryTasks = db.collection(currTaskList).orderBy("priority", "desc");
-        //     } else if (sort === "Priority: Low to High") {
-        //         queryTasks = db.collection(currTaskList).orderBy("priority", "asc");
-        //     } else {
-        //         queryTasks = db.collection(currTaskList).orderBy("created", "asc");
-        //     }
-        //     queryTasks.orderBy("created", "asc");
-        // } else if (currView === "Completed Tasks") {
-        //     queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", true);
-        // } else {
-        //     queryTasks = db.collection('hilnels-hmc-tasks').where("checked", "==", false);
-        // }
+        if (currView === "All Tasks") {
+            if (sort === "Name: A to Z") {
+                taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+            } else if (sort === "Name: Z to A") {
+                taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+            } else if (sort === "Priority: High to Low") {
+                taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+            } else if (sort === "Priority: Low to High") {
+                taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+            } else {
+                taskData = taskData.sort((a, b) => (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0 )
+            }
+            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        } else if (currView === "Completed Tasks") {
+            taskData = taskData.filter(task => task.checked)
+        } else {
+            taskData = taskData.filter(task => !task.checked)
+        }
 
-        // if (sort === "Name: A to Z") {
-        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-        // } else if (sort === "Name: Z to A") {
-        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-        // } else if (sort === "Date Created") {
-        //     taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-        // } else if (sort === "Priority: High to Low") {
-        //     taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-        // } else if (sort === "Priority: Low to High") {
-        //     taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
-        // }
+        if (sort === "Name: A to Z") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Name: Z to A") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Date Created") {
+            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        } else if (sort === "Priority: High to Low") {
+            taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        } else if (sort === "Priority: Low to High") {
+            taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        }
 
     }
 
@@ -131,20 +151,36 @@ function App() {
 
     function handleTaskNameChange(e, id) {
         // collection.doc(id).update({name: e.target.value});
-        collection.doc(currTaskList).collection("tasks").doc(id).update({name: e.target.value});
+        taskData.find(task => task.id === id).name = e.target.value
+        collection.doc(currTaskList).update({tasks: taskData});
     }
 
     function handleTaskListNameChange(e, id) {
         collection.doc(id).update({name: e.target.value});
     }
 
+    // function toggleCheckbox(id) {
+    //     const oldChecked = taskData.find(e => e.id === id).checked;
+    //     collection.doc(id).update({checked: !oldChecked})
+    // }
+
     function toggleCheckbox(id) {
         const oldChecked = taskData.find(e => e.id === id).checked;
-        collection.doc(id).update({checked: !oldChecked})
+        taskData.find(e => e.id === id).checked = !oldChecked
+        collection.doc(currTaskList).update({tasks: taskData})
     }
 
+    // function handleDeleteTasks(ids) {
+    //     ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
+    // }
+
     function handleDeleteTasks(ids) {
-        ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
+        taskData = taskData.filter(e => e.id in ids)
+        collection.doc(currTaskList).update({tasks: taskData})
+    }
+
+    function deleteCurrPageView(id) {
+        db.collection('hilnels-hmc-task-lists').doc(id).delete();
     }
 
     function deleteOrView(id, option) {
@@ -175,20 +211,16 @@ function App() {
         }
     }
 
+    // function updatePriority(id, priority) {
+    //     collection.doc(id).update({priority: priority})
+    // }
+
     function updatePriority(id, priority) {
-        collection.doc(id).update({priority: priority})
+        taskData.find(e => e.id === id).priority = priority
+        collection.doc(currTaskList).update({tasks: taskData})
     }
 
-    // a is highest priority
     function makeNewItem() {
-        // const newId = generateUniqueID();
-        // collection.doc(newId).set({
-        //     id: newId,
-        //     name: "",
-        //     checked: false,
-        //     priority: "c",
-        //     created: firebase.database.ServerValue.TIMESTAMP
-        // })
         let currTaskListObject = db.collection('hilnels-hmc-task-lists').doc(currTaskList).get();
         const newId = generateUniqueID()
         let newTask = {
@@ -227,7 +259,7 @@ function App() {
                         <button type="button" className="new-list-button" onClick={makeNewTaskList}>New Task List
                         </button>
                     </div>
-                    <TaskListContainer handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
+                    <TaskListContainer deleteCurrPageView={deleteCurrPageView} handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
                 </div> :
             <div className="App">
                         <div className="buttons-and-tasks">
@@ -263,7 +295,6 @@ function App() {
                                                                         options={dropdownOptions}
                                                                         deleteOrView={deleteOrView}/>)}
                                 </div>
-                                {(currView === "All Tasks") &&
                                 <div id="sorting-area">
                                     <span>
                                         <div id="sort">
@@ -284,7 +315,7 @@ function App() {
                                             </select>
                                         </div>
                                     </span>
-                                </div>}
+                                </div>
                             </div>
                             <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
                                            toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>

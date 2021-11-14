@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 
 function TaskListItem(props) {
-    return <label className="task-list-item" >
+    return <label className="task-list-label" >
         <div className="task-list-item">
             <TextField
                 id="task-list-text-entry"
@@ -13,12 +13,15 @@ function TaskListItem(props) {
                 InputProps={{ disableUnderline: true,
                     style: { fontSize: 40,
                         background: "transparent",
-                        marginTop:"10px",
+                        marginTop:"25px",
                         paddingBottom:"10px",
                         fontFamily: "Futura",} }}
                 multiline
             />
+            <span id="homepage-action-buttons">
+            <button type="button" className="open-task-list" onClick={() => (props.deleteCurrPageView(props.id), props.updateCurrTaskList(""))}>🗑</button>
             <button type="button" className="open-task-list" onClick={() => (props.togglePageView(), props.updateCurrTaskList(props.id))}>⮑</button>
+            </span>
         </div>
     </label>;
 }

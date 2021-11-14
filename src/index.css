@@ -9,10 +9,6 @@
 
 /*.task-list-item {*/
 /*  border-style: solid;*/
-/*  border-width: 2px;*/
-/*  border-radius: 4px;*/
-/*  width: 100%;*/
-/*  margin-top: 20px;*/
 /*}*/
 
 @media screen and (min-width: 400px) {
@@ -39,7 +35,7 @@
 
 #task-container {
   alignment: center;
-  margin-top: 400px;
+  margin-top: 420px;
   display: grid;
   width: 100%;
   grid-column: 2/ span 3;
@@ -339,3 +335,13 @@ TextField {
 .start {
   margin-bottom: 5px;
 }
+
+
+.open-task-list {
+  padding: 0px;
+  height: 70px;
+  width: 70px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
