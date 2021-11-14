@@ -67,8 +67,6 @@ function App() {
     console.log("list data ", listData)
 
     if (currTaskList !== "" && listData !== []) {
-        // do we need two different queries? one for the task lists and one for the current tasks?
-        // Helppppp i think this is way more messy than it should be??
 
         console.log("in if, list data is ", listData)
         let currList = listData.find(e => e.id === currTaskList);
@@ -201,10 +199,10 @@ function App() {
             created: firebase.database.ServerValue.TIMESTAMP
         }
         console.log("new TASK", newTask)
-        let newTasks = taskData + newTask;
-        console.log("newTasks ", newTasks)
+        taskData.push(newTask);
+        console.log("newTasks ", taskData)
         collection.doc(currTaskList).update({
-            tasks: newTasks
+            tasks: taskData
         });
     }
 
