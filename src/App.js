@@ -43,26 +43,26 @@ const menuItems = [
         arialabel: "delete tasks"
     }
 ]
-
-function sortAlpha(asc, a, b) {
-    if (asc) {
-        if (a.name < b.name) {
-            return -1;
-        } else if (b.name < a.name) {
-            return 1;
-        } else {
-            return 0;
-        }
-    } else {
-        if (a.name > b.name) {
-            return -1;
-        } else if (b.name > a.name) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-}
+//
+// function sortAlpha(asc, a, b) {
+//     if (asc) {
+//         if (a.name < b.name) {
+//             return -1;
+//         } else if (b.name < a.name) {
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     } else {
+//         if (a.name > b.name) {
+//             return -1;
+//         } else if (b.name > a.name) {
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     }
+// }
 
 function App() {
     const [sort, setSort] = useState("Date Created");
@@ -84,16 +84,16 @@ function App() {
         });
         // console.log(listData);
     }
-    console.log("list data ", listData)
+    // console.log("list data ", listData)
 
     if (currTaskList !== "" && listData !== []) {
 
-        console.log("in if, list data is ", listData)
+        // console.log("in if, list data is ", listData)
         let currList = listData.find(e => e.id === currTaskList);
-        console.log("currListId is ", currTaskList)
-        console.log("currList is", currList)
+        // console.log("currListId is ", currTaskList)
+        // console.log("currList is", currList)
         taskData = currList.tasks;
-        console.log(taskData)
+        // console.log(taskData)
 
 
         if (currView === "All Tasks") {
@@ -115,6 +115,7 @@ function App() {
             taskData = taskData.filter(task => !task.checked)
         }
 
+        //This is also angry. Will sort in the middle of typing which is bad :(
         if (sort === "Name: A to Z") {
             taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
         } else if (sort === "Name: Z to A") {
@@ -174,9 +175,19 @@ function App() {
     //     ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
     // }
 
-    function handleDeleteTasks(ids) {
-        taskData = taskData.filter(e => e.id in ids)
-        collection.doc(currTaskList).update({tasks: taskData})
+    function handleDeleteTasks(idList) {
+        let ids = [];
+        for (let i = 0; i <idList.length; i++) {
+            ids.push(idList[i].id);
+        }
+        console.log("Id List is : "+idList);
+        console.log("Ids are : "+ids);
+        console.log("Task list before trying to delete : "+taskData);
+        //This is not working the way that it should be :((( everything is deleting everything
+        // The issue is def the filter methods
+        taskData = taskData.filter(e => e.id in ids);
+        console.log("Task list after trying to delete : "+taskData);
+        collection.doc(currTaskList).update({tasks: taskData});
     }
 
     function deleteCurrPageView(id) {
@@ -187,16 +198,22 @@ function App() {
         if (id === "trash") {
             if (option === "All Tasks") {
                 let ids = taskData.map(e => e.id);
+                console.log("Tried to delete all");
+                console.log(ids);
                 handleDeleteTasks(ids);
             } else if (option === "Completed Tasks") {
-                let ids = taskData.map(e => {
-                    if (e.checked) return e.id
+                let ids = taskData.filter(e => {
+                    if (e.checked) return e
                 });
+                console.log("Tried to delete completed");
+                console.log(ids);
                 handleDeleteTasks(ids);
             } else if (option === "Uncompleted Tasks") {
-                let ids = taskData.map(e => {
+                let ids = taskData.filter(e => {
                     if (!e.checked) return e.id
                 });
+                console.log("Tried to delete uncompleted");
+                console.log(ids);
                 handleDeleteTasks(ids);
             }
         }
@@ -230,9 +247,9 @@ function App() {
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
         }
-        console.log("new TASK", newTask)
+        // console.log("new TASK", newTask)
         taskData.push(newTask);
-        console.log("newTasks ", taskData)
+        // console.log("newTasks ", taskData)
         collection.doc(currTaskList).update({
             tasks: taskData
         });
@@ -255,8 +272,8 @@ function App() {
                 (currPage === "home") ?
                 <div className="homepage">
                     <h2 className="start" tabIndex="0" aria-label="Task Lists">Task Lists</h2>
-                    <div aria-label="create a new task list">
-                        <button type="button" className="new-list-button" onClick={makeNewTaskList}>New Task List
+                    <div>
+                        <button type="button" className="new-list-button" onClick={makeNewTaskList} aria-label="Create a new task list">New Task List
                         </button>
                     </div>
                     <TaskListContainer deleteCurrPageView={deleteCurrPageView} handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
