@@ -175,12 +175,16 @@ function App() {
     //     ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
     // }
 
-    function handleDeleteTasks(idList) {
+    function handleDeleteTasks(idList, option) {
         let ids = [];
         for (let i = 0; i <idList.length; i++) {
             ids.push(idList[i].id);
         }
-        taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
+        if(option === "All Tasks"){
+            taskData = taskData.filter(task => task.id in ids);
+        } else {
+            taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
+        }
         collection.doc(currTaskList).update({tasks: taskData});
     }
 
@@ -200,18 +204,17 @@ function App() {
         if (id === "trash") {
             if (option === "All Tasks") {
                 let ids = taskData.map(e => e.id);
-                console.log("Tried to delete all");
-                handleDeleteTasks(ids);
+                handleDeleteTasks(ids, option);
             } else if (option === "Completed Tasks") {
                 let ids = taskData.filter(e => {
                     if (e.checked) return e
                 });
-                handleDeleteTasks(ids);
+                handleDeleteTasks(ids, option);
             } else if (option === "Uncompleted Tasks") {
                 let ids = taskData.filter(e => {
                     if (!e.checked) return e.id
                 });
-                handleDeleteTasks(ids);
+                handleDeleteTasks(ids, option);
             }
         }
         if (id === "view") {
