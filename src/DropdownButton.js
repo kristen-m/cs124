@@ -2,27 +2,28 @@ import {useState} from "react";
 
 function DropdownButton(props) {
     const [drop, setDrop] = useState(false);
-    return <div className="dropdown" id="view-button">
+    let buttonLabel = "View";
+    return <div className="dropdown" id="view-button" aria-label={props.id +" Selection Dropdown"}>
         <button className="menu-buttons" onClick={() => {setDrop(!drop)}}>{props.name}<span className="small-triangle"> ▼ </span></button>
         <div className="dropdown-content" style={{display: drop ? "block" : "none"}}>
             <button className="dropdown-item" onClick={() => {
-                if(props.id === "trash") {
+                if(props.id === "Delete") {
                     props.toggleModal();
                     props.setCurrentDeleteOption(props.options.option1);
                 } else {
                     props.deleteOrView(props.id, props.options.option1);
                 }
-            }}>{props.options.option1}</button>
+            }} aria-label={props.id +" "+ props.options.option1}>{props.options.option1}</button>
             <button className="dropdown-item" onClick={() => {
-                if(props.id === "trash") {
+                if(props.id === "Delete") {
                     props.toggleModal();
                     props.setCurrentDeleteOption(props.options.option2);
                 } else {
                     props.deleteOrView(props.id, props.options.option2);
                 }
-            }}>{props.options.option2}</button>
+            }} aria-label={props.id+" "+props.options.option2}>{props.options.option2}</button>
             <button className="dropdown-item" onClick={() => {
-                if(props.id === "trash") {
+                if(props.id === "Delete") {
                     props.toggleModal();
                     props.setCurrentDeleteOption(props.options.option3);
                 } else {
@@ -35,7 +36,7 @@ function DropdownButton(props) {
                     }
                 }
             }
-            }>{props.options.option3}</button>
+            } aria-label={props.id+" "+props.options.option3}>{props.options.option3}</button>
         </div>
     </div>;
 }

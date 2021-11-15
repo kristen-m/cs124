@@ -10,6 +10,7 @@ function TaskListItem(props) {
                 value={props.name}
                 onChange={e => props.handleTaskListNameChange(e, props.id)}
                 disabled={props.checked}
+                aria-label="Enter Task List Title"
                 InputProps={{ disableUnderline: true,
                     style: { fontSize: 40,
                         background: "transparent",
@@ -19,8 +20,8 @@ function TaskListItem(props) {
                 multiline
             />
             <span id="homepage-action-buttons">
-            <button type="button" className="open-task-list" onClick={() => (props.deleteCurrPageView(props.id), props.updateCurrTaskList(""))}>🗑</button>
-            <button type="button" className="open-task-list" onClick={() => (props.togglePageView(), props.updateCurrTaskList(props.id))}>⮑</button>
+            <button type="button" aria-label={"Delete task list "+ props.name} className="task-list-options" onClick={() => (props.deleteCurrPageView(props.id), props.updateCurrTaskList(""))}>🗑</button>
+            <button type="button" aria-label={"Enter task list "+ props.name} className="task-list-options" onClick={() => (props.togglePageView(), props.updateCurrTaskList(props.id))}>⮑</button>
             </span>
         </div>
     </label>;

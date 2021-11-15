@@ -38,7 +38,7 @@ const menuItems = [
         arialabel: "view tasks"
     },
     {
-        id: "trash",
+        id: "Delete",
         name: "🗑",
         arialabel: "delete tasks"
     }
@@ -254,8 +254,8 @@ function App() {
             loading ? <div>Loading ... </div> :
                 (currPage === "home") ?
                 <div className="homepage">
-                    <h2 className="start" tabIndex="0" aria-label="Tasks">Task Lists</h2>
-                    <div className="dropdown" id="new-item-button" aria-label="create a new task">
+                    <h2 className="start" tabIndex="0" aria-label="Task Lists">Task Lists</h2>
+                    <div aria-label="create a new task list">
                         <button type="button" className="new-list-button" onClick={makeNewTaskList}>New Task List
                         </button>
                     </div>
@@ -280,16 +280,16 @@ function App() {
                                                 delete {taskData.filter(e => e.checked).length} completed task(s)?
                                             </div>}
                                 </Alert>}
-                                <h2 className="start" tabIndex="0" aria-label="Tasks">{listData.find(e => e.id === currTaskList).name}</h2>
+                                <h2 className="start" tabIndex="0" aria-label={listData.find(e => e.id === currTaskList).name}>{listData.find(e => e.id === currTaskList).name}</h2>
                                 <div className="menu-buttons-container">
-                                    <button type="button" id="back-button" className="menu-buttons" onClick={togglePageView}>⮐
+                                    <button type="button" id="back-button" className="menu-buttons" onClick={togglePageView} aria-label="Return to Task Lists Homepage">⮐
                                     </button>
                                     <div className="dropdown" id="new-item-button" aria-label="create a new task">
                                         <button type="button" className="menu-buttons" onClick={makeNewItem}>New Item
                                         </button>
                                     </div>
                                     {menuItems.map(e => <DropdownButton key={e.id}
-                                                                        aria-label="test5"
+                                                                        aria-label="HELLO????"
                                                                         setCurrentDeleteOption={setCurrentDeleteOption}
                                                                         toggleModal={toggleModal} tasksData={taskData} {...e}
                                                                         options={dropdownOptions}

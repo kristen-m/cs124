@@ -32,11 +32,11 @@ function Alert(props) {
         <div className={"backdrop"}>
             <div className="modal">
                 {props.children}
-                <button ref={cancelButton} className={"alert-button alert-cancel"} type={"button"}
+                <button ref={cancelButton} className={"alert-button alert-cancel"} type={"button"} aria-label="Cancel Delete"
                         onClick={props.onClose}>
                     Cancel
                 </button>
-                <button ref={okButton} className={"alert-button alert-ok"} type={"button"}
+                <button ref={okButton} className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Delete"
                         onClick={() => {
                             props.onOK();
                             props.onClose();
