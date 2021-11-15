@@ -180,14 +180,16 @@ function App() {
         for (let i = 0; i <idList.length; i++) {
             ids.push(idList[i].id);
         }
-        console.log("Id List is : "+idList);
-        console.log("Ids are : "+ids);
-        console.log("Task list before trying to delete : "+taskData);
-        //This is not working the way that it should be :((( everything is deleting everything
-        // The issue is def the filter methods
-        taskData = taskData.filter(e => e.id in ids);
-        console.log("Task list after trying to delete : "+taskData);
+        taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
         collection.doc(currTaskList).update({tasks: taskData});
+    }
+
+    function checkIdInList(id, idList){
+        for (let i = 0; i < idList.length; i ++){
+            if (id === idList[i]){
+                return true;
+            }
+        }
     }
 
     function deleteCurrPageView(id) {
@@ -199,21 +201,16 @@ function App() {
             if (option === "All Tasks") {
                 let ids = taskData.map(e => e.id);
                 console.log("Tried to delete all");
-                console.log(ids);
                 handleDeleteTasks(ids);
             } else if (option === "Completed Tasks") {
                 let ids = taskData.filter(e => {
                     if (e.checked) return e
                 });
-                console.log("Tried to delete completed");
-                console.log(ids);
                 handleDeleteTasks(ids);
             } else if (option === "Uncompleted Tasks") {
                 let ids = taskData.filter(e => {
                     if (!e.checked) return e.id
                 });
-                console.log("Tried to delete uncompleted");
-                console.log(ids);
                 handleDeleteTasks(ids);
             }
         }
