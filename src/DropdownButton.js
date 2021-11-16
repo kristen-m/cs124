@@ -3,7 +3,7 @@ import {useState} from "react";
 function DropdownButton(props) {
     const [drop, setDrop] = useState(false);
     let buttonLabel = "View";
-    return <div className="dropdown" id="view-button" aria-label={props.id +" Selection Dropdown"}>
+    return <div className="dropdown" id={props.id+"-button"} aria-label={props.id +" Selection Dropdown"}>
         <button className="menu-buttons" onClick={() => {setDrop(!drop)}}>{props.name}<span className="small-triangle"> ▼ </span></button>
         <div className="dropdown-content" style={{display: drop ? "block" : "none"}}>
             <button className="dropdown-item" onClick={() => {
