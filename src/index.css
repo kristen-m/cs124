@@ -324,7 +324,6 @@ TextField {
 }
 
 #fixed-buttons {
-  position: sticky;
   top: 0px;
   background: whitesmoke;
   position: fixed;

@@ -43,26 +43,6 @@ const menuItems = [
         arialabel: "delete tasks"
     }
 ]
-//
-// function sortAlpha(asc, a, b) {
-//     if (asc) {
-//         if (a.name < b.name) {
-//             return -1;
-//         } else if (b.name < a.name) {
-//             return 1;
-//         } else {
-//             return 0;
-//         }
-//     } else {
-//         if (a.name > b.name) {
-//             return -1;
-//         } else if (b.name > a.name) {
-//             return 1;
-//         } else {
-//             return 0;
-//         }
-//     }
-// }
 
 function App() {
     const [sort, setSort] = useState("Date Created");
@@ -82,7 +62,6 @@ function App() {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
-        // console.log(listData);
     }
     // console.log("list data ", listData)
 
@@ -106,16 +85,14 @@ function App() {
             } else if (sort === "Priority: Low to High") {
                 taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
             } else {
-                taskData = taskData.sort((a, b) => (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0 )
+                taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
             }
-            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
         } else if (currView === "Completed Tasks") {
             taskData = taskData.filter(task => task.checked)
         } else {
             taskData = taskData.filter(task => !task.checked)
         }
 
-        //This is also angry. Will sort in the middle of typing which is bad :(
         if (sort === "Name: A to Z") {
             taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
         } else if (sort === "Name: Z to A") {
@@ -208,7 +185,7 @@ function App() {
                 handleDeleteTasks(ids, option);
             } else if (option === "Completed Tasks") {
                 let ids = taskData.filter(e => {
-                    if (e.checked) return e
+                    if (e.checked) return e.id
                 });
                 handleDeleteTasks(ids, option);
             } else if (option === "Uncompleted Tasks") {
@@ -248,9 +225,7 @@ function App() {
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
         }
-        // console.log("new TASK", newTask)
         taskData.push(newTask);
-        // console.log("newTasks ", taskData)
         collection.doc(currTaskList).update({
             tasks: taskData
         });
