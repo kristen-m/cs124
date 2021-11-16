@@ -152,6 +152,7 @@ function App() {
 
     function handleTaskNameChange(e, id) {
         // collection.doc(id).update({name: e.target.value});
+        //Maybe the issue with the tasks being sorted immediately is here??? Not sure :(
         taskData.find(task => task.id === id).name = e.target.value
         collection.doc(currTaskList).update({tasks: taskData});
     }
