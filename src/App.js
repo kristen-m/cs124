@@ -287,8 +287,7 @@ function App() {
                                                                         toggleModal={toggleModal} tasksData={taskData} {...e}
                                                                         options={dropdownOptions}
                                                                         deleteOrView={deleteOrView}/>)}
-                                </div>
-                                <div id="sorting-area">
+                                    <div id="sorting-area">
                                     <span>
                                         <div id="sort">
                                             <div id="sort-label">Sort By:</div>
@@ -308,6 +307,7 @@ function App() {
                                             </select>
                                         </div>
                                     </span>
+                                    </div>
                                 </div>
                             </div>
                             <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}

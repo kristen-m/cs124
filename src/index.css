@@ -2,7 +2,9 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
-  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 97%;
   text-align: left;
   /*grid-column: 2;*/
 }
@@ -13,7 +15,8 @@
 
 @media screen and (min-width: 400px) {
   .task-item {
-    width: 100%;
+    margin-right: 100px;
+    width: 97%;
     text-align: left;
     display: block;
     border-style: solid;
@@ -35,7 +38,7 @@
 
 #task-container {
   alignment: center;
-  margin-top: 420px;
+  margin-top: 0px;
   display: grid;
   width: 100%;
   grid-column: 2/ span 3;
@@ -43,7 +46,7 @@
 }
 
 .buttons-and-tasks {
-  display: grid;
+  display: block;
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto 25px auto;
   width: 100%;
@@ -107,13 +110,14 @@ button:hover {
 }
 
 .menu-buttons-container {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  /*flex-direction: row;*/
   align-items: center;
   justify-content: center;
   gap: 20pt;
   grid-column: 2 /span 3;
   width: 100%;
+  opacity: 100%;
 }
 
 #back-button {
@@ -286,6 +290,8 @@ TextField {
   grid-column: 3/ span 2;
   text-align: center;
   float: right;
+  /*width: 100%;*/
+  background-color: whitesmoke;
   margin-right: 85px;
   margin-top: 15px;
 }
@@ -326,10 +332,10 @@ TextField {
 #fixed-buttons {
   top: 0px;
   background: whitesmoke;
-  position: fixed;
+  /*position: fixed;*/
   width: 100%;
   z-index: 100;
-  margin-bottom: 200px;
+  /*margin-bottom: 200px;*/
 }
 
 .start {
