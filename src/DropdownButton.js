@@ -9,7 +9,7 @@ function DropdownButton(props) {
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "Delete") {
                     props.toggleModal();
-                    props.setCurrentDeleteOption(props.options.option1);
+                    props.updateCurrentDeleteOption(props.options.option1);
                 } else {
                     props.deleteOrView(props.id, props.options.option1);
                 }
@@ -17,7 +17,7 @@ function DropdownButton(props) {
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "Delete") {
                     props.toggleModal();
-                    props.setCurrentDeleteOption(props.options.option2);
+                    props.updateCurrentDeleteOption(props.options.option2);
                 } else {
                     props.deleteOrView(props.id, props.options.option2);
                 }
@@ -25,7 +25,7 @@ function DropdownButton(props) {
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "Delete") {
                     props.toggleModal();
-                    props.setCurrentDeleteOption(props.options.option3);
+                    props.updateCurrentDeleteOption(props.options.option3);
                 } else {
                     props.deleteOrView(props.id, props.options.option3);
                 }

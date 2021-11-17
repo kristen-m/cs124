@@ -6,12 +6,12 @@
   margin-right: 10px;
   width: 97%;
   text-align: left;
-  /*grid-column: 2;*/
 }
 
-/*.task-list-item {*/
-/*  border-style: solid;*/
-/*}*/
+.task-list-item:nth-child(even) {
+  background-color: #dddddd;
+  border-radius: 10px;
+}
 
 @media screen and (min-width: 400px) {
   .task-item {
@@ -25,7 +25,6 @@
     position: relative;
     height: 0;
     padding-bottom: 11.25%;
-    /*grid-column: 2;*/
   }
 
   .task-color{
@@ -60,7 +59,6 @@ body {
 }
 
 h2 {
-  /*background-color: red;*/
   font-size: 700%;
   margin-bottom: 0px;
   text-align: center;
@@ -134,6 +132,7 @@ button:hover {
 
 #trash-button {
   grid-column: 4;
+  background-color: #61dafb;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -175,7 +174,6 @@ button:hover {
 
 .dropdown-item {
   width: 100%;
-  /*padding: 10px;*/
   background-color: #f1f1f1;
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -290,7 +288,6 @@ TextField {
   grid-column: 3/ span 2;
   text-align: center;
   float: right;
-  /*width: 100%;*/
   background-color: whitesmoke;
   margin-right: 85px;
   margin-top: 15px;
@@ -332,10 +329,8 @@ TextField {
 #fixed-buttons {
   top: 0px;
   background: whitesmoke;
-  /*position: fixed;*/
   width: 100%;
   z-index: 100;
-  /*margin-bottom: 200px;*/
 }
 
 .start {
@@ -344,10 +339,8 @@ TextField {
 
 
 .task-list-options {
-  padding: 0px;
   height: 70px;
   width: 70px;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  margin: 20px 10px;
 }
 

@@ -21,10 +21,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-
-let currentDeleteOption = "";
-let currTaskList = "";
-
 const dropdownOptions = {
     option1: "All Tasks",
     option2: "Completed Tasks",
@@ -38,7 +34,7 @@ const menuItems = [
         arialabel: "view tasks"
     },
     {
-        id: "Delete",
+        id: "trash",
         name: "🗑",
         arialabel: "delete tasks"
     }
@@ -47,8 +43,12 @@ const menuItems = [
 function App() {
     const [sort, setSort] = useState("Date Created");
     const [showAlert, setShowAlert] = useState(false);
+    const [showListAlert, setShowListAlert] = useState(false);
     const [currView, setCurrView] = useState("All Tasks");
     const [currPage, setCurrPage] = useState("home")
+    const [currentDeleteOption, setCurrentDeleteOption] = useState("");
+    const [deleteListId, setDeleteListId] = useState("");
+    const [currTaskList, setCurrTaskList] = useState("");
 
     let query = db.collection('hilnels-hmc-task-lists');
     const collection = db.collection('hilnels-hmc-task-lists');
@@ -62,32 +62,15 @@ function App() {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
+        console.log("listdata", listData)
     }
-    // console.log("list data ", listData)
 
     if (currTaskList !== "" && listData !== []) {
 
-        // console.log("in if, list data is ", listData)
         let currList = listData.find(e => e.id === currTaskList);
-        // console.log("currListId is ", currTaskList)
-        // console.log("currList is", currList)
         taskData = currList.tasks;
-        // console.log(taskData)
 
-
-        if (currView === "All Tasks") {
-            if (sort === "Name: A to Z") {
-                taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-            } else if (sort === "Name: Z to A") {
-                taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-            } else if (sort === "Priority: High to Low") {
-                taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-            } else if (sort === "Priority: Low to High") {
-                taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
-            } else {
-                taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-            }
-        } else if (currView === "Completed Tasks") {
+        if (currView === "Completed Tasks") {
             taskData = taskData.filter(task => task.checked)
         } else {
             taskData = taskData.filter(task => !task.checked)
@@ -111,6 +94,10 @@ function App() {
         setShowAlert(!showAlert);
     }
 
+    function toggleListModal() {
+        setShowListAlert(!showListAlert);
+    }
+
     function togglePageView() {
         if (currPage === "home") {
             setCurrPage("list");
@@ -120,16 +107,18 @@ function App() {
     }
 
     function updateCurrTaskList(id) {
-        currTaskList = id;
+        setCurrTaskList(id);
     }
 
-    function setCurrentDeleteOption(currDelete) {
-        currentDeleteOption = currDelete;
+    function updateCurrentDeleteOption(currDelete) {
+        setCurrentDeleteOption(currDelete);
+    }
+
+    function updateDeleteListId(currDelete) {
+        setDeleteListId(currDelete);
     }
 
     function handleTaskNameChange(e, id) {
-        // collection.doc(id).update({name: e.target.value});
-        //Maybe the issue with the tasks being sorted immediately is here??? Not sure :(
         taskData.find(task => task.id === id).name = e.target.value
         collection.doc(currTaskList).update({tasks: taskData});
     }
@@ -138,20 +127,11 @@ function App() {
         collection.doc(id).update({name: e.target.value});
     }
 
-    // function toggleCheckbox(id) {
-    //     const oldChecked = taskData.find(e => e.id === id).checked;
-    //     collection.doc(id).update({checked: !oldChecked})
-    // }
-
     function toggleCheckbox(id) {
         const oldChecked = taskData.find(e => e.id === id).checked;
         taskData.find(e => e.id === id).checked = !oldChecked
         collection.doc(currTaskList).update({tasks: taskData})
     }
-
-    // function handleDeleteTasks(ids) {
-    //     ids.forEach(id => db.collection('hilnels-hmc-tasks').doc(id).delete());
-    // }
 
     function handleDeleteTasks(idList, option) {
         let ids = [];
@@ -206,17 +186,12 @@ function App() {
         }
     }
 
-    // function updatePriority(id, priority) {
-    //     collection.doc(id).update({priority: priority})
-    // }
-
     function updatePriority(id, priority) {
         taskData.find(e => e.id === id).priority = priority
         collection.doc(currTaskList).update({tasks: taskData})
     }
 
     function makeNewItem() {
-        let currTaskListObject = db.collection('hilnels-hmc-task-lists').doc(currTaskList).get();
         const newId = generateUniqueID()
         let newTask = {
             id: newId,
@@ -252,28 +227,22 @@ function App() {
                         <button type="button" className="new-list-button" onClick={makeNewTaskList} aria-label="Create a new task list">New Task List
                         </button>
                     </div>
-                    <TaskListContainer deleteCurrPageView={deleteCurrPageView} handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
+                    <TaskListContainer toggleListModal={toggleListModal} updateDeleteListId={updateDeleteListId} deleteCurrPageView={deleteCurrPageView} handleTaskListNameChange={handleTaskListNameChange} taskListData={listData} togglePageView={togglePageView} updateCurrTaskList={updateCurrTaskList}/>
+                    {showListAlert &&
+                    <Alert onClose={toggleListModal} onOK={() => deleteCurrPageView(deleteListId)}>
+                        <div tabIndex="1"> Are you sure you want to delete the task list:
+                            <div tabIndex="1">
+                                {(listData.find(e => e.id === deleteListId).name) === "" ? " New Task List" : (listData.find(e => e.id === deleteListId).name)}
+                            </div>
+                        </div>
+                    </Alert>}
                 </div> :
             <div className="App">
                         <div className="buttons-and-tasks">
                             <div id="fixed-buttons">
-                            {showAlert &&
-                                <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
-                                       dropdownOptions={dropdownOptions}>
-                                    {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
-                                            Are you sure you want to delete all {taskData.length} task(s)?
-                                        </div> :
-                                        (currentDeleteOption === "Uncompleted Tasks") ?
-                                            <div tabIndex="1">
-                                                Are you sure you want to
-                                                delete {taskData.filter(e => !e.checked).length} uncompleted task(s)?
-                                            </div> :
-                                            <div tabIndex="1">
-                                                Are you sure you want to
-                                                delete {taskData.filter(e => e.checked).length} completed task(s)?
-                                            </div>}
-                                </Alert>}
-                                <h2 className="start" tabIndex="0" aria-label={listData.find(e => e.id === currTaskList).name}>{listData.find(e => e.id === currTaskList).name}</h2>
+                                <h2 className="start" tabIndex="0" aria-label={(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}>
+                                    {(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}
+                                </h2>
                                 <div className="menu-buttons-container">
                                     <button type="button" id="back-button" className="menu-buttons" onClick={togglePageView} aria-label="Return to Task Lists Homepage">⮐
                                     </button>
@@ -282,8 +251,7 @@ function App() {
                                         </button>
                                     </div>
                                     {menuItems.map(e => <DropdownButton key={e.id}
-                                                                        aria-label="HELLO????"
-                                                                        setCurrentDeleteOption={setCurrentDeleteOption}
+                                                                        updateCurrentDeleteOption={updateCurrentDeleteOption}
                                                                         toggleModal={toggleModal} tasksData={taskData} {...e}
                                                                         options={dropdownOptions}
                                                                         deleteOrView={deleteOrView}/>)}
@@ -312,6 +280,22 @@ function App() {
                             </div>
                             <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
                                            toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
+                            {showAlert &&
+                            <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
+                                   dropdownOptions={dropdownOptions}>
+                                {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
+                                        Are you sure you want to delete all {taskData.length} task(s)?
+                                    </div> :
+                                    (currentDeleteOption === "Uncompleted Tasks") ?
+                                        <div tabIndex="1">
+                                            Are you sure you want to
+                                            delete {taskData.filter(e => !e.checked).length} uncompleted task(s)?
+                                        </div> :
+                                        <div tabIndex="1">
+                                            Are you sure you want to
+                                            delete {taskData.filter(e => e.checked).length} completed task(s)?
+                                        </div>}
+                            </Alert>}
                         </div>
                     </div>
             }

@@ -19,7 +19,7 @@ function TaskListItem(props) {
                         fontFamily: "Futura",} }}
             />
             <span id="homepage-action-buttons">
-            <button type="button" aria-label={"Delete task list "+ props.name} className="task-list-options" onClick={() => (props.deleteCurrPageView(props.id), props.updateCurrTaskList(""))}>🗑</button>
+            <button type="button" aria-label={"Delete task list "+ props.name} className="task-list-options" onClick={() => (props.toggleListModal(), props.updateDeleteListId(props.id), props.updateCurrTaskList(""))}>🗑</button>
             <button type="button" aria-label={"Enter task list "+ props.name} className="task-list-options" onClick={() => (props.togglePageView(), props.updateCurrTaskList(props.id))}>⮑</button>
             </span>
         </div>;
