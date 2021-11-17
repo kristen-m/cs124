@@ -34,7 +34,7 @@ const menuItems = [
         arialabel: "view tasks"
     },
     {
-        id: "trash",
+        id: "Delete",
         name: "🗑",
         arialabel: "delete tasks"
     }
@@ -139,7 +139,7 @@ function App() {
             ids.push(idList[i].id);
         }
         if(option === "All Tasks"){
-            taskData = taskData.filter(task => task.id in ids);
+            taskData = taskData.filter(task => task in ids);
         } else {
             taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
         }
@@ -159,7 +159,7 @@ function App() {
     }
 
     function deleteOrView(id, option) {
-        if (id === "trash") {
+        if (id === "Delete") {
             if (option === "All Tasks") {
                 let ids = taskData.map(e => e.id);
                 handleDeleteTasks(ids, option);
@@ -281,7 +281,7 @@ function App() {
                             <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
                                            toggleCheckbox={toggleCheckbox} updatePriority={updatePriority}/>
                             {showAlert &&
-                            <Alert onClose={toggleModal} onOK={() => deleteOrView("trash", currentDeleteOption)}
+                            <Alert onClose={toggleModal} onOK={() => deleteOrView("Delete", currentDeleteOption)}
                                    dropdownOptions={dropdownOptions}>
                                 {(currentDeleteOption === "All Tasks") ? <div tabIndex="1">
                                         Are you sure you want to delete all {taskData.length} task(s)?
