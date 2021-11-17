@@ -62,7 +62,7 @@ function App() {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
-        console.log("listdata", listData)
+        // console.log("listdata", listData)
     }
 
     if (currTaskList !== "" && listData !== []) {
@@ -72,7 +72,7 @@ function App() {
 
         if (currView === "Completed Tasks") {
             taskData = taskData.filter(task => task.checked)
-        } else {
+        } else if  (currView === "Uncompleted Tasks") {
             taskData = taskData.filter(task => !task.checked)
         }
 
@@ -119,18 +119,20 @@ function App() {
     }
 
     function handleTaskNameChange(e, id) {
+        // console.log("value read in was: "+ e.target.value);
         taskData.find(task => task.id === id).name = e.target.value
         collection.doc(currTaskList).update({tasks: taskData});
     }
 
     function handleTaskListNameChange(e, id) {
+        console.log("value read in was: "+ e.target.value);
         collection.doc(id).update({name: e.target.value});
     }
 
     function toggleCheckbox(id) {
         const oldChecked = taskData.find(e => e.id === id).checked;
-        taskData.find(e => e.id === id).checked = !oldChecked
-        collection.doc(currTaskList).update({tasks: taskData})
+        taskData.find(e => e.id === id).checked = !oldChecked;
+        collection.doc(currTaskList).update({tasks: taskData});
     }
 
     function handleDeleteTasks(idList, option) {
@@ -213,7 +215,7 @@ function App() {
             name: "",
             taskCount: 0,
             tasks: [],
-            created: firebase.database.ServerValue.TIMESTAMP
+            createdList: firebase.database.ServerValue.TIMESTAMP
         })
     }
 
