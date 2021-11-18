@@ -13,6 +13,7 @@ function DropdownButton(props) {
                 } else {
                     props.deleteOrView(props.id, props.options.option1);
                 }
+                setDrop(!drop);
             }} aria-label={props.id +" "+ props.options.option1}>{props.options.option1}</button>
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "Delete") {
@@ -21,6 +22,7 @@ function DropdownButton(props) {
                 } else {
                     props.deleteOrView(props.id, props.options.option2);
                 }
+                setDrop(!drop)
             }} aria-label={props.id+" "+props.options.option2}>{props.options.option2}</button>
             <button className="dropdown-item" onClick={() => {
                 if(props.id === "Delete") {
@@ -29,6 +31,7 @@ function DropdownButton(props) {
                 } else {
                     props.deleteOrView(props.id, props.options.option3);
                 }
+                setDrop(!drop)
             }} onKeyDown={(e) => {
                 if(e.key === "Tab"){
                     if(drop){

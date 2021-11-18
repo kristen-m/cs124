@@ -49,44 +49,103 @@ function App() {
     const [currentDeleteOption, setCurrentDeleteOption] = useState("");
     const [deleteListId, setDeleteListId] = useState("");
     const [currTaskList, setCurrTaskList] = useState("");
+    const [taskData, setTaskData] = useState([])
 
     let query = db.collection('hilnels-hmc-task-lists');
     const collection = db.collection('hilnels-hmc-task-lists');
 
     const [value, loading, error] = useCollection(query);
     let listData = []
-    let taskData = []
-
+    // let taskData = []
 
     if (value) {
         listData = value.docs.map(e => {
             return {...e.data(), id: e.id}
         });
-        // console.log("listdata", listData)
     }
 
-    if (currTaskList !== "" && listData !== []) {
+    // let taskQuery = db.collection('hilnels-hmc-task-lists').doc(currTaskList).collection("Tasks");
+    // const [taskValue, taskLoading, taskError] = useCollection(taskQuery)
+    //
+    // if (taskValue) {
+    //     taskData = taskValue.docs.map(e => {
+    //         return {...e.data(), id: e.id}
+    //     })
+    // }
 
-        let currList = listData.find(e => e.id === currTaskList);
-        taskData = currList.tasks;
+    if (currTaskList !== "") {
 
-        if (currView === "Completed Tasks") {
-            taskData = taskData.filter(task => task.checked)
-        } else if  (currView === "Uncompleted Tasks") {
-            taskData = taskData.filter(task => !task.checked)
-        }
 
-        if (sort === "Name: A to Z") {
-            taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-        } else if (sort === "Name: Z to A") {
-            taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-        } else if (sort === "Date Created") {
-            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-        } else if (sort === "Priority: High to Low") {
-            taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-        } else if (sort === "Priority: Low to High") {
-            taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
-        }
+        console.log("before collection")
+        console.log("TASKS", taskData)
+        //
+        // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
+        //         snapshot.forEach(e => {
+        //             taskData.push({...e.data(), id: e.id})
+        //             taskData.push("test")
+        //             console.log("data in collection", e.data())
+        //             console.log("test")
+        //             console.log("Tasks Inside: "+taskData);
+        //         })
+        //     })
+
+        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
+        //         taskData = qs.docs.map(e => {
+        //             console.log("in map")
+        //             console.log(e.data())
+        //             return {...e.data(), id: e.id}
+        //         })
+        //     })
+
+        // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
+        //     snapshot.docs.forEach(e => {
+        //         console.log("in for each")
+        //         console.log(e.data())
+        //         taskData.push({...e.data(), id: e.id})
+        //     })
+        // })
+
+        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
+        //     taskData = qs.docs.map(e => e.data())
+        // })
+
+        // let tasks = []
+        //
+        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
+        //     qs.docs.forEach(e => {
+        //         let currTask = {...e.data(), id: e.id}
+        //         console.log("CURRDATA", currTask)
+        //         tasks.push(currTask)
+        //     })
+        //     setTaskData(tasks)
+        // })
+
+        console.log("after collection")
+        console.log("TASKS", taskData)
+
+
+        // let currList = listData.find(e => e.id === currTaskList);
+        // taskData = currList.tasks;
+
+        // taskData = collection.doc(currTaskList).collection("Tasks").get()
+
+        // if (currView === "Completed Tasks") {
+        //     taskData = taskData.filter(task => task.checked)
+        // } else if  (currView === "Uncompleted Tasks") {
+        //     taskData = taskData.filter(task => !task.checked)
+        // }
+        //
+        // if (sort === "Name: A to Z") {
+        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        // } else if (sort === "Name: Z to A") {
+        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        // } else if (sort === "Date Created") {
+        //     taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        // } else if (sort === "Priority: High to Low") {
+        //     taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        // } else if (sort === "Priority: Low to High") {
+        //     taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        // }
 
     }
 
@@ -121,7 +180,9 @@ function App() {
     function handleTaskNameChange(e, id) {
         // console.log("value read in was: "+ e.target.value);
         taskData.find(task => task.id === id).name = e.target.value
-        collection.doc(currTaskList).update({tasks: taskData});
+        // collection.doc(currTaskList).update({tasks: taskData});
+        collection.doc(currTaskList).collection("Tasks").doc(id).update({name: e.target.value})
+
     }
 
     function handleTaskListNameChange(e, id) {
@@ -131,30 +192,36 @@ function App() {
 
     function toggleCheckbox(id) {
         const oldChecked = taskData.find(e => e.id === id).checked;
-        taskData.find(e => e.id === id).checked = !oldChecked;
-        collection.doc(currTaskList).update({tasks: taskData});
+        // taskData.find(e => e.id === id).checked = !oldChecked;
+        // collection.doc(currTaskList).update({tasks: taskData});
+
+        collection.doc(currTaskList).collection("Tasks").doc(id).update({checked: !oldChecked})
+
     }
 
     function handleDeleteTasks(idList, option) {
-        let ids = [];
-        for (let i = 0; i <idList.length; i++) {
-            ids.push(idList[i].id);
-        }
-        if(option === "All Tasks"){
-            taskData = taskData.filter(task => task in ids);
-        } else {
-            taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
-        }
-        collection.doc(currTaskList).update({tasks: taskData});
+        // let ids = [];
+        // for (let i = 0; i <idList.length; i++) {
+        //     ids.push(idList[i].id);
+        // }
+        // if(option === "All Tasks"){
+        //     taskData = taskData.filter(task => task in ids);
+        // } else {
+        //     taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
+        // }
+
+        idList.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete())
+
+        // collection.doc(currTaskList).update({tasks: taskData});
     }
 
-    function checkIdInList(id, idList){
-        for (let i = 0; i < idList.length; i ++){
-            if (id === idList[i]){
-                return true;
-            }
-        }
-    }
+    // function checkIdInList(id, idList){
+    //     for (let i = 0; i < idList.length; i ++){
+    //         if (id === idList[i]){
+    //             return true;
+    //         }
+    //     }
+    // }
 
     function deleteCurrPageView(id) {
         db.collection('hilnels-hmc-task-lists').doc(id).delete();
@@ -190,23 +257,31 @@ function App() {
 
     function updatePriority(id, priority) {
         taskData.find(e => e.id === id).priority = priority
-        collection.doc(currTaskList).update({tasks: taskData})
+        collection.doc(currTaskList).collection("Tasks").doc(id).update({priority: priority})
+
+        // collection.doc(currTaskList).update({tasks: taskData})
     }
 
     function makeNewItem() {
         const newId = generateUniqueID()
-        let newTask = {
+        // let newTask = {
+        //     id: newId,
+        //     name: "",
+        //     checked: false,
+        //     priority: "c",
+        //     created: firebase.database.ServerValue.TIMESTAMP
+        // }
+        // taskData.push(newTask);
+        collection.doc(currTaskList).collection("Tasks").doc(newId).set({
             id: newId,
             name: "",
             checked: false,
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
-        }
-        taskData.push(newTask);
-        // collection.doc(currTaskList).collection("Tasks").doc(newID).update(tasks: taskData);
-        collection.doc(currTaskList).update({
-            tasks: taskData
         });
+        // collection.doc(currTaskList).update({
+        //     tasks: taskData
+        // });
     }
 
     function makeNewTaskList() {
@@ -215,7 +290,7 @@ function App() {
             id: newId,
             name: "",
             taskCount: 0,
-            tasks: [],
+            // tasks: [],
             createdList: firebase.database.ServerValue.TIMESTAMP
         })
     }
