@@ -203,6 +203,7 @@ function App() {
             created: firebase.database.ServerValue.TIMESTAMP
         }
         taskData.push(newTask);
+        // collection.doc(currTaskList).collection("Tasks").doc(newID).update(tasks: taskData);
         collection.doc(currTaskList).update({
             tasks: taskData
         });
