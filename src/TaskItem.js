@@ -16,12 +16,15 @@ function TaskItem(props) {
                 onChange={e => props.handleTaskNameChange(e, props.id)}
                 disabled={props.checked}
                 InputProps={{ disableUnderline: true,
-                                         style: { fontSize: 40,
-                                                background: "transparent",
+                                         style: { background: "transparent",
                                                 marginTop:"10px",
                                                 paddingBottom:"10px",
-                                                fontFamily: "Futura",} }}
+                                                fontSize: "8vw",
+                                                fontFamily: "Futura",
+                                                width: "80%"} }}
                 multiline
+                maxRows={2}
+                minRows={1}
             />
             <select name="Priority" id="priority" onChange={e => props.updatePriority(props.id, e.target.value)}>
                 <option aria-label="high priority" value="a" selected= {"a"===props.priority}>High</option>

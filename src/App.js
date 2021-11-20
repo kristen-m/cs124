@@ -78,7 +78,6 @@ function App() {
         })
     }
 
-
         if (currView === "Completed Tasks") {
             taskData = taskData.filter(task => task.checked)
         } else if  (currView === "Uncompleted Tasks") {
@@ -96,7 +95,6 @@ function App() {
         } else if (sort === "Priority: Low to High") {
             taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
         }
-
 
     function toggleModal() {
         setShowAlert(!showAlert);
