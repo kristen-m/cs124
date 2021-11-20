@@ -214,29 +214,14 @@ function App() {
 
     }
 
-    function handleDeleteTasks(idList, option) {
-        // let ids = [];
-        // for (let i = 0; i <idList.length; i++) {
-        //     ids.push(idList[i].id);
-        // }
-        // if(option === "All Tasks"){
-        //     taskData = taskData.filter(task => task in ids);
-        // } else {
-        //     taskData = taskData.filter(task => task && !checkIdInList(task.id, ids));
-        // }
-
-        idList.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete())
-
-        // collection.doc(currTaskList).update({tasks: taskData});
+    function handleDeleteTasks(taskList, option) {
+        let ids = [];
+        for (let i = 0; i < taskList.length; i++) {
+            ids.push(taskList[i].id);
+            ids.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete())
+        }
     }
 
-    // function checkIdInList(id, idList){
-    //     for (let i = 0; i < idList.length; i ++){
-    //         if (id === idList[i]){
-    //             return true;
-    //         }
-    //     }
-    // }
 
     function deleteCurrPageView(id) {
         db.collection('hilnels-hmc-task-lists').doc(id).delete();
