@@ -144,23 +144,23 @@ function App() {
 
         // taskData = collection.doc(currTaskList).collection("Tasks").get()
 
-        // if (currView === "Completed Tasks") {
-        //     taskData = taskData.filter(task => task.checked)
-        // } else if  (currView === "Uncompleted Tasks") {
-        //     taskData = taskData.filter(task => !task.checked)
-        // }
-        //
-        // if (sort === "Name: A to Z") {
-        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
-        // } else if (sort === "Name: Z to A") {
-        //     taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
-        // } else if (sort === "Date Created") {
-        //     taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
-        // } else if (sort === "Priority: High to Low") {
-        //     taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
-        // } else if (sort === "Priority: Low to High") {
-        //     taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
-        // }
+        if (currView === "Completed Tasks") {
+            taskData = taskData.filter(task => task.checked)
+        } else if  (currView === "Uncompleted Tasks") {
+            taskData = taskData.filter(task => !task.checked)
+        }
+
+        if (sort === "Name: A to Z") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Name: Z to A") {
+            taskData = taskData.sort((a, b) => (a.name.toUpperCase() < b.name.toUpperCase()) ? 1 : -1)
+        } else if (sort === "Date Created") {
+            taskData = taskData.sort((a, b) => (a.created > b.created) ? 1 : -1)
+        } else if (sort === "Priority: High to Low") {
+            taskData = taskData.sort((a, b) => (a.priority > b.priority) ? 1 : -1)
+        } else if (sort === "Priority: Low to High") {
+            taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
+        }
 
     // }
 
