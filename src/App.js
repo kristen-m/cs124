@@ -78,71 +78,6 @@ function App() {
         })
     }
 
-    // if (currTaskList !== "") {
-
-
-        // console.log("before collection")
-        // console.log("TASKS", taskData)
-
-        // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
-        //         snapshot.forEach(e => {
-        //             taskData.push({...e.data(), id: e.id})
-        //             taskData.push("test")
-        //             console.log("data in collection", e.data())
-        //             console.log("test")
-        //             console.log("Tasks Inside: "+taskData);
-        //         })
-        //     })
-
-        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
-        //         taskData = qs.docs.map(e => {
-        //             console.log("in map")
-        //             console.log(e.data())
-        //             return {...e.data(), id: e.id}
-        //         })
-        //     })
-
-        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
-        //     taskData = qs.docs.map(e => {
-        //         console.log("in map")
-        //         console.log(e.data())
-        //         return {...e.data(), id: e.id}
-        //     })
-        //     console.log(taskData)
-        // })
-
-
-        // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
-        //     snapshot.docs.forEach(e => {
-        //         console.log("in for each")
-        //         console.log(e.data())
-        //         taskData.push({...e.data(), id: e.id})
-        //     })
-        // })
-
-        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
-        //     taskData = qs.docs.map(e => e.data())
-        // })
-
-        // let tasks = []
-        //
-        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
-        //     qs.docs.forEach(e => {
-        //         let currTask = {...e.data(), id: e.id}
-        //         console.log("CURRDATA", currTask)
-        //         tasks.push(currTask)
-        //     })
-        //     setTaskData(tasks)
-        // })
-
-        // console.log("after collection")
-        // console.log("TASKS", taskData)
-
-
-        // let currList = listData.find(e => e.id === currTaskList);
-        // taskData = currList.tasks;
-
-        // taskData = collection.doc(currTaskList).collection("Tasks").get()
 
         if (currView === "Completed Tasks") {
             taskData = taskData.filter(task => task.checked)
@@ -162,7 +97,6 @@ function App() {
             taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
         }
 
-    // }
 
     function toggleModal() {
         setShowAlert(!showAlert);
