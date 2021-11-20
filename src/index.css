@@ -29,8 +29,6 @@
 
   .task-color{
     position: relative;
-    /*width: 100%;*/
-    /*height: 100%;*/
     padding-bottom: 11.5%;
   }
 
@@ -119,6 +117,12 @@ button:hover {
 .checkmark {
   float: left;
   size: 26px;
+}
+
+input[type=checkbox] {
+  width: 1em;
+  margin: 20px;
+  transform: scale(3);
 }
 
 .menu-buttons {
@@ -278,18 +282,13 @@ form input{
 }
 
 #task-text-entry {
-  width: 98%;
   box-sizing: border-box;
-  background-color: transparent;
   box-shadow: none;
-  font-size: 40pt;
+  font-size: 8vw;
+  width: 75vw;
   border: none;
   user-select: all;
   margin-top: 15px;
-}
-
-TextField {
-  outline: none;
 }
 
 .app {
@@ -340,7 +339,6 @@ TextField {
   border-radius: 5px;
   margin-bottom: 25px;
 }
-
 
 #sorting-area {
   display: grid;
@@ -408,10 +406,12 @@ TextField {
   margin-bottom: 5px;
 }
 
-
 .task-list-options {
   height: 70px;
   width: 70px;
   margin: 20px 10px;
 }
 
+.MuiInputBase-root {
+  font-size: 8vw;
+}
