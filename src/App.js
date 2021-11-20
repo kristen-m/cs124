@@ -49,14 +49,20 @@ function App() {
     const [currentDeleteOption, setCurrentDeleteOption] = useState("");
     const [deleteListId, setDeleteListId] = useState("");
     const [currTaskList, setCurrTaskList] = useState("");
-    const [taskData, setTaskData] = useState([])
+    // const [taskData, setTaskData] = useState([])
 
     let query = db.collection('hilnels-hmc-task-lists');
     const collection = db.collection('hilnels-hmc-task-lists');
+    let taskQuery = db.collection('hilnels-hmc-task-lists');
+
+    if (currTaskList !== "") {
+        taskQuery = db.collection('hilnels-hmc-task-lists').doc(currTaskList).collection("Tasks");
+    }
+
 
     const [value, loading, error] = useCollection(query);
     let listData = []
-    // let taskData = []
+    let taskData = []
 
     if (value) {
         listData = value.docs.map(e => {
@@ -64,21 +70,20 @@ function App() {
         });
     }
 
-    // let taskQuery = db.collection('hilnels-hmc-task-lists').doc(currTaskList).collection("Tasks");
-    // const [taskValue, taskLoading, taskError] = useCollection(taskQuery)
-    //
-    // if (taskValue) {
-    //     taskData = taskValue.docs.map(e => {
-    //         return {...e.data(), id: e.id}
-    //     })
-    // }
+    const [taskValue, taskLoading, taskError] = useCollection(taskQuery)
 
-    if (currTaskList !== "") {
+    if (taskValue) {
+        taskData = taskValue.docs.map(e => {
+            return {...e.data(), id: e.id}
+        })
+    }
+
+    // if (currTaskList !== "") {
 
 
-        console.log("before collection")
-        console.log("TASKS", taskData)
-        //
+        // console.log("before collection")
+        // console.log("TASKS", taskData)
+
         // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
         //         snapshot.forEach(e => {
         //             taskData.push({...e.data(), id: e.id})
@@ -96,6 +101,16 @@ function App() {
         //             return {...e.data(), id: e.id}
         //         })
         //     })
+
+        // collection.doc(currTaskList).collection("Tasks").get().then(qs => {
+        //     taskData = qs.docs.map(e => {
+        //         console.log("in map")
+        //         console.log(e.data())
+        //         return {...e.data(), id: e.id}
+        //     })
+        //     console.log(taskData)
+        // })
+
 
         // collection.doc(currTaskList).collection("Tasks").get().then(snapshot => {
         //     snapshot.docs.forEach(e => {
@@ -120,8 +135,8 @@ function App() {
         //     setTaskData(tasks)
         // })
 
-        console.log("after collection")
-        console.log("TASKS", taskData)
+        // console.log("after collection")
+        // console.log("TASKS", taskData)
 
 
         // let currList = listData.find(e => e.id === currTaskList);
@@ -147,7 +162,7 @@ function App() {
         //     taskData = taskData.sort((a, b) => (a.priority < b.priority) ? 1 : -1)
         // }
 
-    }
+    // }
 
     function toggleModal() {
         setShowAlert(!showAlert);
