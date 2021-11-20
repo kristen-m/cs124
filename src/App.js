@@ -193,20 +193,10 @@ function App() {
     function updatePriority(id, priority) {
         taskData.find(e => e.id === id).priority = priority
         collection.doc(currTaskList).collection("Tasks").doc(id).update({priority: priority})
-
-        // collection.doc(currTaskList).update({tasks: taskData})
     }
 
     function makeNewItem() {
         const newId = generateUniqueID()
-        // let newTask = {
-        //     id: newId,
-        //     name: "",
-        //     checked: false,
-        //     priority: "c",
-        //     created: firebase.database.ServerValue.TIMESTAMP
-        // }
-        // taskData.push(newTask);
         collection.doc(currTaskList).collection("Tasks").doc(newId).set({
             id: newId,
             name: "",
@@ -214,9 +204,6 @@ function App() {
             priority: "c",
             created: firebase.database.ServerValue.TIMESTAMP
         });
-        // collection.doc(currTaskList).update({
-        //     tasks: taskData
-        // });
     }
 
     function makeNewTaskList() {
@@ -225,7 +212,6 @@ function App() {
             id: newId,
             name: "",
             taskCount: 0,
-            // tasks: [],
             createdList: firebase.database.ServerValue.TIMESTAMP
         })
     }
