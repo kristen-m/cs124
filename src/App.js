@@ -179,6 +179,7 @@ function App() {
         if (id === "view") {
             if (option === "All Tasks") {
                 setCurrView("All Tasks")
+                // document.getElementById()
             } else if (option === "Completed Tasks") {
                 setCurrView("Completed Tasks")
             } else if (option === "Uncompleted Tasks") {
