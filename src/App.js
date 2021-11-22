@@ -143,8 +143,12 @@ function App() {
     function handleDeleteTasks(taskList, option) {
         let ids = [];
         for (let i = 0; i < taskList.length; i++) {
-            ids.push(taskList[i].id);
-            ids.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete())
+            if(option === "All Tasks"){
+                ids.push(taskList[i]);
+            } else {
+                ids.push(taskList[i].id);
+            }
+            ids.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete());
         }
     }
 
