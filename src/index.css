@@ -285,7 +285,7 @@ form input{
   box-sizing: border-box;
   box-shadow: none;
   font-size: 8vw;
-  width: 75vw;
+  width: 200vw;
   border: none;
   user-select: all;
   margin-top: 15px;
@@ -319,15 +319,16 @@ form input{
 }
 
 #priority {
-  font-size: 30px;
+  font-size: calc(30*.2vw);
   font-family: Futura;
   background: lightgrey;
-  margin-bottom: 25px;
+  margin-bottom: 15vw;
+  margin-top: 10vw;
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
-  width:100px;
+  width: 18vw;
   border-radius: 10px;
 }
 
