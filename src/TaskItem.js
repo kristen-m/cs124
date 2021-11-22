@@ -17,7 +17,7 @@ function TaskItem(props) {
                 disabled={props.checked}
                 InputProps={{ disableUnderline: true,
                                          style: { background: "transparent",
-                                                marginTop:"10px",
+                                                marginTop:"2%",
                                                 paddingBottom:"10px",
                                                 fontSize: "8vw",
                                                 fontFamily: "Futura",
