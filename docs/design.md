@@ -25,7 +25,7 @@ Trying to retroactively make a webapp accessible turned out to be more of a
 
 #### Challenges Faced
 
-We faced a lot of challenges when we updated the data we were storing in firebase. We originally tried to add the task data to each task list as a subcollection, which caused a lot of data accessing/updating issues. Eventually, we realized that we could just store the tasks as an array on the list collection and were much more successful with that approach.
+We faced a lot of challenges when we updated the data we were storing in firebase. We originally tried to add the task data to each task list as a subcollection, which caused a lot of data accessing/updating issues. Eventually, we realized that we could just store the tasks as an array on the list collection and were much more successful with that approach. Additionally, we faced many issues with the css. Below, see images that show challenges we faced regarding the home task list page and with the delete alert.
 
 
 #### Parts of Design We're Most Proud Of
