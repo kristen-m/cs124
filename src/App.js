@@ -130,14 +130,12 @@ function App() {
     }
 
     function handleTaskListNameChange(e, id) {
-        console.log("value read in was: "+ e.target.value);
         collection.doc(id).update({name: e.target.value});
     }
 
     function toggleCheckbox(id) {
         const oldChecked = taskData.find(e => e.id === id).checked;
         collection.doc(currTaskList).collection("Tasks").doc(id).update({checked: !oldChecked})
-
     }
 
     function handleDeleteTasks(taskList, option) {
@@ -151,7 +149,6 @@ function App() {
             ids.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete());
         }
     }
-
 
     function deleteCurrPageView(id) {
         db.collection('hilnels-hmc-task-lists').doc(id).delete();

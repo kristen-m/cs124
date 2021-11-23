@@ -19,12 +19,9 @@ function TaskItem(props) {
                                          style: { background: "transparent",
                                                 marginTop:"2%",
                                                 paddingBottom:"10px",
-                                                fontSize: "14vw",
+                                                fontSize: "18vw",
                                                 fontFamily: "Futura",
                                                 width: "80%"} }}
-                multiline
-                maxRows={2}
-                minRows={1}
             />
             <select name="Priority" id="priority" onChange={e => props.updatePriority(props.id, e.target.value)}>
                 <option aria-label="high priority" value="a" selected= {"a"===props.priority}>High</option>
