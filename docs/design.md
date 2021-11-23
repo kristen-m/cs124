@@ -56,9 +56,9 @@ We also encountered an issue where our sticky header disappeared and caused some
 ![css_issue](css_issue.jpeg)
 
 
-![scrolling_issue](scrolling_issue.jpeg)
+![scrolling_issue](scrolling_issue.png)
 
-![font_size__issue](font_size_issue.jpeg)
+![font_size_issue](font_size_issue.png)
 
 #### Parts of Design We're Most Proud Of
 
