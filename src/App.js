@@ -233,7 +233,7 @@ function App() {
                 </div> :
             <div className="App">
                         <div className="buttons-and-tasks">
-                            <div id="fixed-buttons">
+                            <div id="fixed-buttons" className={"sticky"}>
                                 <h2 className="start" tabIndex="0" aria-label={(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}>
                                     {(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}
                                 </h2>

@@ -341,10 +341,6 @@ form input{
   height: 100%;
 }
 
-.start {
-  margin-bottom: 5px;
-}
-
 .task-list-options {
   height: 70px;
   width: 70px;
@@ -399,4 +395,25 @@ form input{
   gap: 20pt;
   grid-column: 2 /span 3;
   width: 100%;
+}
+
+/*#fixed-buttons {*/
+/*  top: 0px;*/
+/*  !*width: 100%;*!*/
+/*  z-index: 100;*/
+/*  opacity: 100%;*/
+/*}*/
+
+div.sticky {
+  background: whitesmoke;
+  /*width: 100%;*/
+  z-index: 100;
+  opacity: 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.start {
+  margin-bottom: 5px;
 }
