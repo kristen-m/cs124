@@ -3,7 +3,14 @@ Kristen Mason & Hilary Nelson
 
 #### Design Decisions & Alternative Designs Considered
 
-We tried to make the design as similar as possible between the new task list view and the task view to provide the user with consistency throughout the app. However, we were careful to distinguish the pages enough so as to avoid confusion between the two (the task list view or the task view). We did this by keeping the same styling across both, and leaving the existing style for editing the item’s name, but changing the title at the top of the page and the coloring of tasks vs. task lists. We also decided that deleting a task list is more significant than deleting a task, and thus you can only delete one task list at a time, with the trash icon right on the right side of the task list.
+We tried to make the design as similar as possible between the new task list view and the task view to provide the user with consistency throughout the app. However, we were careful to distinguish the pages enough so as to avoid confusion between the two (the task list view or the task view). We did this by keeping the same styling across both, and leaving the existing style for editing the item’s name, but changing the title at the top of the page and the coloring of tasks vs. task lists. We also decided that deleting a task list is more significant than deleting a task, and thus you can only delete one task list at a time, with the trash icon right on the right side of the task list. We also updated our view option to indicate clearly which option is currently selected by updating the option to have inverse coloring.
+
+![New_Task_List](New_Task_List.png)
+
+
+![Enter_Task_List](Enter_Task_List.png)
+
+![View_Changed](View_Changed.png)
 
 #### Alternative Designs Considered
 
@@ -18,15 +25,40 @@ User 2 was also new to the application and ran into an unfortunate bug with the 
 
 #### Design Tasks and Accessibility Walkthrough
 
+Our updated design includes a home page where users can make multiple lists, and also updated the view tasks button to change colors based off of the option currently selected.
+
+![New_Task_List](New_Task_List.png)
+
+
+![Enter_Task_List](Enter_Task_List.png)
+
+![View_Changed](View_Changed.png)
+
 One of the key goals for this project was to design with accessibility in mind– making our app easily used by users with low vision, users who cannot use a mouse, and users who cannot see their screens at all (requiring screen readers.) 
 
-Trying to retroactively make a webapp accessible turned out to be more of a 
+Trying to retroactively make a Webapp accessible turned out to be more of a challenge than we expected– in retrospect, it would have been much easier to design with accesibility in mind from the very beginning of the design process instead of trying to shove it in later on in the development cycle. We did our best, and below are the links to our YouTube videos demonstrating a walkthrough of using our app using only the tab button (for users who might not be able to use a mouse) and using only the screen reader (for users who might not be able to see their screen at all.)
+
+Screen Reader Demo: https://www.youtube.com/watch?v=YfxHbQV2RuY
+
+Tabbing Accessibility Demo: https://www.youtube.com/watch?v=NrEOcrbSKMQ
 
 
 #### Challenges Faced
 
 We faced a lot of challenges when we updated the data we were storing in firebase. We originally tried to add the task data to each task list as a subcollection, which caused a lot of data accessing/updating issues. Eventually, we realized that we could just store the tasks as an array on the list collection and were much more successful with that approach. Additionally, we faced many issues with the css. Below, see images that show challenges we faced regarding the home task list page and with the delete alert.
 
+We also encountered an issue where our sticky header disappeared and caused some issues while scrolling, and some issues where the font size of our task list didn't scale properly also shown below.
+
+
+![uneven_task_list](uneven_task_list.jpeg)
+
+
+![css_issue](css_issue.jpeg)
+
+
+![scrolling_issue](scrolling_issue.jpeg)
+
+![font_size__issue](font_size_issue.jpeg)
 
 #### Parts of Design We're Most Proud Of
 
