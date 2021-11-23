@@ -92,17 +92,6 @@ input[type=checkbox] {
   font-size: 38px;
 }
 
-.menu-buttons-container {
-  display: grid;
-  /*flex-direction: row;*/
-  align-items: center;
-  justify-content: center;
-  gap: 20pt;
-  grid-column: 2 /span 3;
-  width: 100%;
-  opacity: 100%;
-}
-
 #back-button {
   grid-column: 1;
 }
@@ -402,29 +391,12 @@ form input{
 
 }
 
-/*@media screen and (min-width: 550px) {*/
-/*  #sorting-area {*/
-/*    grid-row: 2;*/
-/*  }*/
-
-/*  #task-sorting {*/
-/*    width: 200px;*/
-/*    height: 100px;*/
-/*    font-size: 38px;*/
-/*  }*/
-
-/*  #sort-label {*/
-/*    display: none;*/
-/*  }*/
-
-/*  .menu-buttons-container {*/
-/*    display: grid;*/
-/*  }*/
-/*}*/
-
-#fixed-buttons {
-  top: 0px;
-  background: whitesmoke;
+.menu-buttons-container {
+  display: grid;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20pt;
+  grid-column: 2 /span 3;
   width: 100%;
-  z-index: 100;
 }

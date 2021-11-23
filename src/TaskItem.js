@@ -19,7 +19,7 @@ function TaskItem(props) {
                                          style: { background: "transparent",
                                                 marginTop:"2%",
                                                 paddingBottom:"10px",
-                                                fontSize: "8vw",
+                                                fontSize: "14vw",
                                                 fontFamily: "Futura",
                                                 width: "80%"} }}
                 multiline
