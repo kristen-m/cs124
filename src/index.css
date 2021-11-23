@@ -13,50 +13,6 @@
   border-radius: 10px;
 }
 
-@media screen and (min-width: 325px) {
-  .task-item {
-    margin-right: 100px;
-    width: 97%;
-    text-align: left;
-    display: block;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 4px;
-    position: relative;
-    height: 0;
-    padding-bottom: 11.2%;
-  }
-
-  .task-color{
-    position: relative;
-    padding-bottom: 11.5%;
-  }
-
-  h2 {
-    font-size: 8vh;
-  }
-}
-
-/*@media screen and (min-width: 550px) {*/
-/*  #sorting-area {*/
-/*    grid-row: 2;*/
-/*  }*/
-
-/*  #task-sorting {*/
-/*    width: 200px;*/
-/*    height: 100px;*/
-/*    font-size: 38px;*/
-/*  }*/
-
-/*  #sort-label {*/
-/*    display: none;*/
-/*  }*/
-
-/*  .menu-buttons-container {*/
-/*    display: grid;*/
-/*  }*/
-/*}*/
-
 
 #task-container {
   alignment: center;
@@ -396,13 +352,6 @@ form input{
   height: 100%;
 }
 
-#fixed-buttons {
-  top: 0px;
-  background: whitesmoke;
-  width: 100%;
-  z-index: 100;
-}
-
 .start {
   margin-bottom: 5px;
 }
@@ -415,4 +364,67 @@ form input{
 
 .MuiInputBase-root {
   font-size: 8vw;
+}
+
+@media screen and (min-width: 1080px){
+  h2 {
+    font-size: 15vw;
+  }
+}
+@media screen and (min-width: 325px) {
+  .task-item {
+    margin-right: 100px;
+    width: 97%;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    position: relative;
+    height: 0;
+    padding-bottom: 11.2%;
+  }
+
+  .task-color{
+    position: relative;
+    padding-bottom: 11.5%;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  #task-container {
+    position: fixed;
+  }
+
+  .buttons-and-tasks {
+    position: absolute;
+  }
+
+}
+
+/*@media screen and (min-width: 550px) {*/
+/*  #sorting-area {*/
+/*    grid-row: 2;*/
+/*  }*/
+
+/*  #task-sorting {*/
+/*    width: 200px;*/
+/*    height: 100px;*/
+/*    font-size: 38px;*/
+/*  }*/
+
+/*  #sort-label {*/
+/*    display: none;*/
+/*  }*/
+
+/*  .menu-buttons-container {*/
+/*    display: grid;*/
+/*  }*/
+/*}*/
+
+#fixed-buttons {
+  top: 0px;
+  background: whitesmoke;
+  width: 100%;
+  z-index: 100;
 }
