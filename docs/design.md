@@ -15,8 +15,11 @@ We discussed a variety of options for allowing users to switch between task list
 User 1 was a user completely new to the application (they had not tested it in previous labs). The user said that the app was very intuitive and had no issues figuring out how to do anything. The user did suggest that they would like the the tasks to start sorted by priority high-low, since most important tasks should be on the bottom, but quickly realized that they did not want to have new tasks come in at high priority or to be forced to establish a priority system at all, and decided that date created was preferable. The user also wanted the priority buttons to scale when they were shown the task list on different sized devices, but otherwise said that the application scaled appropriately.
 
 
-#### Design Tasks and Walkthrough
+#### Design Tasks and Accessibility Walkthrough
 
+One of the key goals for this project was to design with accessibility in mind– making our app easily used by users with low vision, users who cannot use a mouse, and users who cannot see their screens at all (requiring screen readers.) 
+
+Trying to retroactively make a webapp accessible turned out to be more of a 
 
 
 #### Challenges Faced
