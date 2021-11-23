@@ -14,6 +14,7 @@ We discussed a variety of options for allowing users to switch between task list
 
 User 1 was a user completely new to the application (they had not tested it in previous labs). The user said that the app was very intuitive and had no issues figuring out how to do anything. The user did suggest that they would like the the tasks to start sorted by priority high-low, since most important tasks should be on the bottom, but quickly realized that they did not want to have new tasks come in at high priority or to be forced to establish a priority system at all, and decided that date created was preferable. The user also wanted the priority buttons to scale when they were shown the task list on different sized devices, but otherwise said that the application scaled appropriately.
 
+User 2 was also new to the application and ran into an unfortunate bug with the deployment to github pages. Although the app was running smoothly locally for both of us, User 2 was unable to see the buttons on the single task list view page, and therefore could not add, sort, or delete tasks and also could not return to the home screen. The user did say that they expected there to be buttons at the top of the task list screen, which suggests that the buttons are placed to be expected (since they should’ve been there). We eventually figured out that there was something going amiss with the opacity setting for the buttons, even though it was set to 100% and the buttons were showing up locally.
 
 #### Design Tasks and Accessibility Walkthrough
 
@@ -24,7 +25,7 @@ Trying to retroactively make a webapp accessible turned out to be more of a
 
 #### Challenges Faced
 
-We faced a lot of challenges when we updated the data we were storing in firebase. We originally tried to add the task data to each task list as a subcollection, which caused a lot of data accessing/updating issues. Eventually, we realized that we could just store the tasks as an array on the list collection and were much more successful with that approach.
+We faced a lot of challenges when we updated the data we were storing in firebase. We originally tried to add the task data to each task list as a subcollection, which caused a lot of data accessing/updating issues. Eventually, we realized that we could just store the tasks as an array on the list collection and were much more successful with that approach. Additionally, we faced many issues with the css. Below, see images that show challenges we faced regarding the home task list page and with the delete alert.
 
 
 #### Parts of Design We're Most Proud Of
