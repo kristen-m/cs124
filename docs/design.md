@@ -64,3 +64,15 @@ We also encountered an issue where our sticky header disappeared and caused some
 
 We are most proud of the new home screen and the navigation between the home page (where all task lists are viewed) and the task list view page (where tasks of a specific task list are viewed). We chose to provide navigation between the pages with simple arrow buttons, which effectively communicate to the user that they can open or close a task list with just one click. 
 
+
+We're also very proud of our reactive design implementation– we wanted to design with accessibility in mind and as a result, we wanted to make our app very readable at a large majority of screen sizes and orientations. We received user feedback that users would rather have their tasks grow larger when the app is resized so that they can see everything on the modified scale rather than see more tasks, so we designed our app to reflect that, with our task item size and font growing larger as the screen size does. The app also works when zoomed in to 200% with no issues, which was a goal of ours. Below are a few pictures of our reactive design that we're proudest of.
+
+
+
+At small screen sizes
+
+![reactive_design_1](reactive_design_1.png)
+
+
+At big screen sizes:
+![reactive_design_2](reactive_design_2.png)
