@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.2.3",
     "react-alert": "^7.0.3"
   }
 }
