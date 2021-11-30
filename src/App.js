@@ -97,10 +97,10 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error logging in: " {error.message}</p>}
-            <button onClick={() =>
+            <button className={"login-button"} onClick={() =>
                 signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
             </button>
-            <button onClick={() =>
+            <button className={"login-button"} onClick={() =>
                 auth.signInWithPopup(googleProvider)}>Login with Google
             </button>
         </div>
@@ -121,7 +121,7 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error signing up: " {error.message}</p>}
-            <button onClick={() =>
+            <button className={"login-button"} onClick={() =>
                 createUserWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>
                 Create test user
             </button>

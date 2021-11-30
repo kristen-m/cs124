@@ -1,3 +1,9 @@
+.login-button {
+display: grid;
+margin-bottom: 30px;
+float: center;
+}
+
 .task-item {
   border-style: solid;
   border-width: 2px;
