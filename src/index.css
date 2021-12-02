@@ -1,7 +1,11 @@
 .login-button {
-display: grid;
-margin-bottom: 30px;
-float: center;
+  display: grid;
+  margin-bottom: 30px;
+  /*float: left;*/
+  width: 100%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 10vh;
 }
 
 .task-item {
@@ -419,4 +423,13 @@ div.sticky {
   gap: 20pt;
   grid-column: 2 /span 3;
   width: 100%;
+}
+
+#google-button {
+  width: 50vw;
+  margin-bottom: 30px;
+}
+
+#login-area {
+  display: none;
 }

@@ -97,12 +97,25 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error logging in: " {error.message}</p>}
-            <button className={"login-button"} onClick={() =>
-                signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>Login with test user Email/PW
+            <button className={"login-button"} onClick={() => {
+                document.getElementById("login-area").style.display = "block";
+                // signInWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD);
+            }}>Login
             </button>
-            <button className={"login-button"} onClick={() =>
-                auth.signInWithPopup(googleProvider)}>Login with Google
-            </button>
+            <div id={"login-area"}>
+                <form>
+                    <label htmlFor="fname">First name:</label>
+                    <input type="text" id="fname" name="fname"></input>
+                        <label htmlFor="lname">Last name:</label>
+                        <input type="text" id="lname" name="lname"></input>
+                </form>
+            </div>
+            {/*<button className={"login-button"} onClick={() =>*/}
+            {/*    auth.signInWithPopup(googleProvider)}>Login with Google*/}
+       <img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>
+           auth.signInWithPopup(googleProvider)}>
+       </img>
+            {/*</button>*/}
         </div>
     }
 
@@ -123,7 +136,7 @@ function App(props) {
             {error && <p>"Error signing up: " {error.message}</p>}
             <button className={"login-button"} onClick={() =>
                 createUserWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD)}>
-                Create test user
+                Don't have an account? Sign Up
             </button>
 
         </div>
