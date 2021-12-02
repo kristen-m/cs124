@@ -71,8 +71,8 @@ function App(props) {
         return <div>
             {user.displayName || user.email}
             <SignedInApp {...props} user={user}/>
-            <button type="button" onClick={() => auth.signOut()}>Logout</button>
-            {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
+                    <button type="button" onClick={() => auth.signOut()}>Logout</button>
+                    {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
         </div>
     } else {
         return <>
@@ -146,9 +146,9 @@ function App(props) {
 
         const collectionName = "hilnels-hmc-task-lists-auth";
 
-        let query = db.collection(collectionName).where('owner', "==", props.user.uid);
-        const collection = db.collection(collectionName).where('owner', "==", props.user.uid);
-        let taskQuery = db.collection(collectionName).where('owner', "==", props.user.uid);
+        let query = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
+        const collection = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
+        let taskQuery = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
 
         if (currTaskList !== "") {
             taskQuery = db.collection(collectionName).doc(currTaskList).collection("Tasks");
@@ -278,8 +278,15 @@ function App(props) {
         }
 
         function updatePriority(id, priority) {
-            taskData.find(e => e.id === id).priority = priority
-            collection.doc(currTaskList).collection("Tasks").doc(id).update({priority: priority})
+            db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).update({priority: priority})
+        }
+
+        function shareTaskList(id, email) {
+            console.log("LIST DATA", listData)
+            console.log("id of list", id)
+            console.log("owners of list", listData.find(e => e.id ===id))
+            let newOwners = listData.find(e => e.id === id).owners + [email]
+            db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).update({owners: newOwners})
         }
 
         function makeNewItem() {
@@ -290,7 +297,7 @@ function App(props) {
                 checked: false,
                 priority: "c",
                 created: firebase.database.ServerValue.TIMESTAMP,
-                owner: props.user.uid
+                owner: [props.user.uid]
             });
         }
 
@@ -301,7 +308,7 @@ function App(props) {
                 name: "",
                 taskCount: 0,
                 createdList: firebase.database.ServerValue.TIMESTAMP,
-                owner: props.user.uid
+                owner: [props.user.uid]
             })
         }
 
@@ -373,6 +380,8 @@ function App(props) {
                                         </div>
                                     </span>
                                             </div>
+                                            <button type="button" className="menu-buttons" onClick={() => shareTaskList(currTaskList, "hilarychristinenelson@gmail.com")}>Share
+                                            </button>
                                         </div>
                                     </div>
                                     <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
