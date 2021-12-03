@@ -432,4 +432,50 @@ div.sticky {
 
 #login-area {
   display: none;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+#login-form {
+  grid-column: 2 /span 1;
+  grid-row: 1 /span 1;
+}
+
+#email {
+  font-size: 45px;
+}
+
+#password {
+  font-size: 45px;
+}
+
+#toggle-password-vis {
+  font-size: 30px;
+  grid-column: 2 /span 1;
+  grid-row: 2 /span 1;
+  float: left;
+  width: 80%;
+}
+
+#submit {
+  font-size: 30px;
+  border-style: solid;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#confirm-password {
+  font-size: 45px;
+}
+
+#signup-area {
+  display: none;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+#signup-form {
+  grid-column: 2 /span 1;
+  grid-row: 1 /span 1;
+  float: left;
 }
