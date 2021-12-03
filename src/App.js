@@ -57,6 +57,18 @@ function App(props) {
         }
     }
 
+    function toggleView(id) {
+        document.getElementById('signup-area').style.display = 'none';
+        document.getElementById('login-area').style.display = 'none';
+
+        let elementDisplay = document.getElementById(id).style.display;
+        if (!elementDisplay || elementDisplay === 'none') {
+            document.getElementById(id).style.display = "grid";
+        } else {
+            document.getElementById(id).style.display = "none";
+        }
+    }
+
     function SignIn() {
         const [
             signInWithEmailAndPassword,
@@ -72,18 +84,15 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error logging in: " {error.message}</p>}
-            <button className={"login-button"} onClick={() => {
-                document.getElementById("login-area").style.display = "grid";
-            }}>Login
+            <button className={"login-button"} onClick={() => toggleView('login-area')}>Login
             </button>
             <div id={"login-area"}>
                 <form id={"login-form"}>
-                    <label htmlFor="email">email:</label>
+                    <label htmlFor="email">email:</label><br></br>
                     <input type="text" id="email" name="email"></input><br></br>
-                        <label htmlFor="password">password:</label>
+                        <label htmlFor="password">password:</label><br></br>
                         <input type="password" id="password" name="password"></input><br></br>
                         <button id={"submit"} onClick={() => {
-                            // validateInput();
                             let email = document.getElementById("email").value;
                             let pwd = document.getElementById("password").value;
                             signInWithEmailAndPassword(email, pwd);
@@ -117,9 +126,7 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error signing up: " {error.message}</p>}
-            <button className={"login-button"} onClick={() => {
-                document.getElementById("signup-area").style.display = "grid";
-                }}>
+            <button className={"login-button"} onClick={() => toggleView('signup-area')}>
                 Don't have an account? Sign Up
             </button>
             <div id={"signup-area"}>
