@@ -1,14 +1,42 @@
+import {useEffect, useRef} from "react";
+
+
 function Alert(props) {
+    const cancelButton = useRef(null);
+    const okButton = useRef(null);
+    useEffect(() => {
+        cancelButton.current.focus();
+        cancelButton.current.addEventListener("keydown", (e) => {
+            //Treat tab & shift+tab the same way bc only two options
+            if(e.key ===  "Tab") {
+                e.preventDefault();
+                okButton.current.focus()
+            }
+        });
+        okButton.current.addEventListener("keydown", (e) => {
+            //Treat tab & shift+tab the same way bc only two options
+            if(e.key === "Tab") {
+                e.preventDefault();
+                cancelButton.current.focus();
+            }
+        });
+        const close = (e) => {
+            if(e.key === "Escape"){
+                props.onClose()
+            }
+        }
+        window.addEventListener('keydown', close)
+    });
     return (
-    <div className="alert-buttons">
+    <div className={"alert-buttons"}>
         <div className={"backdrop"}>
             <div className="modal">
                 {props.children}
-                <button className={"alert-button alert-cancel"} type={"button"}
+                <button ref={cancelButton} className={"alert-button alert-cancel"} type={"button"} aria-label="Cancel Delete"
                         onClick={props.onClose}>
                     Cancel
                 </button>
-                <button className={"alert-button alert-ok"} type={"button"}
+                <button ref={okButton} className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Delete"
                         onClick={() => {
                             props.onOK();
                             props.onClose();

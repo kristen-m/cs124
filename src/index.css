@@ -2,24 +2,30 @@
   border-style: solid;
   border-width: 2px;
   border-radius: 4px;
-  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 97%;
   text-align: left;
-  /*grid-column: 2;*/
 }
 
+.task-list-item:nth-child(even) {
+  background-color: #dddddd;
+  border-radius: 10px;
+}
+
+
 #task-container {
-  margin-top: 400px;
+  alignment: center;
+  margin-top: 0px;
   display: grid;
-  /*border-style: solid;*/
-  /*border-color: lightgray;*/
   width: 100%;
   grid-column: 2/ span 3;
   gap: 20px;
 }
 
 .buttons-and-tasks {
-  display: grid;
-  grid-template-columns: 50px auto auto auto 50px;
+  display: block;
+  grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto 25px auto;
   width: 100%;
   gap: 15px;
@@ -32,7 +38,6 @@ body {
 }
 
 h2 {
-  /*background-color: red;*/
   font-size: 700%;
   margin-bottom: 0px;
   text-align: center;
@@ -52,7 +57,6 @@ label {
 
 button {
   font-family: Futura;
-  font-size: 173%;
   color: black;
   background: #e3e7ff;
   border-color: cornflowerblue;
@@ -71,21 +75,25 @@ button:hover {
   size: 26px;
 }
 
+input[type=checkbox] {
+  width: 1em;
+  margin: 20px;
+  transform: scale(3);
+}
+
 .menu-buttons {
   width: 200px;
   height: 100px;
   font-size: 38px;
-
+}
+.new-list-button {
+  width: 300px;
+  height: 100px;
+  font-size: 38px;
 }
 
-.menu-buttons-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20pt;
-  grid-column: 2 /span 3;
-  width: 100%;
+#back-button {
+  grid-column: 1;
 }
 
 #new-item-button {
@@ -97,7 +105,9 @@ button:hover {
 }
 
 #trash-button {
+  grid-row: 1;
   grid-column: 4;
+  background-color: #61dafb;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -137,9 +147,8 @@ button:hover {
   transition: background-color .2s;
 }
 
-.dropdown-item {
+.view-dropdown-item {
   width: 100%;
-  padding: 10px;
   background-color: #f1f1f1;
   min-width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -152,7 +161,40 @@ button:hover {
   display: block;
 }
 
-.dropdown-item:hover {
+.view-dropdown-item:hover {
+  background-color: #ddd;
+  transition: background-color .2s;
+}
+
+.selected-dropdown-item {
+  width: 100%;
+  background-color: #333333;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-size:30px;
+  border: none;
+  color: #f6f6f6;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.Delete-dropdown-item {
+  width: 100%;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  font-size:30px;
+  border: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.Delete-dropdown-item:hover {
   background-color: #ddd;
   transition: background-color .2s;
 }
@@ -168,7 +210,7 @@ button:hover {
 }
 
 form input{
-  font-size: 200%;
+  font-size: 10%;
   border-style: none;
 }
 
@@ -185,22 +227,30 @@ form input{
 }
 
 #task-text-entry {
-  width: 650px;
   box-sizing: border-box;
-  background-color: transparent;
   box-shadow: none;
-  font-size: 40pt;
+  font-size: 10vw;
+  width: 200vw;
   border: none;
   user-select: all;
-  margin-top: 15px;
-}
-
-TextField {
-  outline: none;
+  height: 17vw;
 }
 
 .app {
   width: 640px;
+}
+
+div.sticky {
+  background: whitesmoke;
+  z-index: 100;
+  opacity: 1;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.start {
+  margin-bottom: 5px;
 }
 
 .backdrop {
@@ -227,15 +277,16 @@ TextField {
 }
 
 #priority {
-  font-size: 30px;
+  font-size: calc(30*.2vw);
   font-family: Futura;
   background: lightgrey;
-  margin-bottom: 25px;
+  margin-bottom: 15vw;
+  margin-top: 10vw;
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
-  width:100px;
+  width: 18vw;
   border-radius: 10px;
 }
 
@@ -248,12 +299,12 @@ TextField {
   margin-bottom: 25px;
 }
 
-
 #sorting-area {
   display: grid;
   grid-column: 3/ span 2;
   text-align: center;
   float: right;
+  background-color: whitesmoke;
   margin-right: 85px;
   margin-top: 15px;
 }
@@ -271,41 +322,95 @@ TextField {
 
 #task-color-a-false {
   background: #ff8e8e;
+  width: 100%;
+  height: 100%;
 }
 
 #task-color-b-false {
   background: #fff3a6;
+  width: 100%;
+  height: 100%;
 }
 
 #task-color-c-false {
   background: #c5e8b0;
+  width: 100%;
+  height: 100%;
 }
 
 #task-color-a-true {
   background: grey;
+  width: 100%;
+  height: 100%;
 }
 #task-color-b-true {
   background: grey;
+  width: 100%;
+  height: 100%;
 }
 #task-color-c-true {
   background: grey;
+  width: 100%;
+  height: 100%;
+}
+
+.task-list-options {
+  height: 70px;
+  width: 70px;
+  margin: 20px 10px;
+}
+
+.MuiInputBase-root {
+  font-size: 8vw;
+}
+
+@media screen and (min-width: 1080px){
+  h2 {
+    font-size: 15vw;
+  }
+}
+@media screen and (min-width: 325px) {
+  .task-item {
+    margin-right: 100px;
+    width: 97%;
+    text-align: left;
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    position: relative;
+    height: .01vw;
+    padding-bottom: 11.2%;
+  }
+
+  .task-color{
+    position: relative;
+    padding-bottom: 11.5%;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  #task-container {
+    position: fixed;
+  }
+
+  .buttons-and-tasks {
+    position: absolute;
+  }
+
 }
 
 #fixed-buttons {
-  position: sticky;
   top: 0px;
   background: whitesmoke;
-  position: fixed;
+}
+
+.menu-buttons-container {
+  display: grid;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20pt;
+  grid-column: 2 /span 3;
   width: 100%;
-  z-index: 100;
 }
-
-.start {
-  margin-bottom: 5px;
-}
-
-/*#disabled-task-item {*/
-/*  width: 100%;*/
-/*  border: solid;*/
-/*  background: blueviolet;*/
-/*}*/
