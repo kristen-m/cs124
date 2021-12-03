@@ -146,9 +146,14 @@ function App(props) {
 
         const collectionName = "hilnels-hmc-task-lists-auth";
 
-        let query = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
-        const collection = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
-        let taskQuery = db.collection(collectionName).where('owner', "array-contains", props.user.uid);
+        let query = db.collection(collectionName).where('owner', "==", props.user.uid);
+        const collection = db.collection(collectionName).where('owner', "==", props.user.uid);
+        let taskQuery = db.collection(collectionName).where('owner', "==", props.user.uid);
+
+        console.log("email", props.user.email)
+
+        let shareQuery = db.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
+        const shareCollection = db.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
 
         if (currTaskList !== "") {
             taskQuery = db.collection(collectionName).doc(currTaskList).collection("Tasks");
@@ -156,12 +161,27 @@ function App(props) {
 
         const [value, loading, error] = useCollection(query);
         let listData = []
+        let sharedListData = []
         let taskData = []
+
+        const [sharedValue, sharedLoading, sharedError] = useCollection(shareQuery)
+
+        // if (sharedValue) {
+        //     sharedListData = sharedValue.docs.map(e => {
+        //         return {...e.data(), id: e.id}
+        //     })
+        // }
 
         if (value) {
             listData = value.docs.map(e => {
                 return {...e.data(), id: e.id}
             });
+            if (sharedValue) {
+                sharedListData = sharedValue.docs.map(e => {
+                    return {...e.data(), id: e.id}
+                })
+            }
+            listData = listData.concat(sharedListData)
         }
 
         const [taskValue, taskLoading, taskError] = useCollection(taskQuery)
@@ -221,7 +241,6 @@ function App(props) {
         function handleTaskNameChange(e, id) {
             taskData.find(task => task.id === id).name = e.target.value
             db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).update({name: e.target.value})
-
         }
 
         function handleTaskListNameChange(e, id) {
@@ -241,7 +260,7 @@ function App(props) {
                 } else {
                     ids.push(taskList[i].id);
                 }
-                ids.forEach(id => collection.doc(currTaskList).collection("Tasks").doc(id).delete());
+                ids.forEach(id => db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).delete());
             }
         }
 
@@ -281,13 +300,19 @@ function App(props) {
             db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).update({priority: priority})
         }
 
-        function shareTaskList(id, email) {
-            console.log("LIST DATA", listData)
-            console.log("id of list", id)
-            console.log("owners of list", listData.find(e => e.id ===id))
-            let newOwners = listData.find(e => e.id === id).owners + [email]
-            db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(id).update({owners: newOwners})
+        function shareTaskList(email) {
+            // let oldShare = listData.find(e => e.id === currTaskList).sharedWith
+            // console.log("old share", oldShare)
+            // let newShare = listData.find(e => e.id === currTaskList).sharedWith.push(email)
+            // console.log("new share", newShare)
+            // console.log("ID ", currTaskList)
+            // db.collection(collectionName).doc(currTaskList).update({sharedWith: newShare})
+            // console.log(listData.find(e => e.id === currTaskList))
+            const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
+            db.collection(collectionName).doc(currTaskList).update({sharedWith: arrayUnion(email)})
+            console.log(listData.find(e => e.id === currTaskList))
         }
+
 
         function makeNewItem() {
             const newId = generateUniqueID()
@@ -297,7 +322,8 @@ function App(props) {
                 checked: false,
                 priority: "c",
                 created: firebase.database.ServerValue.TIMESTAMP,
-                owner: [props.user.uid]
+                owner: props.user.uid,
+                sharedWith: []
             });
         }
 
@@ -308,9 +334,13 @@ function App(props) {
                 name: "",
                 taskCount: 0,
                 createdList: firebase.database.ServerValue.TIMESTAMP,
-                owner: [props.user.uid]
+                owner: props.user.uid,
+                sharedWith: []
             })
         }
+
+        console.log("SHARED WITH ME", sharedListData)
+        console.log("all tasks", listData)
 
         return <div>
                 {
@@ -328,6 +358,12 @@ function App(props) {
                                                    handleTaskListNameChange={handleTaskListNameChange}
                                                    taskListData={listData} togglePageView={togglePageView}
                                                    updateCurrTaskList={updateCurrTaskList}/>
+                                {/*<h2>Shared With Me</h2>*/}
+                                {/*<TaskListContainer toggleListModal={toggleListModal} updateDeleteListId={updateDeleteListId}*/}
+                                {/*                   deleteCurrPageView={deleteCurrPageView}*/}
+                                {/*                   handleTaskListNameChange={handleTaskListNameChange}*/}
+                                {/*                   taskListData={sharedListData} togglePageView={togglePageView}*/}
+                                {/*                   updateCurrTaskList={updateCurrTaskList}/>*/}
                                 {showListAlert &&
                                 <Alert onClose={toggleListModal} onOK={() => deleteCurrPageView(deleteListId)}>
                                     <div tabIndex="1"> Are you sure you want to delete the task list:
@@ -340,6 +376,7 @@ function App(props) {
                             <div className="App">
                                 <div className="buttons-and-tasks">
                                     <div id="fixed-buttons" className={"sticky"}>
+                                        {/*{console.log("list Data before get name", listData)}*/}
                                         <h2 className="start" tabIndex="0"
                                             aria-label={(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}>
                                             {(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}
@@ -380,7 +417,7 @@ function App(props) {
                                         </div>
                                     </span>
                                             </div>
-                                            <button type="button" className="menu-buttons" onClick={() => shareTaskList(currTaskList, "hilarychristinenelson@gmail.com")}>Share
+                                            <button type="button" className="menu-buttons" onClick={() => shareTaskList("hilarychristinenelson@gmail.com")}>Share
                                             </button>
                                         </div>
                                     </div>
