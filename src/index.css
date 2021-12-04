@@ -443,10 +443,12 @@ div.sticky {
 
 #email {
   font-size: 45px;
+  width: 100%;
 }
 
 #password {
   font-size: 45px;
+  width: 100%;
 }
 
 #toggle-password-vis {
@@ -458,14 +460,30 @@ div.sticky {
 }
 
 #submit {
-  font-size: 30px;
   border-style: solid;
   border-radius: 5px;
   margin-top: 10px;
+  font-family: Futura;
+  color: black;
+  background: #e3e7ff;
+  border-color: cornflowerblue;
+  font-size: 25pt;
+}
+
+#signup-submit {
+  border-style: solid;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-family: Futura;
+  color: black;
+  background: #e3e7ff;
+  border-color: cornflowerblue;
+  font-size: 25pt;
 }
 
 #confirm-password {
   font-size: 45px;
+  width: 100%;
 }
 
 #signup-area {
@@ -478,4 +496,10 @@ div.sticky {
   grid-column: 2 /span 1;
   grid-row: 1 /span 1;
   float: left;
+}
+
+#signup-submit:disabled {
+  background: #e1e0e0;
+  color: #919191;
+  border-color: lightgrey;
 }

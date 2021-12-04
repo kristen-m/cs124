@@ -1,11 +1,14 @@
 import './App.css';
 import firebase from "firebase/compat";
 import SignedInApp from "./SignedInApp";
+import PasswordStrengthBar from 'react-password-strength-bar';
+
 import {
     useAuthState,
     useCreateUserWithEmailAndPassword,
     useSignInWithEmailAndPassword
 } from "react-firebase-hooks/auth";
+import {useState} from "react";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDoJ20jLJgywuuBGKRGlcUQNH0abdUQ_Pw",
@@ -116,6 +119,8 @@ function App(props) {
             createUserWithEmailAndPassword,
             userCredential, loading, error
         ] = useCreateUserWithEmailAndPassword(auth);
+        const [password, setPassword] = useState("");
+        var enableSignUp = false;
 
         if (userCredential) {
             // Shouldn't happen because App should see that
@@ -134,16 +139,36 @@ function App(props) {
                     <label htmlFor="email">email:</label><br></br>
                     <input type="text" id="email" name="email"></input><br></br>
                     <label htmlFor="password">password:</label><br></br>
-                    <input type="password" id="password" name="password"></input><br></br>
+                    <div id={'password-area'}>
+                    <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+                    <PasswordStrengthBar
+                        password={password}
+                        barColors={[
+                            "#B83E26",
+                            "#FFB829",
+                            "#009200",
+                            "#009200",
+                            "#009200",
+                            "#009200"
+                        ]}
+                        style={{ width: '100%'}}
+                    />
+                    </div>
                     <label htmlFor="password">confirm password:</label><br></br>
-                    <input type="password" id="confirm-password" name="password"></input><br></br>
-                    {/*check that both passwords are the same*/}
-                    {/*add password validation calls*/}
-                    <button id={"submit"} onClick={() => {
+                    <input type="password" id="confirm-password" name="password" onChange={(e) => {
+                        if(e.target.value === password) {
+                            document.getElementById('signup-submit').disabled = false;
+                        } else {
+                            document.getElementById('signup-submit').disabled = true;
+                        }
+                    }
+                    }>
+                    </input><br></br>
+                    <button id={"signup-submit"} onClick={() => {
                         let email = document.getElementById("email").value;
                         let pwd = document.getElementById("password").value;
-                        createUserWithEmailAndPassword(FAKE_EMAIL, FAKE_PASSWORD);
-                    }}>Sign Up</button>
+                        createUserWithEmailAndPassword(FAKE_EMAIL, password);
+                    }} disabled>Sign Up</button>
                 </form>
             </div>
         </div>
