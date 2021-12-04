@@ -151,7 +151,8 @@ function App(props) {
                             "#009200",
                             "#009200"
                         ]}
-                        style={{ width: '100%'}}
+                        style={{ width: '100%',
+                                  zoom: '400%'}}
                     />
                     </div>
                     <label htmlFor="password">confirm password:</label><br></br>
