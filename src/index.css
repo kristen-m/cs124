@@ -499,7 +499,36 @@ div.sticky {
 }
 
 #signup-submit:disabled {
-  background: #e1e0e0;
-  color: #919191;
-  border-color: lightgrey;
+          background: #e1e0e0;
+          color: #919191;
+          border-color: lightgrey;
+}
+
+#task-title-in-share {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.modal-share {
+  background-color: #fff;
+  border-radius: 5pt  ;
+  border-color: black;
+  border-style: solid;
+  margin: 0 auto;
+  top: 500pt;
+  width: 800pt;
+  padding: 10pt;
+  position: relative;
+  font-size: 30pt;
+}
+
+#share-email {
+  font-size: 30pt;
+}
+
+#share-email-entry {
+  border-color: black;
+  border-style: solid;
+  font-size: 40pt;
+  outline: black;
 }

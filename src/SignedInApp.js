@@ -6,6 +6,7 @@ import Alert from "./Alert";
 import DropdownButton from "./DropdownButton";
 import TaskContainer from "./TaskContainer";
 import {useState} from "react";
+import EmailEntry from "./EmailEntry";
 
 function SignedInApp(props) {
     const db = firebase.firestore();
@@ -37,6 +38,7 @@ function SignedInApp(props) {
     const [currentDeleteOption, setCurrentDeleteOption] = useState("");
     const [deleteListId, setDeleteListId] = useState("");
     const [currTaskList, setCurrTaskList] = useState("");
+    const [shareEmail, setShareEmail] = useState(false);
 
         const collectionName = "hilnels-hmc-task-lists-auth";
 
@@ -60,12 +62,6 @@ function SignedInApp(props) {
 
         const [sharedValue, sharedLoading, sharedError] = useCollection(shareQuery)
 
-        // if (sharedValue) {
-        //     sharedListData = sharedValue.docs.map(e => {
-        //         return {...e.data(), id: e.id}
-        //     })
-        // }
-
         if (value) {
             listData = value.docs.map(e => {
                 return {...e.data(), id: e.id}
@@ -75,6 +71,7 @@ function SignedInApp(props) {
                     return {...e.data(), id: e.id}
                 })
             }
+            listData.push("sharedLists")
             listData = listData.concat(sharedListData)
         }
 
@@ -195,13 +192,6 @@ function SignedInApp(props) {
         }
 
         function shareTaskList(email) {
-            // let oldShare = listData.find(e => e.id === currTaskList).sharedWith
-            // console.log("old share", oldShare)
-            // let newShare = listData.find(e => e.id === currTaskList).sharedWith.push(email)
-            // console.log("new share", newShare)
-            // console.log("ID ", currTaskList)
-            // db.collection(collectionName).doc(currTaskList).update({sharedWith: newShare})
-            // console.log(listData.find(e => e.id === currTaskList))
             const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
             db.collection(collectionName).doc(currTaskList).update({sharedWith: arrayUnion(email)})
             console.log(listData.find(e => e.id === currTaskList))
@@ -233,8 +223,16 @@ function SignedInApp(props) {
             })
         }
 
-        console.log("SHARED WITH ME", sharedListData)
-        console.log("all tasks", listData)
+    function toggleView(id) {
+        document.getElementById('share-area').style.display = 'none';
+
+        let elementDisplay = document.getElementById(id).style.display;
+        if (!elementDisplay || elementDisplay === 'none') {
+            document.getElementById(id).style.display = "grid";
+        } else {
+            document.getElementById(id).style.display = "none";
+        }
+    }
 
         return <div>
             {
@@ -252,12 +250,6 @@ function SignedInApp(props) {
                                                handleTaskListNameChange={handleTaskListNameChange}
                                                taskListData={listData} togglePageView={togglePageView}
                                                updateCurrTaskList={updateCurrTaskList}/>
-                            {/*<h2>Shared With Me</h2>*/}
-                            {/*<TaskListContainer toggleListModal={toggleListModal} updateDeleteListId={updateDeleteListId}*/}
-                            {/*                   deleteCurrPageView={deleteCurrPageView}*/}
-                            {/*                   handleTaskListNameChange={handleTaskListNameChange}*/}
-                            {/*                   taskListData={sharedListData} togglePageView={togglePageView}*/}
-                            {/*                   updateCurrTaskList={updateCurrTaskList}/>*/}
                             {showListAlert &&
                             <Alert onClose={toggleListModal} onOK={() => deleteCurrPageView(deleteListId)}>
                                 <div tabIndex="1"> Are you sure you want to delete the task list:
@@ -270,14 +262,13 @@ function SignedInApp(props) {
                         <div className="App">
                             <div className="buttons-and-tasks">
                                 <div id="fixed-buttons" className={"sticky"}>
-                                    {/*{console.log("list Data before get name", listData)}*/}
                                     <h2 className="start" tabIndex="0"
                                         aria-label={(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}>
                                         {(listData.find(e => e.id === currTaskList).name) === "" ? " New Task List" : (listData.find(e => e.id === currTaskList).name)}
                                     </h2>
                                     <div className="menu-buttons-container">
                                         <button type="button" id="back-button" className="menu-buttons"
-                                                onClick={togglePageView} aria-label="Return to Task Lists Homepage">⮐
+                                                onClick={() => {togglePageView(); setShareEmail(false)}} aria-label="Return to Task Lists Homepage">⮐
                                         </button>
                                         <div className="dropdown" id="new-item-button" aria-label="create a new task">
                                             <button type="button" className="menu-buttons" onClick={makeNewItem}>New
@@ -311,8 +302,11 @@ function SignedInApp(props) {
                                         </div>
                                     </span>
                                         </div>
-                                        <button type="button" className="menu-buttons" onClick={() => shareTaskList("hilarychristinenelson@gmail.com")}>Share
+                                        <button type="button" className="menu-buttons" onClick={() => setShareEmail(true)}>Share
                                         </button>
+                                        {shareEmail &&
+                                            <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail} listName={(listData.find(e => e.id === currTaskList).name)}/>
+                                        }
                                     </div>
                                 </div>
                                 <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}
