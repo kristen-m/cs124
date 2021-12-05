@@ -239,7 +239,7 @@ function SignedInApp(props) {
                 loading ? <div>Loading ... </div> :
                     (currPage === "home") ?
                         <div className="homepage">
-                            <h2 className="start" tabIndex="0" aria-label="Task Lists">Task Lists</h2>
+                            <h2 className="start" tabIndex="0" aria-label="My Task Lists">My Task Lists</h2>
                             <div>
                                 <button type="button" className="new-list-button" onClick={makeNewTaskList}
                                         aria-label="Create a new task list">New Task List
@@ -268,7 +268,10 @@ function SignedInApp(props) {
                                     </h2>
                                     <div className="menu-buttons-container">
                                         <button type="button" id="back-button" className="menu-buttons"
-                                                onClick={() => {togglePageView(); setShareEmail(false)}} aria-label="Return to Task Lists Homepage">⮐
+                                                onClick={() => {
+                                                    togglePageView();
+                                                    setShareEmail(false)
+                                                }} aria-label="Return to Task Lists Homepage">⮐
                                         </button>
                                         <div className="dropdown" id="new-item-button" aria-label="create a new task">
                                             <button type="button" className="menu-buttons" onClick={makeNewItem}>New
@@ -302,10 +305,12 @@ function SignedInApp(props) {
                                         </div>
                                     </span>
                                         </div>
-                                        <button type="button" className="menu-buttons" onClick={() => setShareEmail(true)}>Share
+                                        <button id="share-menu-button" type="button" className="menu-buttons"
+                                                onClick={() => setShareEmail(true)}>Share
                                         </button>
                                         {shareEmail &&
-                                            <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail} listName={(listData.find(e => e.id === currTaskList).name)}/>
+                                        <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail}
+                                                    listName={(listData.find(e => e.id === currTaskList).name)}/>
                                         }
                                     </div>
                                 </div>

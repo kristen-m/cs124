@@ -4,6 +4,7 @@ import {useEffect, useRef} from "react";
 function EmailEntry(props) {
     const cancelButton = useRef(null);
     const sendButton = useRef(null);
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     useEffect(() => {
         cancelButton.current.focus();
         cancelButton.current.addEventListener("keydown", (e) => {
@@ -37,7 +38,11 @@ function EmailEntry(props) {
                             <div>
                                 <br></br>
                                 <label id={"share-email"} htmlFor="email"> email: </label>
-                                <input type="text" id="share-email-entry" name="email"></input><br></br>
+                                <input type="text" id="share-email-entry" name="email"
+                                       onChange={(e) => {
+                                    document.getElementById("share-button").disabled = !re.test(e.target.value);
+                                }}
+                                /><br></br>
                             </div>
                         </form>
                     </div>
@@ -45,12 +50,13 @@ function EmailEntry(props) {
                             onClick={() => {props.setShareEmail(false)}}>
                         Cancel
                     </button>
-                    <button ref={sendButton} className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Delete"
+                    <button ref={sendButton} id="share-button" className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Delete"
                             onClick={() => {
-                                let email = document.getElementById("email").value;
+                                let email = document.getElementById("share-email-entry").value;
                                 props.shareTaskList(email);
                                 props.setShareEmail(false);
-                            }}>
+                                }
+                            }>
                         Share
                     </button>
                 </div>

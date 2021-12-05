@@ -104,20 +104,28 @@ input[type=checkbox] {
 
 #back-button {
   grid-column: 1;
+  grid-row: 1;
 }
 
 #new-item-button {
   grid-column: 2;
+  grid-row: 1;
 }
 
 #view-button {
   grid-column: 3;
+  grid-row: 1;
 }
 
 #trash-button {
   grid-row: 1;
   grid-column: 4;
   background-color: #61dafb;
+}
+
+#share-menu-button {
+  grid-column: 5;
+  grid-row: 1;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -311,7 +319,8 @@ div.sticky {
 
 #sorting-area {
   display: grid;
-  grid-column: 3/ span 2;
+  grid-column: 4/ span 2;
+  grid-row: 2;
   text-align: center;
   float: right;
   background-color: whitesmoke;
@@ -423,6 +432,8 @@ div.sticky {
   gap: 20pt;
   grid-column: 2 /span 3;
   width: 100%;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto auto;
 }
 
 #google-button {
@@ -507,6 +518,12 @@ div.sticky {
 #task-title-in-share {
   font-style: italic;
   font-weight: bold;
+}
+
+#share-button:disabled {
+  background: #e1e0e0;
+  color: #919191;
+  border-color: lightgrey;
 }
 
 .modal-share {
