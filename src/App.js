@@ -59,11 +59,9 @@ function App(props) {
                 <SignIn key="Sign In"/>
                 <SignUp key="Sign Up"/>
                 <div id="or-text">——————————— or ———————————</div>
-                {/*<img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>*/}
-                {/*    auth.signInWithPopup(googleProvider)}>*/}
-                {/*</img>*/}
                 <div id='google-button-div'>
-                <div className="google-button">
+                <div className="google-button" onClick={() =>
+                    auth.signInWithPopup(googleProvider)}>
                     <div className="google-icon-wrapper">
                         <img className="google-icon"
                              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
