@@ -40,7 +40,7 @@ function SignedInApp(props) {
     const [currTaskList, setCurrTaskList] = useState("");
     const [shareEmail, setShareEmail] = useState(false);
 
-        const collectionName = "hilnels-hmc-task-lists-auth";
+        const collectionName = "hilnels-hmc-taskListsAuth";
 
         let query = db.collection(collectionName).where('owner', "==", props.user.uid);
         const collection = db.collection(collectionName).where('owner', "==", props.user.uid);
