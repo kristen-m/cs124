@@ -1,8 +1,4 @@
 .login-button {
-  /*display: flex;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  grid-column: 2;
   margin-bottom: 30px;
   align-content: center;
   width: 30%;
@@ -13,6 +9,19 @@
 
 #welcome-text {
   font-size: 4vw;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#time-saving-tips-title {
+  font-size: 4vw;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+#time-saving-tips-body {
+  font-size: 3vw;
   margin-top: 40px;
   margin-bottom: 40px;
 }
@@ -582,6 +591,7 @@ div.sticky {
   border-radius: 5px;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
 }
+
 .google-icon-wrapper {
   position: absolute;
   margin-top: 1px;

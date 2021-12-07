@@ -45,28 +45,26 @@ function App(props) {
         return <p>Checking...</p>;
     } else if (user) {
         return <div>
-            {user.displayName || user.email}
+            <button type="button" onClick={() => auth.signOut()}>Logout: {user.displayName || user.email}</button>
+            {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
             <SignedInApp {...props} user={user}/>
-                    <button type="button" onClick={() => auth.signOut()}>Logout</button>
-                    {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
+
         </div>
     } else {
         return <div>
             {userError && <p>Error App: {userError.message}</p>}
             <h2>Task List</h2>
             <div id="welcome-text">Welcome to Task List!<br/>Login or sign up to began making task lists .</div>
-            {/*<div id="welcome-text">Login or sign up to began making task lists.</div>*/}
             <br/>
             <div id="sign-in-buttons">
                 <SignIn key="Sign In"/>
                 <SignUp key="Sign Up"/>
                 <div id="or-text">——————————— or ———————————</div>
             </div>
-            <div id="welcome-text">Time Saving Tip!</div>
             <div>
                 <div id='social-media-signin'>
-                    <div className="google-button" onClick={() =>
-                        auth.signInWithPopup(googleProvider)}>
+                    <div className="google-button" onClick={() => {
+                        auth.signInWithPopup(googleProvider)}}>
                         <div className="google-icon-wrapper">
                             <img className="google-icon"
                                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
@@ -74,8 +72,8 @@ function App(props) {
                         <div className="btn-text">Continue with Google</div>
                     </div>
 
-                    <div className="facebook-button" onClick={() =>
-                        auth.signInWithPopup(facebookProvider)}>
+                    <div className="facebook-button" onClick={() => {
+                        auth.signInWithPopup(facebookProvider)}}>
                         <div className="facebook-icon-wrapper">
                             <img className="facebook-icon"
                                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"/>
@@ -83,12 +81,16 @@ function App(props) {
                         <div className="btn-text">Continue with Facebook</div>
                     </div>
                 </div>
+                <div id="time-saving-tips-title">Time Saving Tip!</div>
+                <div id="time-saving-tips-body">
+                    {timeSavingTips[Math.floor(Math.random()*timeSavingTips.length)]}
+                </div>
             </div>
         </div>
     }
 
     function showPassword() {
-        let x = document.getElementById("password");
+        var x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
         } else {
