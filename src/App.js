@@ -23,6 +23,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
+
 
 const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
     "When selecting with the mouse, triple-click to select a line!",
@@ -59,20 +61,28 @@ function App(props) {
                 <SignIn key="Sign In"/>
                 <SignUp key="Sign Up"/>
                 <div id="or-text">——————————— or ———————————</div>
-                <div id='google-button-div'>
-                <div className="google-button" onClick={() =>
-                    auth.signInWithPopup(googleProvider)}>
-                    <div className="google-icon-wrapper">
-                        <img className="google-icon"
-                             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
-                    </div>
-                    <div className="btn-text">Continue with Google</div>
-                </div>
-                </div>
             </div>
             <div id="welcome-text">Time Saving Tip!</div>
             <div>
+                <div id='social-media-signin'>
+                    <div className="google-button" onClick={() =>
+                        auth.signInWithPopup(googleProvider)}>
+                        <div className="google-icon-wrapper">
+                            <img className="google-icon"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                        </div>
+                        <div className="btn-text">Continue with Google</div>
+                    </div>
 
+                    <div className="facebook-button" onClick={() =>
+                        auth.signInWithPopup(facebookProvider)}>
+                        <div className="facebook-icon-wrapper">
+                            <img className="facebook-icon"
+                                 src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"/>
+                        </div>
+                        <div className="btn-text">Continue with Facebook</div>
+                    </div>
+                </div>
             </div>
         </div>
     }

@@ -573,8 +573,6 @@ div.sticky {
 
 
 .google-button {
-  position: fixed;
-  margin-left: 35.5%;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 50px 150px 50px 150px;
@@ -600,6 +598,34 @@ div.sticky {
   width: 50px;
   height: 50px;
 }
+
+.facebook-button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 50px 150px 50px 150px;
+  width: 500px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .25);
+}
+.facebook-icon-wrapper {
+  position: absolute;
+  margin-top: 1px;
+  margin-left: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 2px;
+  background-color: white;
+}
+.facebook-icon {
+  position: absolute;
+  /*margin-top: 11px;*/
+  margin-left: -25px;
+  width: 50px;
+  height: 50px;
+}
+
 .btn-text {
   float: right;
   color: black;
