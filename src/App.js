@@ -120,7 +120,6 @@ function App(props) {
             userCredential, loading, error
         ] = useCreateUserWithEmailAndPassword(auth);
         const [password, setPassword] = useState("");
-        var enableSignUp = false;
 
         if (userCredential) {
             // Shouldn't happen because App should see that
@@ -167,8 +166,7 @@ function App(props) {
                     </input><br></br>
                     <button id={"signup-submit"} onClick={() => {
                         let email = document.getElementById("email").value;
-                        let pwd = document.getElementById("password").value;
-                        createUserWithEmailAndPassword(FAKE_EMAIL, password);
+                        createUserWithEmailAndPassword(email, password);
                     }} disabled>Sign Up</button>
                 </form>
             </div>
