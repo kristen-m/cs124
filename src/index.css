@@ -1,33 +1,39 @@
+#sign-in-buttons{
+  margin: auto;
+  width: 1000px;
+  height: 500px;
+}
+
 .login-button {
   margin-bottom: 30px;
   align-content: center;
-  width: 30%;
+  width: 600px;
   padding-top: 2%;
   padding-bottom: 2%;
-  font-size: 7vw;
+  font-size: 50px;
 }
 
 #welcome-text {
-  font-size: 4vw;
+  font-size: 30px;
   margin-top: 40px;
   margin-bottom: 40px;
 }
 
 #time-saving-tips-title {
-  font-size: 4vw;
+  font-size: 30px;
   margin-top: 40px;
   margin-bottom: 40px;
   font-style: italic;
 }
 
 #time-saving-tips-body {
-  font-size: 3vw;
+  font-size: 20px;
   margin-top: 40px;
   margin-bottom: 40px;
 }
 
 #or-text {
-  font-size: 4vw;
+  font-size: 30px;
   margin-top: 40px;
   margin-bottom: 40px;
 }
@@ -407,11 +413,11 @@ div.sticky {
   font-size: 8vw;
 }
 
-@media screen and (min-width: 1080px){
-  h2 {
-    font-size: 15vw;
-  }
-}
+/*@media screen and (min-width: 1080px){*/
+/*  h2 {*/
+/*    font-size: 15vw;*/
+/*  }*/
+/*}*/
 @media screen and (min-width: 325px) {
   .task-item {
     margin-right: 100px;
@@ -429,6 +435,12 @@ div.sticky {
   .task-color{
     position: relative;
     padding-bottom: 11.5%;
+  }
+
+  #sign-in-buttons{
+    margin: auto;
+    width: 1000px;
+    height: 500px;
   }
 }
 
