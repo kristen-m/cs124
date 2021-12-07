@@ -53,7 +53,7 @@ function App(props) {
     } else {
         return <div>
             {userError && <p>Error App: {userError.message}</p>}
-            <h2>Task List</h2>
+            <h2 id='header-wrapper'>Task List</h2>
             <div id="welcome-text">Welcome to Task List!<br/>Login or sign up to began making task lists .</div>
             <br/>
             <div id="sign-in-buttons">
@@ -81,9 +81,11 @@ function App(props) {
                         <div className="btn-text">Continue with Facebook</div>
                     </div>
                 </div>
-                <div id="time-saving-tips-title">Time Saving Tip!</div>
-                <div id="time-saving-tips-body">
-                    {timeSavingTips[Math.floor(Math.random()*timeSavingTips.length)]}
+                <div id="tips-wrapper">
+                    <div id="time-saving-tips-title">Time Saving Tip!</div>
+                    <div id="time-saving-tips-body">
+                        {timeSavingTips[Math.floor(Math.random()*timeSavingTips.length)]}
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,6 +103,7 @@ function App(props) {
     function toggleView(id) {
         document.getElementById('signup-area').style.display = 'none';
         document.getElementById('login-area').style.display = 'none';
+        document.getElementById('sign-in-buttons').style.height = '1000px';
 
         let elementDisplay = document.getElementById(id).style.display;
         if (!elementDisplay || elementDisplay === 'none') {
