@@ -1,11 +1,26 @@
 .login-button {
-  display: grid;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  grid-column: 2;
   margin-bottom: 30px;
-  /*float: left;*/
-  width: 100%;
+  align-content: center;
+  width: 30%;
   padding-top: 2%;
   padding-bottom: 2%;
-  font-size: 10vh;
+  font-size: 7vw;
+}
+
+#welcome-text {
+  font-size: 4vw;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+#or-text {
+  font-size: 4vw;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .task-item {
@@ -436,11 +451,6 @@ div.sticky {
   grid-template-rows: auto auto;
 }
 
-#google-button {
-  width: 50vw;
-  margin-bottom: 30px;
-}
-
 #login-area {
   display: none;
   grid-template-columns: auto auto auto;
@@ -562,7 +572,8 @@ div.sticky {
 }
 
 
-.google-btn {
+.google-button {
+  margin-left: 35.5%;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 50px 150px 50px 150px;
