@@ -1,5 +1,15 @@
 
-.login-button {
+#login-button {
+  margin-bottom: 30px;
+  align-content: center;
+  width: 600px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 50px;
+}
+
+#signup-button {
+  margin-top: 20px;
   margin-bottom: 30px;
   align-content: center;
   width: 600px;
@@ -80,10 +90,32 @@ h2 {
   text-align: center;
   align-items: center;
   justify-content: center;
+  display: flex;
+  margin: auto;
+  width:1000px;
+}
+
+#header-login-button {
+  float: right;
+  margin-left: 100px;
+  height: 80px;
+  border-radius: 10px;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+#header-signup-button {
+  margin-right: 100px;
+  float: right;
+  height: 80px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 #header-wrapper{
-  width:1000px;
+  float: right;
+  display: flex;
+  margin: auto;
 }
 
 input.check {
@@ -134,21 +166,26 @@ input[type=checkbox] {
 }
 
 #back-button {
+  padding: 10px;
+  width: auto;
   grid-column: 1;
   grid-row: 1;
 }
 
 #new-item-button {
+  width: auto;
   grid-column: 2;
   grid-row: 1;
 }
 
 #view-button {
+  width: auto;
   grid-column: 3;
   grid-row: 1;
 }
 
 #trash-button {
+  width: auto;
   grid-row: 1;
   grid-column: 4;
   background-color: #61dafb;
@@ -460,7 +497,7 @@ div.sticky {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20pt;
+  gap: 16pt;
   grid-column: 2 /span 3;
   width: 100%;
   grid-template-columns: auto auto auto auto auto;
@@ -500,6 +537,7 @@ div.sticky {
 }
 
 #toggle-password-vis {
+  margin: auto;
   font-size: 30px;
   grid-column: 2 /span 1;
   grid-row: 2 /span 1;
@@ -519,14 +557,13 @@ div.sticky {
 }
 
 #signup-submit {
-  border-style: solid;
-  border-radius: 5px;
-  margin-top: 10px;
-  font-family: Futura;
-  color: black;
-  background: #e3e7ff;
-  border-color: cornflowerblue;
-  font-size: 25pt;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  align-content: center;
+  width: 600px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  font-size: 50px;
 }
 
 #confirm-password {
@@ -667,5 +704,11 @@ div.sticky {
   height: 100px;
 }
 
+
+@media screen and (min-width: 564px) {
+  h2 {
+    width:100%;
+  }
+}
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);

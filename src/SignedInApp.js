@@ -46,8 +46,6 @@ function SignedInApp(props) {
         const collection = db.collection(collectionName).where('owner', "==", props.user.uid);
         let taskQuery = db.collection(collectionName).where('owner', "==", props.user.uid);
 
-        console.log("email", props.user.email)
-
         let shareQuery = db.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
         const shareCollection = db.collection(collectionName).where('sharedWith', "array-contains", props.user.email);
 

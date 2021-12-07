@@ -25,7 +25,8 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-
+let toggleLogin = false;
+let toggleSignUp = false;
 const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
     "When selecting with the mouse, triple-click to select a line!",
     "Learn to touch type by mounting a touch typing chart near your computer!",
@@ -50,7 +51,11 @@ function App(props) {
     } else {
         return <div>
             {userError && <p>Error App: {userError.message}</p>}
-            <h2 id='header-wrapper'>Task List</h2>
+            <div id={'header-wrapper'}>
+            <button id={'header-login-button'} onClick={() => toggleView('login-area')}>Log In</button>
+            <button id={'header-signup-button'} onClick={() => toggleView('signup-area')}>Sign Up</button>
+            </div>
+            <h2>Task List</h2>
             <div id="welcome-text">Welcome to Task List!<br/>Login or sign up to began making task lists .</div>
             <br/>
             <div id="sign-in-buttons">
@@ -97,7 +102,7 @@ function App(props) {
     }
 
     function showPassword() {
-        var x = document.getElementById("password");
+        let x = document.getElementById("login-password");
         if (x.type === "password") {
             x.type = "text";
         } else {
@@ -108,7 +113,20 @@ function App(props) {
     function toggleView(id) {
         document.getElementById('signup-area').style.display = 'none';
         document.getElementById('login-area').style.display = 'none';
-        document.getElementById('sign-in-buttons').style.height = '1000px';
+        if(id === 'signup-area') {
+            document.getElementById('sign-in-buttons').style.height = '850px';
+            document.getElementById('login-button').style.display = 'none';
+            document.getElementById('signup-button').style.display = 'none';
+            document.getElementById('header-login-button').style.visibility = 'visible';
+            document.getElementById('header-signup-button').style.visibility = 'hidden';
+        } else if(id === 'login-area') {
+            document.getElementById('login-button').style.display = 'grid';
+            document.getElementById('login-button').style.margin = 'auto';
+            document.getElementById('sign-in-buttons').style.height = '600px';
+            document.getElementById('signup-button').style.display = 'none';
+            document.getElementById('header-login-button').style.visibility = 'hidden';
+            document.getElementById('header-signup-button').style.visibility = 'visible';
+        }
 
         let elementDisplay = document.getElementById(id).style.display;
         if (!elementDisplay || elementDisplay === 'none') {
@@ -133,29 +151,29 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error logging in: " {error.message}</p>}
-            <button className={"login-button"} onClick={() => toggleView('login-area')}>Login
-            </button>
             <div id={"login-area"}>
                 <form id={"login-form"}>
                     <label htmlFor="email">email:</label><br></br>
                     <input type="text" id="login-email" name="email"></input><br></br>
-                        <label htmlFor="password">password:</label><br></br>
-                        <input type="password" id="login-password" name="password"></input><br></br>
-                        <button id={"submit"} onClick={() => {
-                            let email = document.getElementById("login-email").value;
-                            let pwd = document.getElementById("login-password").value;
-                            signInWithEmailAndPassword(email, pwd);
-                        } }>Log In</button>
+                    <label htmlFor="password">password:</label><br></br>
+                    <input type="password" id="login-password" name="password"></input><br></br>
                 </form>
                 <label id={"toggle-password-vis"}>
-                <input type="checkbox" onClick={() => showPassword()}/> Show Password
+                    <input type="checkbox" onClick={() => showPassword()}/> Show Password
                 </label>
             </div>
-            {/*<button className={"login-button"} onClick={() =>*/}
-            {/*    auth.signInWithPopup(googleProvider)}>Login with Google*/}
-       {/*/!*<img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>*!/*/}
-       {/*    auth.signInWithPopup(googleProvider)}>*/}
-       {/*</img>*/}
+            <button id={"login-button"} onClick={() => {
+                    if(!toggleLogin) {
+                        toggleView('login-area');
+                        toggleLogin = true;
+                    } else {
+                        let email = document.getElementById("login-email").value;
+                        let pwd = document.getElementById("login-password").value;
+                        signInWithEmailAndPassword(email, pwd);
+                        toggleLogin = false;
+                    }
+            }}>Log In
+            </button>
         </div>
     }
 
@@ -175,32 +193,29 @@ function App(props) {
         }
         return <div>
             {error && <p>"Error signing up: " {error.message}</p>}
-            <button className={"login-button"} onClick={() => toggleView('signup-area')}>
-                Sign Up
-            </button>
             <div id={"signup-area"}>
                 <form id={"signup-form"} onSubmit={() => {
-                        let email = document.getElementById("email").value;
-                        createUserWithEmailAndPassword(email, password);
+                    let email = document.getElementById("email").value;
+                    createUserWithEmailAndPassword(email, password);
                 }}>
                     <label htmlFor="email">email:</label><br></br>
                     <input type="text" id="email" name="email"></input><br></br>
                     <label htmlFor="password">password:</label><br></br>
                     <div id={'password-area'}>
-                    <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
-                    <PasswordStrengthBar
-                        password={password}
-                        barColors={[
-                            "#B83E26",
-                            "#FFB829",
-                            "#009200",
-                            "#009200",
-                            "#009200",
-                            "#009200"
-                        ]}
-                        style={{ width: '100%',
-                                  zoom: '400%'}}
-                    />
+                        <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+                        <PasswordStrengthBar
+                            password={password}
+                            barColors={[
+                                "#B83E26",
+                                "#FFB829",
+                                "#009200",
+                                "#009200",
+                                "#009200",
+                                "#009200"
+                            ]}
+                            style={{ width: '100%',
+                                zoom: '400%'}}
+                        />
                     </div>
                     <label htmlFor="password">confirm password:</label><br></br>
                     <input type="password" id="confirm-password" name="password" onChange={(e) => {
@@ -215,6 +230,52 @@ function App(props) {
                     <button id={"signup-submit"} disabled>Sign Up</button>
                 </form>
             </div>
+            <button id={"signup-button"} onClick={() => {
+                if(!toggleSignUp) {
+                    toggleView('signup-area');
+                    toggleSignUp = true;
+                } else {
+                    toggleSignUp = false;
+                }
+            }}>Sign Up
+            </button>
+            {/*<div id={"signup-area"}>*/}
+            {/*    <form id={"signup-form"} onSubmit={() => {*/}
+            {/*            let email = document.getElementById("email").value;*/}
+            {/*            createUserWithEmailAndPassword(email, password);*/}
+            {/*    }}>*/}
+            {/*        <label htmlFor="email">email:</label><br></br>*/}
+            {/*        <input type="text" id="email" name="email"></input><br></br>*/}
+            {/*        <label htmlFor="password">password:</label><br></br>*/}
+            {/*        <div id={'password-area'}>*/}
+            {/*        <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />*/}
+            {/*        <PasswordStrengthBar*/}
+            {/*            password={password}*/}
+            {/*            barColors={[*/}
+            {/*                "#B83E26",*/}
+            {/*                "#FFB829",*/}
+            {/*                "#009200",*/}
+            {/*                "#009200",*/}
+            {/*                "#009200",*/}
+            {/*                "#009200"*/}
+            {/*            ]}*/}
+            {/*            style={{ width: '100%',*/}
+            {/*                      zoom: '400%'}}*/}
+            {/*        />*/}
+            {/*        </div>*/}
+            {/*        <label htmlFor="password">confirm password:</label><br></br>*/}
+            {/*        <input type="password" id="confirm-password" name="password" onChange={(e) => {*/}
+            {/*            if(e.target.value === password) {*/}
+            {/*                document.getElementById('signup-submit').disabled = false;*/}
+            {/*            } else {*/}
+            {/*                document.getElementById('signup-submit').disabled = true;*/}
+            {/*            }*/}
+            {/*        }*/}
+            {/*        }>*/}
+            {/*        </input><br></br>*/}
+            {/*        <button id={"signup-submit"} disabled>Sign Up</button>*/}
+            {/*    </form>*/}
+            {/*</div>*/}
         </div>
     }
 }
