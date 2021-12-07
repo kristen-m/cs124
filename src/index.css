@@ -457,7 +457,18 @@ div.sticky {
   width: 100%;
 }
 
+#login-email {
+  font-size: 45px;
+  width: 100%;
+}
+
+
 #password {
+  font-size: 45px;
+  width: 100%;
+}
+
+#login-password {
   font-size: 45px;
   width: 100%;
 }

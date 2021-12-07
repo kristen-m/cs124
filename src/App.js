@@ -31,7 +31,7 @@ function App(props) {
         auth.currentUser.sendEmailVerification();
     }
 
-    const FAKE_EMAIL = 'kristenmingl@gmail.com';
+    const FAKE_EMAIL = 'hiwapek644@suggerin.com';
     const FAKE_PASSWORD = 'xyzzyxx';
 
     if (userLoading) {
@@ -92,12 +92,12 @@ function App(props) {
             <div id={"login-area"}>
                 <form id={"login-form"}>
                     <label htmlFor="email">email:</label><br></br>
-                    <input type="text" id="email" name="email"></input><br></br>
+                    <input type="text" id="login-email" name="email"></input><br></br>
                         <label htmlFor="password">password:</label><br></br>
-                        <input type="password" id="password" name="password"></input><br></br>
+                        <input type="password" id="login-password" name="password"></input><br></br>
                         <button id={"submit"} onClick={() => {
-                            let email = document.getElementById("email").value;
-                            let pwd = document.getElementById("password").value;
+                            let email = document.getElementById("login-email").value;
+                            let pwd = document.getElementById("login-password").value;
                             signInWithEmailAndPassword(email, pwd);
                         } }>Log In</button>
                 </form>
@@ -166,6 +166,8 @@ function App(props) {
                     </input><br></br>
                     <button id={"signup-submit"} onClick={() => {
                         let email = document.getElementById("email").value;
+                        console.log("Email: "+email);
+                        console.log("Password: "+password);
                         createUserWithEmailAndPassword(email, password);
                     }} disabled>Sign Up</button>
                 </form>
