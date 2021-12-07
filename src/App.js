@@ -24,6 +24,11 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
+const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
+    "When selecting with the mouse, triple-click to select a line!",
+    "Learn to touch type by mounting a touch typing chart near your computer!",
+    "\"Learning is an investment: pay some immediate productivity for increased future productivity\" -Neil Rhodes"]
+
 function App(props) {
     const [user, userLoading, userError] = useAuthState(auth);
 
@@ -44,11 +49,25 @@ function App(props) {
                     {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
         </div>
     } else {
-        return <>
+        return <div>
             {userError && <p>Error App: {userError.message}</p>}
+            <h2>Task List</h2>
+            <div id="welcome-text">Welcome to Task List!<br/>Login or sign up to began making task lists .</div>
+            {/*<div id="welcome-text">Login or sign up to began making task lists.</div>*/}
+            <br/>
+            <div id="sign-in-buttons">
                 <SignIn key="Sign In"/>
                 <SignUp key="Sign Up"/>
-        </>
+                <div id="or-text">——————————— or ———————————</div>
+                <img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>
+                    auth.signInWithPopup(googleProvider)}>
+                </img>
+            </div>
+            <div id="welcome-text">Time Saving Tip!</div>
+            <div>
+
+            </div>
+        </div>
     }
 
     function showPassword() {
@@ -107,9 +126,6 @@ function App(props) {
             </div>
             {/*<button className={"login-button"} onClick={() =>*/}
             {/*    auth.signInWithPopup(googleProvider)}>Login with Google*/}
-       <img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>
-           auth.signInWithPopup(googleProvider)}>
-       </img>
             {/*</button>*/}
         </div>
     }
@@ -131,7 +147,7 @@ function App(props) {
         return <div>
             {error && <p>"Error signing up: " {error.message}</p>}
             <button className={"login-button"} onClick={() => toggleView('signup-area')}>
-                Don't have an account? Sign Up
+                Sign Up
             </button>
             <div id={"signup-area"}>
                 <form id={"signup-form"}>
