@@ -284,6 +284,13 @@ function SignedInApp(props) {
                                                                             tasksData={taskData} {...e}
                                                                             options={dropdownOptions}
                                                                             deleteOrView={deleteOrView}/>)}
+                                        <button id="share-menu-button" type="button" className="menu-buttons"
+                                                onClick={() => setShareEmail(true)}>Share
+                                        </button>
+                                        {shareEmail &&
+                                        <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail}
+                                                    listName={(listData.find(e => e.id === currTaskList).name)}/>
+                                        }
                                         <div id="sorting-area">
                                     <span>
                                         <div id="sort">
@@ -305,13 +312,6 @@ function SignedInApp(props) {
                                         </div>
                                     </span>
                                         </div>
-                                        <button id="share-menu-button" type="button" className="menu-buttons"
-                                                onClick={() => setShareEmail(true)}>Share
-                                        </button>
-                                        {shareEmail &&
-                                        <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail}
-                                                    listName={(listData.find(e => e.id === currTaskList).name)}/>
-                                        }
                                     </div>
                                 </div>
                                 <TaskContainer handleTaskNameChange={handleTaskNameChange} tasksData={taskData}

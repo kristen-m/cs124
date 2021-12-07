@@ -45,7 +45,7 @@ function App(props) {
         return <p>Checking...</p>;
     } else if (user) {
         return <div>
-            <button type="button" onClick={() => auth.signOut()}>Logout: {user.displayName || user.email}</button>
+            <button tabIndex="1" type="button" onClick={() => auth.signOut()}>Logout: {user.displayName || user.email}</button>
             {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
             <SignedInApp {...props} user={user}/>
 

@@ -37,8 +37,8 @@ function EmailEntry(props) {
                             Sharing the list <span id={"task-title-in-share"}> {props.listName} </span>
                             <div>
                                 <br></br>
-                                <label id={"share-email"} htmlFor="email"> email: </label>
-                                <input type="text" id="share-email-entry" name="email"
+                                <label id={"share-email"} htmlFor="email" tabIndex="0"> email: </label>
+                                <input type="text" id="share-email-entry" name="email" tabIndex="0"
                                        onChange={(e) => {
                                     document.getElementById("share-button").disabled = !re.test(e.target.value);
                                 }}
