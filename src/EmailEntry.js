@@ -6,24 +6,23 @@ function EmailEntry(props) {
     const sendButton = useRef(null);
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     useEffect(() => {
-        cancelButton.current.focus();
-        cancelButton.current.addEventListener("keydown", (e) => {
-            //Treat tab & shift+tab the same way bc only two options
+        document.getElementById('share-email-entry').focus();
+        document.getElementById('share-email-entry').addEventListener("keydown", (e) => {
             if(e.key ===  "Tab") {
                 e.preventDefault();
-                sendButton.current.focus()
+                cancelButton.current.focus()
             }
-        });
+        })
         sendButton.current.addEventListener("keydown", (e) => {
             //Treat tab & shift+tab the same way bc only two options
             if(e.key === "Tab") {
                 e.preventDefault();
-                cancelButton.current.focus();
+                document.getElementById('share-email-entry').focus();
             }
         });
         const close = (e) => {
             if(e.key === "Escape"){
-                props.onClose()
+                props.setShareEmail(false);
             }
         }
         window.addEventListener('keydown', close)
@@ -46,11 +45,11 @@ function EmailEntry(props) {
                             </div>
                         </form>
                     </div>
-                    <button ref={cancelButton} className={"alert-button alert-cancel"} type={"button"} aria-label="Cancel Delete"
+                    <button ref={cancelButton} className={"alert-button alert-cancel"} type={"button"} aria-label="Cancel Share"
                             onClick={() => {props.setShareEmail(false)}}>
                         Cancel
                     </button>
-                    <button ref={sendButton} id="share-button" className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Delete"
+                    <button ref={sendButton} id="share-button" className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Share"
                             onClick={() => {
                                 let email = document.getElementById("share-email-entry").value;
                                 props.shareTaskList(email);

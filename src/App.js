@@ -38,9 +38,6 @@ function App(props) {
         auth.currentUser.sendEmailVerification();
     }
 
-    const FAKE_EMAIL = 'hiwapek644@suggerin.com';
-    const FAKE_PASSWORD = 'xyzzyxx';
-
     if (userLoading) {
         return <p>Checking...</p>;
     } else if (user) {
@@ -63,7 +60,11 @@ function App(props) {
             </div>
             <div>
                 <div id='social-media-signin'>
-                    <div className="google-button" onClick={() => {
+                    <div tabIndex={'1'} className="google-button" onKeyDown={(e) => {
+                        if(e.key === 'Enter'){
+                            auth.signInWithPopup(googleProvider);
+                        }
+                    }} onClick={() => {
                         auth.signInWithPopup(googleProvider)}}>
                         <div className="google-icon-wrapper">
                             <img className="google-icon"
@@ -72,7 +73,11 @@ function App(props) {
                         <div className="btn-text">Continue with Google</div>
                     </div>
 
-                    <div className="facebook-button" onClick={() => {
+                    <div tabIndex={'1'} className="facebook-button" onKeyDown={(e) => {
+                        if(e.key === 'Enter'){
+                            auth.signInWithPopup(facebookProvider);
+                        }
+                    }} onClick={() => {
                         auth.signInWithPopup(facebookProvider)}}>
                         <div className="facebook-icon-wrapper">
                             <img className="facebook-icon"
