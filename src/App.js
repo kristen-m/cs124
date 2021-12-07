@@ -107,9 +107,16 @@ function App(props) {
             </div>
             {/*<button className={"login-button"} onClick={() =>*/}
             {/*    auth.signInWithPopup(googleProvider)}>Login with Google*/}
-       <img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>
-           auth.signInWithPopup(googleProvider)}>
-       </img>
+            <div className="google-btn">
+                <div className="google-icon-wrapper">
+                    <img className="google-icon"
+                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                </div>
+                <div className="btn-text">Continue with Google</div>
+            </div>
+       {/*/!*<img id={"google-button"} src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" onClick={() =>*!/*/}
+       {/*    auth.signInWithPopup(googleProvider)}>*/}
+       {/*</img>*/}
             {/*</button>*/}
         </div>
     }
@@ -134,7 +141,10 @@ function App(props) {
                 Don't have an account? Sign Up
             </button>
             <div id={"signup-area"}>
-                <form id={"signup-form"}>
+                <form id={"signup-form"} onSubmit={() => {
+                        let email = document.getElementById("email").value;
+                        createUserWithEmailAndPassword(email, password);
+                }}>
                     <label htmlFor="email">email:</label><br></br>
                     <input type="text" id="email" name="email"></input><br></br>
                     <label htmlFor="password">password:</label><br></br>
@@ -164,12 +174,7 @@ function App(props) {
                     }
                     }>
                     </input><br></br>
-                    <button id={"signup-submit"} onClick={() => {
-                        let email = document.getElementById("email").value;
-                        console.log("Email: "+email);
-                        console.log("Password: "+password);
-                        createUserWithEmailAndPassword(email, password);
-                    }} disabled>Sign Up</button>
+                    <button id={"signup-submit"} disabled>Sign Up</button>
                 </form>
             </div>
         </div>
