@@ -43,10 +43,10 @@ function App(props) {
         return <p>Checking...</p>;
     } else if (user) {
         return <div>
-            {user.displayName || user.email}
+            <button type="button" onClick={() => auth.signOut()}>Logout: {user.displayName || user.email}</button>
+            {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
             <SignedInApp {...props} user={user}/>
-                    <button type="button" onClick={() => auth.signOut()}>Logout</button>
-                    {!user.emailVerified && <button type="button" onClick={verifyEmail}>Verify email</button>}
+
         </div>
     } else {
         return <div>
@@ -72,9 +72,9 @@ function App(props) {
                 </div>
                 </div>
             </div>
-            <div id="welcome-text">Time Saving Tip!</div>
-            <div>
-
+            <div id="time-saving-tips-title">Time Saving Tip!</div>
+            <div id="time-saving-tips-body">
+                {timeSavingTips[Math.floor(Math.random()*timeSavingTips.length)]}
             </div>
         </div>
     }
