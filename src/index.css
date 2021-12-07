@@ -573,6 +573,7 @@ div.sticky {
 
 
 .google-button {
+  position: fixed;
   margin-left: 35.5%;
   margin-top: 20px;
   margin-bottom: 20px;
