@@ -7,10 +7,8 @@ import DropdownButton from "./DropdownButton";
 import TaskContainer from "./TaskContainer";
 import {useState} from "react";
 import EmailEntry from "./EmailEntry";
-import axios from "axios";
-import qs from "qs";
 import SMSPopup from "./SMSPopup";
-import config from "./config";
+import Config from "./Config";
 
 function SignedInApp(props) {
     const db = firebase.firestore();
