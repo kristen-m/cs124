@@ -10,6 +10,7 @@ import EmailEntry from "./EmailEntry";
 import axios from "axios";
 import qs from "qs";
 import SMSPopup from "./SMSPopup";
+import config from "./config";
 
 function SignedInApp(props) {
     const db = firebase.firestore();
@@ -204,14 +205,14 @@ function SignedInApp(props) {
             const qs = require('qs');
             let message = formatTasksMessage();
             console.log(message);
-            axios.post("https://api.twilio.com/2010-04-01/Accounts/" + "AC4a2992d15191155479b44dc01864f95c" + "/Messages.json", qs.stringify({
+            axios.post("https://api.twilio.com/2010-04-01/Accounts/" + config.TWILIO_TOKEN + "/Messages.json", qs.stringify({
                 Body: message,
                 From: "+16055705875",
                 To: "+1"+number
             }), {
                 auth: {
-                    username: "AC4a2992d15191155479b44dc01864f95c",
-                    password: "796f9bfa55627c6e50e6df7fce7c652b"
+                    username: config.TWILIO_TOKEN,
+                    password: config.TWILIO_API_KEY
                 }
             });
         }
