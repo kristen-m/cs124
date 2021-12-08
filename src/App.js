@@ -27,6 +27,7 @@ const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 let toggleLogin = false;
 let toggleSignUp = false;
+let resetLoginError = false;
 const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
     "When selecting with the mouse, triple-click to select a line!",
     "Learn to touch type by mounting a touch typing chart near your computer!",
@@ -136,6 +137,16 @@ function App(props) {
         }
     }
 
+    function parseErrorMessage(error){
+        if(error.includes('auth/invalid-email')){
+            return <p id={'signin-error-message'}>Please Enter a Valid Email</p>;
+        } else if (error.includes('auth/user-not-found')){
+            return <p id={'signin-error-message'}>Hmm... we don't have you in our system. <br></br>
+                <a href="#" onClick={() => toggleView("signup-area")}> Sign up </a> to create a new account.
+                <br></br> Forgot your password? </p>;
+        }
+    }
+
     function SignIn() {
         const [
             signInWithEmailAndPassword,
@@ -150,7 +161,7 @@ function App(props) {
             return <p>Logging in…</p>
         }
         return <div>
-            {error && <p>"Error logging in: " {error.message}</p>}
+            {error && parseErrorMessage(error.message)}
             <div id={"login-area"}>
                 <form id={"login-form"}>
                     <label htmlFor="email">email:</label><br></br>
