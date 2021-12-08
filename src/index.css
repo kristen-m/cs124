@@ -617,6 +617,17 @@ div.sticky {
   font-size: 30pt;
 }
 
+#share-sms {
+  font-size: 30pt;
+}
+
+#share-sms-entry {
+  border-color: black;
+  border-style: solid;
+  font-size: 40pt;
+  outline: black;
+}
+
 #share-email-entry {
   border-color: black;
   border-style: solid;
@@ -709,6 +720,13 @@ div.sticky {
   h2 {
     width:100%;
   }
+}
+
+#sms-sharing {
+  display: grid;
+  float: right;
+  grid-column: 1/ span 2;
+  grid-row: 2;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);

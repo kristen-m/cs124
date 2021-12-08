@@ -7,10 +7,12 @@ import DropdownButton from "./DropdownButton";
 import TaskContainer from "./TaskContainer";
 import {useState} from "react";
 import EmailEntry from "./EmailEntry";
+import axios from "axios";
+import qs from "qs";
+import SMSPopup from "./SMSPopup";
 
 function SignedInApp(props) {
     const db = firebase.firestore();
-
     const dropdownOptions = {
         option1: "All Tasks",
         option2: "Completed Tasks",
@@ -39,8 +41,10 @@ function SignedInApp(props) {
     const [deleteListId, setDeleteListId] = useState("");
     const [currTaskList, setCurrTaskList] = useState("");
     const [shareEmail, setShareEmail] = useState(false);
+    const [shareSMS, setShareSMS] = useState(false);
 
-        const collectionName = "hilnels-hmc-taskListsAuth";
+
+    const collectionName = "hilnels-hmc-taskListsAuth";
 
         let query = db.collection(collectionName).where('owner', "==", props.user.uid);
         const collection = db.collection(collectionName).where('owner', "==", props.user.uid);
@@ -195,6 +199,23 @@ function SignedInApp(props) {
             console.log(listData.find(e => e.id === currTaskList))
         }
 
+        function sendSMS(number){
+            const axios = require('axios');
+            const qs = require('qs');
+            let message = formatTasksMessage();
+            console.log(message);
+            axios.post("https://api.twilio.com/2010-04-01/Accounts/" + "AC4a2992d15191155479b44dc01864f95c" + "/Messages.json", qs.stringify({
+                Body: message,
+                From: "+16055705875",
+                To: "+1"+number
+            }), {
+                auth: {
+                    username: "AC4a2992d15191155479b44dc01864f95c",
+                    password: "796f9bfa55627c6e50e6df7fce7c652b"
+                }
+            });
+        }
+
 
         function makeNewItem() {
             const newId = generateUniqueID()
@@ -207,6 +228,25 @@ function SignedInApp(props) {
                 owner: props.user.uid,
                 sharedWith: []
             });
+        }
+
+        function formatTasksMessage() {
+            console.log(currTaskList);
+            let message = '\n'+ (listData.find(e => e.id === currTaskList).name) +' Tasks:\n'
+            for(let i = 0; i < taskData.length; i++){
+                message += "Task "+(i+1)+": "+ taskData[i].name + "\n";
+                if(taskData[i].checked) {
+                    message += "Task "+(i+1)+ " Completed\n"
+                }
+                if(taskData[i].priority === 'c') {
+                    message += "Task "+(i+1)+ " Priority: Low\n"
+                } else if(taskData[i].priority === 'b') {
+                    message += "Task "+(i+1)+ " Priority: Medium\n"
+                } else if(taskData[i].priority === 'a') {
+                    message += "Task "+(i+1)+ " Priority: High\n"
+                }
+            }
+            return message;
         }
 
         function makeNewTaskList() {
@@ -289,6 +329,12 @@ function SignedInApp(props) {
                                         <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail}
                                                     listName={(listData.find(e => e.id === currTaskList).name)}/>
                                         }
+                                        {shareSMS &&
+                                        <SMSPopup setShareSMS={setShareSMS} sendSMS={sendSMS}></SMSPopup>
+                                        }
+                                        <button id={'sms-sharing'} onClick={() => {
+                                            setShareSMS(true)
+                                        }}> Share Via SMS</button>
                                         <div id="sorting-area">
                                     <span>
                                         <div id="sort">
