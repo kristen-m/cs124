@@ -30,7 +30,11 @@ let toggleSignUp = false;
 const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
     "When selecting with the mouse, triple-click to select a line!",
     "Learn to touch type by mounting a touch typing chart near your computer!",
-    "\"Learning is an investment: pay some immediate productivity for increased future productivity\" -Neil Rhodes"]
+    "\"Learning is an investment: pay some immediate productivity for increased future productivity\" -Neil Rhodes",
+    "Share a task list with friend so you can both edit tasks!",
+    "Delete a task list by clicking the trash can icon.",
+    "Sort tasks lists by priority by changing the Sort By menu.",
+    "Skip the hassle of signing up with email by logging in with your existing Google or Facebook account."]
 
 function App(props) {
     const [user, userLoading, userError] = useAuthState(auth);
@@ -52,8 +56,8 @@ function App(props) {
         return <div>
             {userError && <p>Error App: {userError.message}</p>}
             <div id={'header-wrapper'}>
-            <button id={'header-login-button'} onClick={() => toggleView('login-area')}>Log In</button>
-            <button id={'header-signup-button'} onClick={() => toggleView('signup-area')}>Sign Up</button>
+                <button id={'header-login-button'} onClick={() => toggleView('login-area')}>Log In</button>
+                <button id={'header-signup-button'} onClick={() => toggleView('signup-area')}>Sign Up</button>
             </div>
             <h2>Task List</h2>
             <div id="welcome-text">Welcome to Task List!<br/>Login or sign up to began making task lists .</div>
@@ -67,10 +71,34 @@ function App(props) {
                 <div id='social-media-signin'>
                     <div tabIndex={'1'} className="google-button" onKeyDown={(e) => {
                         if(e.key === 'Enter'){
-                            auth.signInWithPopup(googleProvider);
+                            // auth.signInWithPopup(googleProvider);
+                            //fixing popup issue?
+                            auth.signInWithPopup(googleProvider).then(function(result) {
+                                // code which runs on success
+                            }).catch(function(error) {
+                                // Handle Errors here.
+                                var errorCode = error.code;
+                                console.log(errorCode);
+                                alert(errorCode);
+
+                                var errorMessage = error.message;
+                                console.log(errorMessage);
+                                alert(errorMessage);
+                            });
                         }
                     }} onClick={() => {
-                        auth.signInWithPopup(googleProvider)}}>
+                        auth.signInWithPopup(googleProvider).then(function(result) {
+                            // code which runs on success
+                        }).catch(function(error) {
+                            // Handle Errors here.
+                            var errorCode = error.code;
+                            console.log(errorCode);
+                            alert(errorCode);
+
+                            var errorMessage = error.message;
+                            console.log(errorMessage);
+                            alert(errorMessage);
+                        });}}>
                         <div className="google-icon-wrapper">
                             <img className="google-icon"
                                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
@@ -80,10 +108,32 @@ function App(props) {
 
                     <div tabIndex={'1'} className="facebook-button" onKeyDown={(e) => {
                         if(e.key === 'Enter'){
-                            auth.signInWithPopup(facebookProvider);
+                            auth.signInWithPopup(facebookProvider).then(function(result) {
+                                // code which runs on success
+                            }).catch(function(error) {
+                                // Handle Errors here.
+                                var errorCode = error.code;
+                                console.log(errorCode);
+                                alert(errorCode);
+
+                                var errorMessage = error.message;
+                                console.log(errorMessage);
+                                alert(errorMessage);
+                            });;
                         }
                     }} onClick={() => {
-                        auth.signInWithPopup(facebookProvider)}}>
+                        auth.signInWithPopup(facebookProvider).then(function(result) {
+                            // code which runs on success
+                        }).catch(function(error) {
+                            // Handle Errors here.
+                            var errorCode = error.code;
+                            console.log(errorCode);
+                            alert(errorCode);
+
+                            var errorMessage = error.message;
+                            console.log(errorMessage);
+                            alert(errorMessage);
+                        });}}>
                         <div className="facebook-icon-wrapper">
                             <img className="facebook-icon"
                                  src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"/>
@@ -157,21 +207,25 @@ function App(props) {
                     <input type="text" id="login-email" name="email"></input><br></br>
                     <label htmlFor="password">password:</label><br></br>
                     <input type="password" id="login-password" name="password"></input><br></br>
+                    <button id={"submit"} onClick={() => {
+                        let email = document.getElementById("login-email").value;
+                        auth.sendPasswordResetEmail(email)
+                    } }>Forgot Password?</button>
                 </form>
                 <label id={"toggle-password-vis"}>
                     <input type="checkbox" onClick={() => showPassword()}/> Show Password
                 </label>
             </div>
             <button id={"login-button"} onClick={() => {
-                    if(!toggleLogin) {
-                        toggleView('login-area');
-                        toggleLogin = true;
-                    } else {
-                        let email = document.getElementById("login-email").value;
-                        let pwd = document.getElementById("login-password").value;
-                        signInWithEmailAndPassword(email, pwd);
-                        toggleLogin = false;
-                    }
+                if(!toggleLogin) {
+                    toggleView('login-area');
+                    toggleLogin = true;
+                } else {
+                    let email = document.getElementById("login-email").value;
+                    let pwd = document.getElementById("login-password").value;
+                    signInWithEmailAndPassword(email, pwd);
+                    toggleLogin = false;
+                }
             }}>Log In
             </button>
         </div>
@@ -281,3 +335,4 @@ function App(props) {
 }
 
 export default App;
+
