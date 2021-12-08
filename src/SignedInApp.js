@@ -205,14 +205,14 @@ function SignedInApp(props) {
             const qs = require('qs');
             let message = formatTasksMessage();
             console.log(message);
-            axios.post("https://api.twilio.com/2010-04-01/Accounts/" + config.TWILIO_TOKEN + "/Messages.json", qs.stringify({
+            axios.post("https://api.twilio.com/2010-04-01/Accounts/" + Config.TWILIO_TOKEN + "/Messages.json", qs.stringify({
                 Body: message,
                 From: "+16055705875",
                 To: "+1"+number
             }), {
                 auth: {
-                    username: config.TWILIO_TOKEN,
-                    password: config.TWILIO_API_KEY
+                    username: Config.TWILIO_TOKEN,
+                    password: Config.TWILIO_API_KEY
                 }
             });
         }
