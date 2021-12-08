@@ -27,7 +27,6 @@ const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 let toggleLogin = false;
 let toggleSignUp = false;
-let resetLoginError = false;
 const timeSavingTips = ["When selecting with the mouse, double-click to select a word!",
     "When selecting with the mouse, triple-click to select a line!",
     "Learn to touch type by mounting a touch typing chart near your computer!",
@@ -39,6 +38,8 @@ const timeSavingTips = ["When selecting with the mouse, double-click to select a
 
 function App(props) {
     const [user, userLoading, userError] = useAuthState(auth);
+    const [isLoginError, setLoginError] = useState("");
+
 
     function verifyEmail() {
         auth.currentUser.sendEmailVerification();
@@ -80,11 +81,9 @@ function App(props) {
                                 // Handle Errors here.
                                 var errorCode = error.code;
                                 console.log(errorCode);
-                                alert(errorCode);
 
                                 var errorMessage = error.message;
                                 console.log(errorMessage);
-                                alert(errorMessage);
                             });
                         }
                     }} onClick={() => {
@@ -94,11 +93,11 @@ function App(props) {
                             // Handle Errors here.
                             var errorCode = error.code;
                             console.log(errorCode);
-                            alert(errorCode);
+                            // alert(errorCode);
 
                             var errorMessage = error.message;
                             console.log(errorMessage);
-                            alert(errorMessage);
+                            // alert(errorMessage);
                         });}}>
                         <div className="google-icon-wrapper">
                             <img className="google-icon"
@@ -115,12 +114,12 @@ function App(props) {
                                 // Handle Errors here.
                                 var errorCode = error.code;
                                 console.log(errorCode);
-                                alert(errorCode);
+                                // alert(errorCode);
 
                                 var errorMessage = error.message;
                                 console.log(errorMessage);
-                                alert(errorMessage);
-                            });;
+                                // alert(errorMessage);
+                            });
                         }
                     }} onClick={() => {
                         auth.signInWithPopup(facebookProvider).then(function(result) {
@@ -129,11 +128,11 @@ function App(props) {
                             // Handle Errors here.
                             var errorCode = error.code;
                             console.log(errorCode);
-                            alert(errorCode);
+                            // alert(errorCode);
 
                             var errorMessage = error.message;
                             console.log(errorMessage);
-                            alert(errorMessage);
+                            // alert(errorMessage);
                         });}}>
                         <div className="facebook-icon-wrapper">
                             <img className="facebook-icon"
@@ -165,18 +164,24 @@ function App(props) {
         document.getElementById('signup-area').style.display = 'none';
         document.getElementById('login-area').style.display = 'none';
         if(id === 'signup-area') {
-            document.getElementById('sign-in-buttons').style.height = '850px';
+            document.getElementById('sign-in-buttons').style.height = '800px';
             document.getElementById('login-button').style.display = 'none';
             document.getElementById('signup-button').style.display = 'none';
             document.getElementById('header-login-button').style.visibility = 'visible';
             document.getElementById('header-signup-button').style.visibility = 'hidden';
         } else if(id === 'login-area') {
-            document.getElementById('login-button').style.display = 'grid';
-            document.getElementById('login-button').style.margin = 'auto';
-            document.getElementById('sign-in-buttons').style.height = '600px';
-            document.getElementById('signup-button').style.display = 'none';
-            document.getElementById('header-login-button').style.visibility = 'hidden';
-            document.getElementById('header-signup-button').style.visibility = 'visible';
+            console.log(        "Toggled Login Area"
+            )
+            // if(isLoginError){
+            //     return
+            // } else {
+                document.getElementById('login-button').style.display = 'grid';
+                document.getElementById('login-button').style.margin = 'auto';
+                document.getElementById('sign-in-buttons').style.height = '600px';
+                document.getElementById('signup-button').style.display = 'none';
+                document.getElementById('header-login-button').style.visibility = 'hidden';
+                document.getElementById('header-signup-button').style.visibility = 'visible';
+            // }
         }
 
         let elementDisplay = document.getElementById(id).style.display;
@@ -193,7 +198,13 @@ function App(props) {
         } else if (error.includes('auth/user-not-found')){
             return <p id={'signin-error-message'}>Hmm... we don't have you in our system. <br></br>
                 <a href="#" onClick={() => toggleView("signup-area")}> Sign up </a> to create a new account.
-                <br></br> Forgot your password? </p>;
+                <br></br></p>;
+        } else if (error.includes("auth/wrong-password")) {
+            return <p>Incorrect Password, Try Again <br></br>
+                <a href="#" onClick={() => {
+               let email = document.getElementById("login-email").value;
+               auth.sendPasswordResetEmail(email)
+           } }> Forgot Your Password? </a></p>
         }
     }
 
@@ -211,13 +222,13 @@ function App(props) {
             return <p>Logging in…</p>
         }
         return <div>
-            {error && parseErrorMessage(error.message)}
+            {isLoginError && parseErrorMessage(isLoginError)}
             <div id={"login-area"}>
                 <form id={"login-form"}>
-                    <label htmlFor="email">email:</label><br></br>
-                    <input type="text" id="login-email" name="email"></input><br></br>
-                    <label htmlFor="password">password:</label><br></br>
-                    <input type="password" id="login-password" name="password"></input><br></br>
+                    {/*<label htmlFor="email">email:</label><br></br>*/}
+                    <input type="text" id="login-email" name="email" placeholder={"Email"}></input><br></br>
+                    {/*<label htmlFor="password">password:</label><br></br>*/}
+                    <input type="password" id="login-password" name="password" placeholder={"Password"}></input><br></br>
                     <button id={"submit"} onClick={() => {
                         let email = document.getElementById("login-email").value;
                         auth.sendPasswordResetEmail(email)
@@ -234,8 +245,12 @@ function App(props) {
                 } else {
                     let email = document.getElementById("login-email").value;
                     let pwd = document.getElementById("login-password").value;
-                    signInWithEmailAndPassword(email, pwd);
-                    toggleLogin = false;
+                    firebase.auth().signInWithEmailAndPassword(email, pwd).then(() => {toggleLogin = false;}).catch(function(error) {
+                        // Handle Errors here.
+                        let errorMessage = error.message;
+                        // setLoginError(error.message);
+                        console.log(error);
+                    });
                 }
             }}>Log In
             </button>
@@ -263,11 +278,11 @@ function App(props) {
                     let email = document.getElementById("email").value;
                     createUserWithEmailAndPassword(email, password);
                 }}>
-                    <label htmlFor="email">email:</label><br></br>
-                    <input type="text" id="email" name="email"></input><br></br>
-                    <label htmlFor="password">password:</label><br></br>
+                    {/*<label htmlFor="email">email:</label><br></br>*/}
+                    <input type="text" id="email" name="email" placeholder={"Email"}></input><br></br>
+                    {/*<label htmlFor="password">password:</label><br></br>*/}
                     <div id={'password-area'}>
-                        <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" id="password" placeholder={"Password"} onChange={(e) => setPassword(e.target.value)} />
                         <PasswordStrengthBar
                             password={password}
                             barColors={[
@@ -282,8 +297,8 @@ function App(props) {
                                 zoom: '400%'}}
                         />
                     </div>
-                    <label htmlFor="password">confirm password:</label><br></br>
-                    <input type="password" id="confirm-password" name="password" onChange={(e) => {
+                    {/*<label htmlFor="password">confirm password:</label><br></br>*/}
+                    <input type="password" id="confirm-password" name="password" placeholder={"Password"} onChange={(e) => {
                         if(e.target.value === password) {
                             document.getElementById('signup-submit').disabled = false;
                         } else {
