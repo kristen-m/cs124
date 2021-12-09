@@ -1,8 +1,10 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 
 function EmailEntry(props) {
     const cancelButton = useRef(null);
     const sendButton = useRef(null);
+    const [shareSameEmail, setShareSameEmail] = useState(false);
+
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     useEffect(() => {
         document.getElementById('share-email-entry').focus();
@@ -33,6 +35,7 @@ function EmailEntry(props) {
                     <div id={"share-area"}>
                         <form id={"share-form"}>
                             Sharing the list <span id={"task-title-in-share"}> {props.listName} </span>
+                            {shareSameEmail && <p id={"share-self-error"}>Cannot Share Task List with Yourself</p>}
                             <div>
                                 <br></br>
                                 <label id={"share-email"} htmlFor="email" tabIndex="0"> email: </label>
@@ -51,8 +54,12 @@ function EmailEntry(props) {
                     <button ref={sendButton} id="share-button" className={"alert-button alert-ok"} type={"button"} aria-label="Confirm Share"
                             onClick={() => {
                                 let email = document.getElementById("share-email-entry").value;
-                                props.shareTaskList(email);
-                                props.setShareEmail(false);
+                                if(email === props.email){
+                                    setShareSameEmail(true);
+                                } else {
+                                    props.shareTaskList(email);
+                                    props.setShareEmail(false);
+                                }
                             }}>
                         Share
                     </button>

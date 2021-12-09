@@ -61,7 +61,12 @@ function SignupScreen(props) {
                             document.getElementById('signup-submit').disabled = true;
                         }
                     }
-                    }>
+                    } onKeyDown={(e) => {
+                        if(e.key === "Enter") {
+                            let email = document.getElementById("email").value;
+                            createUserWithEmailAndPassword(email, password);
+                        }
+                    }}>
                     </input><br></br>
                     <button id={"signup-submit"} disabled>Sign Up</button>
                 </form>

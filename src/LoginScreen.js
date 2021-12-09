@@ -33,7 +33,13 @@ function LoginScreen(props) {
         <div id={"login-area"}>
             <form id={"login-form"}>
                 <input type="text" id="login-email" name="email" placeholder={"Email"}></input><br></br>
-                <input type="password" id="login-password" name="password" placeholder={"Password"}></input><br></br>
+                <input type="password" id="login-password" name="password" placeholder={"Password"} onKeyDown={(e) => {
+                    if(e.key === "Enter") {
+                        let email = document.getElementById("login-email").value;
+                        let pwd = document.getElementById("login-password").value;
+                        signInWithEmailAndPassword(email, pwd);
+                    }
+                }}></input><br></br>
                 <button id={"submit"} onClick={() => {
                     let email = document.getElementById("login-email").value;
                     props.auth.sendPasswordResetEmail(email)
@@ -97,7 +103,12 @@ function LoginScreen(props) {
                 <div tabIndex={'1'} className="facebook-button" onKeyDown={(e) => {
                     if(e.key === 'Enter'){
                         props.auth.signInWithPopup(facebookProvider).then(function(result) {
-                            // code which runs on success
+                            var token = result.credential.accessToken;
+                            console.log(token);
+
+                            // The signed-in user info.
+                            var user = result.user;
+                            console.log(user);
                         }).catch(function(error) {
                             // Handle Errors here.
                             var errorCode = error.code;

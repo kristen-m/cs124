@@ -1,12 +1,9 @@
 import './App.css';
 import firebase from "firebase/compat";
 import SignedInApp from "./SignedInApp";
-import PasswordStrengthBar from 'react-password-strength-bar';
 
 import {
     useAuthState,
-    useCreateUserWithEmailAndPassword,
-    useSignInWithEmailAndPassword
 } from "react-firebase-hooks/auth";
 import {useState} from "react";
 import SignupScreen from "./SignupScreen";

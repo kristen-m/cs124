@@ -327,7 +327,7 @@ function SignedInApp(props) {
                                             onClick={() => setShareEmail(true)}>Share
                                     </button>
                                     {shareEmail &&
-                                    <EmailEntry shareTaskList={shareTaskList} setShareEmail={setShareEmail}
+                                    <EmailEntry email={props.user.email} shareTaskList={shareTaskList} setShareEmail={setShareEmail}
                                                 listName={(listData.find(e => e.id === currTaskList).name)}/>
                                     }
                                     {shareSMS &&

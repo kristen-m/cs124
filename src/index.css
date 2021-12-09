@@ -669,6 +669,7 @@ div.sticky {
   border-style: solid;
   font-size: 40pt;
   outline: black;
+  width: 80%;
 }
 
 
@@ -763,6 +764,11 @@ div.sticky {
   float: right;
   grid-column: 1/ span 2;
   grid-row: 2;
+}
+
+#share-self-error {
+  font-size: 40px;
+  color: #be1b1b;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
