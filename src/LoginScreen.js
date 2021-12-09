@@ -25,7 +25,6 @@ function LoginScreen(props) {
     } else if (loading) {
         return <p>Logging in…</p>
     }
-    console.log(error);
     return (
 
     <div>
@@ -104,11 +103,8 @@ function LoginScreen(props) {
                     if(e.key === 'Enter'){
                         props.auth.signInWithPopup(facebookProvider).then(function(result) {
                             var token = result.credential.accessToken;
-                            console.log(token);
-
                             // The signed-in user info.
                             var user = result.user;
-                            console.log(user);
                         }).catch(function(error) {
                             // Handle Errors here.
                             var errorCode = error.code;

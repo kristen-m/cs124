@@ -116,7 +116,6 @@ function SignedInApp(props) {
         } else {
             setCurrPage("home")
         }
-        console.log("TASK DATA", taskData)
     }
 
     function updateCurrTaskList(id) {
@@ -196,14 +195,12 @@ function SignedInApp(props) {
     function shareTaskList(email) {
         const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
         db.collection(collectionName).doc(currTaskList).update({sharedWith: arrayUnion(email)})
-        console.log(listData.find(e => e.id === currTaskList))
     }
 
     function sendSMS(number){
         const axios = require('axios');
         const qs = require('qs');
         let message = formatTasksMessage();
-        console.log(message);
         axios.post("https://api.twilio.com/2010-04-01/Accounts/" + Config.TWILIO_TOKEN + "/Messages.json", qs.stringify({
             Body: message,
             From: "+16055705875",
@@ -218,7 +215,6 @@ function SignedInApp(props) {
 
 
     function makeNewItem() {
-        console.log("making new item")
         const newId = generateUniqueID()
         db.collection(collectionName).doc(currTaskList).collection("Tasks").doc(newId).set({
             id: newId,
@@ -232,7 +228,6 @@ function SignedInApp(props) {
     }
 
     function formatTasksMessage() {
-        console.log(currTaskList);
         let message = '\n'+ (listData.find(e => e.id === currTaskList).name) +' Tasks:\n'
         for(let i = 0; i < taskData.length; i++){
             message += "Task "+(i+1)+": "+ taskData[i].name + "\n";

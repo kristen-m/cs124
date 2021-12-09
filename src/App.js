@@ -44,7 +44,6 @@ function App(props) {
 
         </div>
     } else {
-        console.log(currentScreenView);
         return <div>
             {userError && <p>Error App: {userError.message}</p>}
             <div id={'header-wrapper'}>

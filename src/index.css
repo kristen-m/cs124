@@ -451,11 +451,6 @@ div.sticky {
   font-size: 8vw;
 }
 
-/*@media screen and (min-width: 1080px){*/
-/*  h2 {*/
-/*    font-size: 15vw;*/
-/*  }*/
-/*}*/
 @media screen and (min-width: 325px) {
   .task-item {
     margin-right: 100px;
