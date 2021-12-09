@@ -505,7 +505,6 @@ div.sticky {
 }
 
 #login-area {
-  display: none;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto;
 }
@@ -534,7 +533,7 @@ div.sticky {
   padding: 20px;
   margin-bottom: 20px;
   font-size: 45px;
-  width: 100%;
+  width: 76%;
 }
 
 
@@ -548,6 +547,10 @@ div.sticky {
   font-size: 45px;
   width: 100%;
 }
+#signin-error-message{
+  font-size: 40px;
+  color: #ad2424;
+}
 
 #login-password {
   border: solid;
@@ -557,7 +560,7 @@ div.sticky {
   padding: 20px;
   margin-bottom: 20px;
   font-size: 45px;
-  width: 100%;
+  width: 76%;
 }
 
 #toggle-password-vis {
@@ -602,12 +605,15 @@ div.sticky {
 }
 
 #signup-area {
-  display: none;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
+  width: 60%;
+  height: 670px;
+  margin: auto;
+  /*grid-template-columns: auto auto auto;*/
+  /*grid-template-rows: auto auto auto;*/
 }
 
 #signup-form {
+  margin: auto;
   grid-column: 2 /span 1;
   grid-row: 1 /span 1;
   float: left;
