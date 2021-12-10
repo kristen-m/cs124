@@ -114,7 +114,7 @@ If the user shares vis SMS, a similar popup appears, prompting the user for thei
 
 Once they confirm the phone number they want to share the task list with and hit send, a SMS message is sent to that number, similar to the one below:
 
-![SMS-sharing](SMS-sharing.png)
+![SMS-sharing](SMS-sharing.jpg)
 
 
 If the user shares via email, a popup will appear, prompting the user for the email with whom they would like to share their list:
