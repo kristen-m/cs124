@@ -73,7 +73,9 @@ User 2 was new to our app and also had no issues using it. They also chose to lo
 
 Below is the walkthrough of our app.
 
-Start with the initial landing screen: ![final-design](final-design.png)
+Start with the initial landing screen: 
+
+![final_design](final_design.png)
 
 Then navigate to either the Log In or Sign Up buttons.
 Log In:
