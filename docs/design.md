@@ -127,11 +127,11 @@ However, if the user attempts to share a list with themselves, it flashes an err
 
 Once a user shares a task list with another user, it appears under the "Shared With Me" task header for the other user. In the image below, my email shared a list with the user hello
 
-[shared-task-home](shared-task-home.png)
+![shared-task-home](shared-task-home.png)
 
 The user with whom the task list was shared can access the shared task list as they would any task list of their own, as shown below:
 
-[share-task-item](share-task-item.png)
+![share-task-item](share-task-item.png)
 
 
 That concludes the walkthrough of all new features added to our webapp since Lab 4.
