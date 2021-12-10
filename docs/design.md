@@ -125,12 +125,13 @@ If the user shares via email, a popup will appear, prompting the user for the em
 However, if the user attempts to share a list with themselves, it flashes an error: ![share-popup-error](share-popup-error.png)
 
 
-Once a user shares a task list with another user, it appears under the "Shared With Me" task header for the other user. In the image below, my email shared a list with a user hello@gmail.com
+Once a user shares a task list with another user, it appears under the "Shared With Me" task header for the other user. In the image below, my email shared a list with the user hello
+
 [shared-task-home](shared-task-home.png)
 
 The user with whom the task list was shared can access the shared task list as they would any task list of their own, as shown below:
 
-[shared-task-item](shared-task-item.png)
+[share-task-item](share-task-item.png)
 
 
 That concludes the walkthrough of all new features added to our webapp since Lab 4.
