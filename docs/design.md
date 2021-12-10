@@ -60,7 +60,7 @@ Our sharing ability also persists from lab 5 to lab 6, and we have 2 ways throug
 
 Once they confirm the phone number they want to share the task list with and hit send, a SMS message is sent to that number, similar to the one below:
 
-![SMS-sharing](SMS-sharing.png)
+![SMS-sharing](SMS-sharing.jpg)
 
 
 Allold behavior from our Webapp is also functional in our React Native app–
