@@ -52,7 +52,7 @@ The majority of our alternative designs in this process involved the placement o
 
 
 
-	Another alternative design we considered was making our Login, Sign Up, and initial landing screens all exist within the same component, and manipulate the DOM to determine which version of the app was visible at any given point in time. However, we realized that rummaging around in the DOM and directly modifying elements’s CSS was not the best approach, and caused several visual bugs as shown below. Instead, we opted to break each screen out into its own component and control the visible component through a useState variable, that way the proper screen was shown consistently across rerenders of the page.
+Another alternative design we considered was making our Login, Sign Up, and initial landing screens all exist within the same component, and manipulate the DOM to determine which version of the app was visible at any given point in time. However, we realized that rummaging around in the DOM and directly modifying elements’s CSS was not the best approach, and caused several visual bugs as shown below. Instead, we opted to break each screen out into its own component and control the visible component through a useState variable, that way the proper screen was shown consistently across rerenders of the page.
 
 ![login-alt-design-errors1](login-alt-design-errors1.png)
 
@@ -71,6 +71,69 @@ User 2 was new to our app and also had no issues using it. They also chose to lo
 
 #### Design Tasks and Walkthrough
 
+Below is the walkthrough of our app.
+
+Start with the initial landing screen: ![final-design](final-design.png)
+
+Then navigate to either the Log In or Sign Up buttons.
+Log In:
+![login-screen](login-screen.png)
+
+Sign Up:
+![signup-screen](signup-screen.png)
+
+
+Once there, sign up/login using a valid email and password, or an error will be displayed
+
+
+Login Error: ![login-screen-error](login-screen-error.png)
+Sign Up Error: ![signup-screen](signup-screen-error.png)
+
+
+The sign up screen also displays password strength, and the login screen offers users the ability to toggle the visibility of their password with a checkbox, as shown below.
+
+![show-password](show-password.png)
+
+
+The user can also log in through Facebook or Google, which will trigger these popups:
+![fb_success](fb_success.png)
+
+![google](google.png)
+
+
+Once logged into the app, the users home screen looks like it did in Lab 4, with the addition of a space for shared lists:
+![task-home](task-home.png)
+
+Once at their home screen, the user can create and navigate to new task lists. Once the user is inside the task list, they have 2 ways through which they can share their task list– through email or SMS.
+
+![task-item](task-item.png)
+
+
+If the user shares vis SMS, a similar popup appears, prompting the user for their phone number. 
+![phone-popup](phone-popup.png)
+
+Once they confirm the phone number they want to share the task list with and hit send, a SMS message is sent to that number, similar to the one below:
+
+![SMS-sharing](SMS-sharing.png)
+
+
+If the user shares via email, a popup will appear, prompting the user for the email with whom they would like to share their list:
+
+![share-popup](share-popup.png)
+
+
+However, if the user attempts to share a list with themselves, it flashes an error: ![share-popup-error](share-popup-error.png)
+
+
+Once a user shares a task list with another user, it appears under the "Shared With Me" task header for the other user. In the image below, my email shared a list with a user hello@gmail.com
+[shared-task-home](shared-task-home.png)
+
+The user with whom the task list was shared can access the shared task list as they would any task list of their own, as shown below:
+
+[shared-task-item](shared-task-item.png)
+
+
+That concludes the walkthrough of all new features added to our webapp since Lab 4.
 
 #### Challenges Faced
 
@@ -87,7 +150,6 @@ We faced a variety of challenges with this lab. When creating the share by email
   Another design challenge we faced was making the transition between our app’s initial landing page, login page, and signup forms as seamless as possible. We originally tried to accomplish this switch through pure CSS, but ran into issues when incorporating error messages, and had to refactor our entire app so that each of the 3 landing pages were spaced out into separate components.
 
   ![fb_error1](fb_error1.png)
-  ![fb_error2](fb_error2.png)
   ![fb_error3](fb_error3.png)
 
 
