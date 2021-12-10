@@ -1,4 +1,4 @@
-# Lab 4 Accessible & Responsive Task List App
+# Lab 5 - Sign In
 
 ## Our deployed task list app can be found here:
 
