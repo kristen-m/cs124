@@ -5,9 +5,90 @@ Kristen Mason & Hilary Nelson
 
 Because our web app has from the start been designed with a mobile layout in mind, we found it very straightforward to preserve our previous design decisions from labs 1-5 while working on Lab 6. The Moto G4 layout was very similar to the simulated Apple device layouts in terms of dimensions, so we found ourselves really only having to make superficial changes to the CSS in order to make all of our task item elements appear on the screen as they had in our web app. Other than that, our React Native version of the app appears nearly identical to the version of the app we published for Lab 5– which was our goal.
 
+Our deployed iOS app landing page design vs our Lab 5 deployed webapp landing page design:
+
+![initial](initial.png)
+![final_design](final_design.png)
+
+
+
 ### User Testing
 
 The user who tested our iOS app had previously tested the web app, and so they were already familiar with the design. They said that the iOS app was very clear and intuitive, and did not have any feedback.
+
+#### Comprehensive Design & Walkthrough
+
+Below is a high level walkthrough of our React Native App:
+
+Start at the initial landing page:
+
+![initial](initial.png)
+
+Then navigate to either the Log In or Sign Up buttons. 
+Log In: 
+![login](login.png)
+
+
+Sign Up: 
+![signup](signup.png)
+
+If the user inputs a poorly formatted or invalid email, the recieve the error shown above.
+
+
+
+Once logged into the app, the users home screen looks like it did in Lab 5:
+
+![loggedinblack](loggedinblack.png)
+
+
+Once at their home screen, the user can create and navigate to new task lists. 
+
+![newtasklist](newtasklist.png)
+
+
+
+Once the user is inside the task list, they can create new tasks:
+![blanklist](blanklist.png)
+![newitem](newitem.png)
+
+
+
+
+Our sharing ability also persists from lab 5 to lab 6, and we have 2 ways through which they can share their task list– through email or SMS.
+
+![SMS](SMS.png)
+
+Once they confirm the phone number they want to share the task list with and hit send, a SMS message is sent to that number, similar to the one below:
+
+![SMS-sharing](SMS-sharing.png)
+
+
+Allold behavior from our Webapp is also functional in our React Native app–
+
+Checking off tasks to mark them as completed:
+![checked](checked.png)
+
+
+Changing the priority of tasks (and having the color of the task change as a result)
+![priority](priority.png)
+
+
+Sorting tasks based off of Name, Date Created, Priority, etc:
+![sort](sort.png)
+
+
+Users can still modify the view of their task list, choosing to see All Tasks, Completed Tasks, or Uncomplete Tasks:
+![view](view.png)
+
+
+Finally, the user still has the ability to delete their tasks, and an alert is displayed when they click a delete option to ensure that the user intended to complete the action:
+
+![delete](delete.png)
+![deletealert](deletealert.png)
+
+
+
+
 
 #### Challenges Faced
 
